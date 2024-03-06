@@ -59,7 +59,7 @@ input:not(#inputEnviar){
     height: 20px;
     border-radius: 20px;
     color: #ffffff;
-    background-color: #242625;
+    background-color: #304d73;
 }
 input:not(#inputEnviar):hover{
     border: 3px solid #aa0000   ;
