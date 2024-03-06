@@ -1,0 +1,28 @@
+
+h1{
+    position: relative;
+    left: 600px;
+}
+
+#containerCadb > p {
+    margin-left: 21px;
+    margin-bottom: 11px;
+    color: #ffffff;
+}
+
+#conteinerLogin > input{
+    margin-left: 75px;
+    border-radius: 11px;
+}
+
+#containerCadb{
+    position: relative;
+    bottom: 25px;
+    background-color: #000000b0;
+    border: 2px solid #242625;
+    border-radius: 11px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 370px;
+}
