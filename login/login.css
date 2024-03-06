@@ -3,11 +3,16 @@ body{
     background-repeat: no-repeat; 
     background-size: cover;
     overflow-y: hidden;
+    font-family: "Manrope", sans-serif;
 }
 h1{
     color:#ffffff;
     position: relative;
     left: 105px;
+
+
+
+    font-weight: 200;
 }
 #Logo{
     height: 200px;
@@ -20,25 +25,33 @@ h1{
     position: relative;
     bottom: 25px;
     background-color: #000000b0;
-    border: 2px solid #242625;
+ 
+-webkit-box-shadow: 1px 1px 22px 0px rgba(143,143,143,1);
+-moz-box-shadow: 1px 1px 22px 0px rgba(143,143,143,1);
+box-shadow: 1px 1px 22px 0px rgba(143,143,143,1);
+
     border-radius: 11px;
+
     margin-left: auto;
     margin-right: auto;
+
     width: 300px;
     height: 300px;
 }
 #conteinerLogin > p {
     margin-left: 21px;
-    margin-bottom: 11px;
+    margin-bottom: 4px;
     color: #ffffff;
+
+    font-size: 13px;
 }
 #conteinerLogin > input{
     margin-left: 65px;
 }
 #inputEnviar{
-    font-weight: 900;
+    font-weight: 200;
     color: #ffffff;
-    background-color: #242625;
+    background-color: #304d73;
     border-radius: 15px; 
     padding: 10px 20px; 
     border: none; 
@@ -62,5 +75,6 @@ input:not(#inputEnviar){
     background-color: #304d73;
 }
 input:not(#inputEnviar):hover{
-    border: 3px solid #aa0000   ;
+    border: 3px solid white   ;
+    transition: 1s;
     }
