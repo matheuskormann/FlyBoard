@@ -1,39 +1,40 @@
 body{
-    background-image: url("/imagens/fundoLogin.jpeg");
-    background-repeat: no-repeat; 
-    background-size: cover;
+    background-image: url("/imagens/fundomenor.jpg");
+    background-repeat: no-repeat;
+    background-size: auto;
     overflow-y: hidden;
     font-family: "Manrope", sans-serif;
 }
+
+
+
 h1{
     color:#ffffff;
     position: relative;
     left: 105px;
-
-
-
     font-weight: 200;
 }
 #Logo{
     height: 200px;
-    margin-left: 42%;
-    border-radius: 50%;
-  
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+
 }
 
 #conteinerLogin{
-    position: relative;
     bottom: 25px;
     background-color: #000000b0;
- 
+
 -webkit-box-shadow: 1px 1px 22px 0px rgba(143,143,143,1);
 -moz-box-shadow: 1px 1px 22px 0px rgba(143,143,143,1);
 box-shadow: 1px 1px 22px 0px rgba(143,143,143,1);
 
     border-radius: 11px;
 
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
 
     width: 300px;
     height: 300px;
@@ -52,9 +53,9 @@ box-shadow: 1px 1px 22px 0px rgba(143,143,143,1);
     font-weight: 200;
     color: #ffffff;
     background-color: #304d73;
-    border-radius: 15px; 
-    padding: 10px 20px; 
-    border: none; 
+    border-radius: 15px;
+    padding: 10px 20px;
+    border: none;
     cursor: pointer;
     transition: 0.7s;
     position: relative;
@@ -78,3 +79,14 @@ input:not(#inputEnviar):hover{
     border: 3px solid white   ;
     transition: 1s;
     }
+    @media only screen and (min-device-width: 1300px) {
+      body {
+        background-image: url("/imagens/fundoLogin.jpeg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        overflow-y: hidden;
+        font-family: "Manrope", sans-serif;
+
+      }
+    }
+

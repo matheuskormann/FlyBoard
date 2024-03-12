@@ -1,8 +1,10 @@
 body{
     background-image: url("/imagens/fundoLogin.jpeg");
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
     background-size: cover;
     overflow-y: hidden;
+}
+
 }
 h1{
     color:#ffffff;
@@ -13,14 +15,14 @@ h1{
     height: 200px;
     margin-left: 42%;
     border-radius: 50%;
-  
+
 }
 .conteinerInput{
     display: flex;
     justify-content: flex-start;
     position: relative;
     top: 25px;
-    
+
 }
 #conteinerCadastro{
     position: relative;
@@ -32,7 +34,7 @@ h1{
     margin-right: auto;
     width: 610px;
     height: 350px;
-} 
+}
 p {
     margin-left: 21px;
     margin-bottom: 11px;
@@ -45,9 +47,9 @@ input{
     font-weight: 900;
     color: #ffffff;
     background-color: #242625;
-    border-radius: 15px; 
-    padding: 10px 20px; 
-    border: none; 
+    border-radius: 15px;
+    padding: 10px 20px;
+    border: none;
     cursor: pointer;
     transition: 0.7s;
     position: relative;
