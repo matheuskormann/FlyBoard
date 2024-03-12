@@ -1,8 +1,17 @@
 body{
-	background-image: url("/imagens/scooby.jpg");
+	background-image: url("../imagens/fundoLogin.jpeg");
     background-repeat: no-repeat; 
     background-size: cover;
 }
+
+
+
+#Logo{
+    height: 200px;
+    margin-left: 42%;
+    border-radius: 50%;
+}
+
 #menu {
 	background: #0099CC;
 	background: linear-gradient(to bottom,  #1044CC,  #BD78FF);
