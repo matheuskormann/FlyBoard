@@ -1,5 +1,5 @@
 body{
-    background-image: url("/imagens/fundomenor.jpg");
+    background-image: url("../imagens/fundomenor.jpg");
     background-repeat: no-repeat;
     background-size: auto;
     overflow-y: hidden;
@@ -81,7 +81,7 @@ input:not(#inputEnviar):hover{
     }
     @media only screen and (min-device-width: 1300px) {
       body {
-        background-image: url("/imagens/fundoLogin.jpeg");
+        background-image: url("../imagens/fundoLogin.jpeg");
         background-repeat: no-repeat;
         background-size: cover;
         overflow-y: hidden;
