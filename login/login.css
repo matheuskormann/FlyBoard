@@ -77,4 +77,19 @@ input:not(#inputEnviar){
 input:not(#inputEnviar):hover{
     border: 3px solid white   ;
     transition: 1s;
+<<<<<<< Updated upstream
     }
+=======
+    }
+    @media only screen and (min-device-width: 1300px) {
+      body {
+        background-image: url("../imagens/fundomenor.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        overflow-y: hidden;
+        font-family: "Manrope", sans-serif;
+
+      }
+    }
+
+>>>>>>> Stashed changes
