@@ -1,48 +1,83 @@
-body{
-    background-image: url("../imagens/fundoLogin.jpeg");
+body {
+    background-image: url("/imagens/fundomenor.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
-    overflow-y: hidden;
+    background-size: auto;
+    overflow-x: hidden;
+    font-family: "Manrope", sans-serif;
 }
 
-h1{
-    color:#ffffff;
+h1,h4  {
+    color: #ffffff;
     position: relative;
     left: 105px;
+    position: relative;
+    top: -15px;
 }
-#Logo{
-    height: 200px;
-    margin-left: 42%;
-    border-radius: 50%;
-
-}
-.conteinerInput{
+#h3{
     display: flex;
-    justify-content: flex-start;
+    justify-content: center; 
     position: relative;
-    top: 25px;
+    top: -85px;
+}
+#Logo {
+    height: auto;
+    width: 50%;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    position: relative;
+    top: -35px;
+}
+
+.conteinerInput {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px ;
+    position: relative;
+   
 
 }
-#conteinerCadastro{
+.input{
     position: relative;
-    bottom: 25px;
-    background-color: #000000b0;
+    top: -25px;
+    left: 19px;
+    margin: 9px 25px 1px 1px;
+}
+
+#conteinercadPasageiro {
+    background-color: rgba(0, 0, 0, 0.7);
     border: 2px solid #242625;
     border-radius: 11px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 610px;
-    height: 350px;
+    margin: 20px auto;
+    max-width: 39%;
+    min-width: min-content;
+    margin-bottom: 35px;
+    padding: 20px; 
+    position: relative;
+    top: -100px;
 }
+
 p {
-    margin-left: 21px;
-    margin-bottom: 11px;
     color: #ffffff;
 }
-input{
-    margin-left: 65px;
+
+input {
+    display: flex;
+    align-items: center;
+    margin:auto;
+    width: 195px;
+    border: 3px solid #0D0D0D;
+    border-radius: 20px;
+    color: #ffffff;
+    background-color: #304d73;
+    padding: 8px;
+    
+   
 }
-#inputEnviar{
+
+#inputEnviar {
     font-weight: 900;
     color: #ffffff;
     background-color: #242625;
@@ -51,23 +86,24 @@ input{
     border: none;
     cursor: pointer;
     transition: 0.7s;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
     position: relative;
-    top: 45px;
-    left:197px;
+    top: -25px;
 }
-#inputEnviar:hover{
+
+#inputEnviar:hover {
     background-color: #aa0000;
-  }
-input:not(#inputEnviar){
-    border: 3px solid #0D0D0D;
-    position: relative;
-    right: 41px;
-    width: 241px;
-    height: 20px;
-    border-radius: 20px;
-    color: #ffffff;
-    background-color: #304d73;
 }
-input:not(#inputEnviar):hover{
-    border: 3px solid #aa0000   ;
+
+input:not(#inputEnviar):hover {
+    border: 3px solid #aa0000;
+}
+@media only screen and (min-device-width: 1300px) {
+    body {
+      background-size: cover;
+      overflow-y: hidden;
     }
+  }

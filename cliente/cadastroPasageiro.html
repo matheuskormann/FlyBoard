@@ -1,39 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> CadastroPassageiro</title>
-  <link rel="stylesheet" href="cadPassagero.css">
-  <link rel="shortcut icon" href="../imagens/flyboardLOGOremovido.ico" type="image/x-icon">
+    <title>Cadastro Passageiro</title>
+    <link rel="stylesheet" href="cadPassagero.css">
+    <link rel="shortcut icon" href="/imagens/flyboardLOGOremovido.ico" type="image/x-icon">
 </head>
-    <body>
-        <img id="Logo" src="../imagens/flyboardLogosemF_azul.png" alt="Logo">
-        <form name="form1">
 
-            <div id="conteinerCadastro">
-                <div class="conteinerInput">
-                    <div>
-                       <p>Nome completo:</p>
-                       <input id="inputLogin" type="text" name="txtLogin">
-                       <p>CPF:</p>
-                       <input id="inputLogin" type="text" name="txtLogin">
-                       <p>data de nacimento:</p>
-                       <input id="inputLogin" type="text" name="txtLogin">
+<body>
+    
+    <img id="Logo" src="/imagens/flyboardLOGOremovido.png" alt="Logo">
+    <div id="h3">
+    <h3>Cadastro Pasageiros</h3>
+    </div>
+    <form name="form1">
+
+        <div id="conteinercadPasageiro">
+            <div class="conteinerInput">
+                
+            
+                    <div class="input">
+                        <p>Nome completo:</p>
+                        <input id="inputLogin" type="text" name="txtLogin">
                     </div>
-                    <div>
-                       <p>E-mail:</p>
-                       <input id="inputLogin" type="text" name="txtLogin">
-                       <p>Senha:</p>
-                       <input id="inputPasswoed" type="password" name="txtPassword">
-                       <p>comfirme a Senha:</p>
-                       <input id="inputPasswoed" type="password" name="txtPassword">
+                    <div class="input">
+                        <p>CPF:</p>
+                        <input id="inputLogin" type="text" name="txtLogin">
                     </div>
-                </div>
-                <br>
-                <input id="inputEnviar" type="submit" value="Enviar">
+                    <div class="input">
+                        <p>Data de Nacimento:</p>
+                        <input id="inputLogin" type="date" name="txtdatPartCad">
+                    </div>
+                    <div class="input">
+                        <p>E-mail:</p>
+                        <input id="inputLogin" type="text" name="txtLogin">
+                    </div>
+                    <div class="input">
+                        <p>Senha</p>
+                        <input id="inputLogin" type="password" name="txtPassword">
+                    </div>
+                    <div class="input">
+                        <p>Comfirme a Senha</p>
+                        <input id="inputLogin" type="password" name="txtPassword">
+                    </div>
             </div>
-           
-        </form>
-    </body>
+            <br>
+            <input id="inputEnviar" type="submit" value="Enviar">
+        </div>
+
+    </form>
+</body>
+
 </html>
