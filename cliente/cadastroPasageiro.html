@@ -23,27 +23,27 @@
             
                     <div class="input">
                         <p>Nome completo:</p>
-                        <input id="inputLogin" type="text" name="txtLogin">
+                        <input id="inputNome" type="text" name="txtLogin">
                     </div>
                     <div class="input">
                         <p>CPF:</p>
-                        <input id="inputLogin" type="text" name="txtLogin">
+                        <input id="inputCPF" type="text" name="txtCpf">
                     </div>
                     <div class="input">
                         <p>Data de Nacimento:</p>
-                        <input id="inputLogin" type="date" name="txtdatPartCad">
+                        <input id="inputDtnasc" type="date" name="txtDtNasc">
                     </div>
                     <div class="input">
                         <p>E-mail:</p>
-                        <input id="inputLogin" type="text" name="txtLogin">
+                        <input id="inputEmail" type="text" name="txtEmail">
                     </div>
                     <div class="input">
                         <p>Senha</p>
-                        <input id="inputLogin" type="password" name="txtPassword">
+                        <input id="inputSenha" type="password" name="txtPassword">
                     </div>
                     <div class="input">
                         <p>Comfirme a Senha</p>
-                        <input id="inputLogin" type="password" name="txtPassword">
+                        <input id="inputSenha1" type="password" name="txtPassword">
                     </div>
             </div>
             <br>
@@ -51,6 +51,40 @@
         </div>
 
     </form>
+
+
+    <script>
+        function validateForm() {
+            var email = document.forms["form1"]["txtEmail"].value;
+            var password = document.forms["form1"]["txtPassword"].value;
+            var cpf = document.forms["form1"]["txtCpf"].value;
+
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            var passwordRegex = /^.{6,}$/;
+
+            var cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+
+            if (!emailRegex.test(email)) {
+                alert("Por favor, insira um e-mail válido.");
+                return false;
+            }
+
+            if (!passwordRegex.test(password)) {
+                alert("A senha deve ter pelo menos 6 caracteres.");
+                return false;
+            }
+
+            if (!cpfRegex.test(cpf)){
+                alert("Cpf inválido");
+                return false;
+            }
+
+            console.log('deu');
+        }
+
+        
+    </script>
 </body>
 
 </html>
