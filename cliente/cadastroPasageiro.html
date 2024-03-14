@@ -31,7 +31,7 @@
                     </div>
                     <div class="input">
                         <p>Data de Nacimento:</p>
-                        <input id="inputDtnasc" type="date" name="txtDtNasc">
+                        <input id="inputDtnasc" type="date" name="txtDtNasc" required>
                     </div>
                     <div class="input">
                         <p>E-mail:</p>
@@ -60,7 +60,7 @@
             var confSenha = document.forms["form1"]["txtPassword1"].value;
             var cpf = document.forms["form1"]["txtCpf"].value;
             var nome = document.forms["form1"]["txtNome"].value;
-            var data = document.forms["form1"]["txtDtNasc"]
+            var data = document.forms["form1"]["txtDtNasc"].value;
             
 
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -70,6 +70,8 @@
             var cpfRegex = /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/;
 
             var nomeRegex = /^\s*$/
+
+            
 
             if (!emailRegex.test(email)) {
                 alert("Por favor, insira um e-mail válido.");
@@ -96,7 +98,7 @@
                 return false;
             }
 
-            if()
+           
             
             console.log('deu');
             
