@@ -32,25 +32,28 @@
         function validateForm() {
             var email = document.forms["form1"]["txtLogin"].value;
             var password = document.forms["form1"]["txtPassword"].value;
-
+    
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
             var passwordRegex = /^.{6,}$/;
-
+    
             if (!emailRegex.test(email)) {
                 alert("Por favor, insira um e-mail válido.");
                 return false;
             }
-
+    
             if (!passwordRegex.test(password)) {
                 alert("A senha deve ter pelo menos 6 caracteres.");
-                return false;
+                return false; 
             }
-
-            console.log('deu');
+    
+            console.log('Email: ' + email);
+            console.log('Senha: ' + password);
+    
+            return false; 
+            return true;
         }
 
-        
     </script>
+    
 </body>
 </html>
