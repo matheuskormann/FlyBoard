@@ -3,7 +3,34 @@ body{
     background-repeat: no-repeat; 
     background-size: cover;
 }
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
 
+#imagem-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+}
+
+#imagem-bottom img {
+    margin: 0 10px; /* espaço entre as imagens */
+    border: 2px solid #ccc; /* borda de 2 pixels sólidos cinza */
+    border-radius: 5px; /* bordas arredondadas */
+}
+
+
+#imagem-bottom img {
+    margin: 0 10px; /* espaço entre as imagens */
+}
 
 
 #Logo{
