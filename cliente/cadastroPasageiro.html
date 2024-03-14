@@ -23,7 +23,7 @@
             
                     <div class="input">
                         <p>Nome completo:</p>
-                        <input id="inputNome" type="text" name="txtLogin">
+                        <input id="inputNome" type="text" name="txtNome">
                     </div>
                     <div class="input">
                         <p>CPF:</p>
@@ -43,11 +43,11 @@
                     </div>
                     <div class="input">
                         <p>Comfirme a Senha</p>
-                        <input id="inputSenha1" type="password" name="txtPassword">
+                        <input id="inputSenha1" type="password" name="txtPassword1">
                     </div>
             </div>
             <br>
-            <input id="inputEnviar" type="submit" value="Enviar">
+            <input id="inputEnviar" type="submit" value="Enviar" onclick="validateForm()">
         </div>
 
     </form>
@@ -57,13 +57,19 @@
         function validateForm() {
             var email = document.forms["form1"]["txtEmail"].value;
             var password = document.forms["form1"]["txtPassword"].value;
+            var confSenha = document.forms["form1"]["txtPassword1"].value;
             var cpf = document.forms["form1"]["txtCpf"].value;
+            var nome = document.forms["form1"]["txtNome"].value;
+            var data = document.forms["form1"]["txtDtNasc"]
+            
 
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
             var passwordRegex = /^.{6,}$/;
 
-            var cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+            var cpfRegex = /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/;
+
+            var nomeRegex = /^\s*$/
 
             if (!emailRegex.test(email)) {
                 alert("Por favor, insira um e-mail válido.");
@@ -76,11 +82,24 @@
             }
 
             if (!cpfRegex.test(cpf)){
-                alert("Cpf inválido");
+                alert("Cpf inválido, Insira desta forma 000.000.000-00");
                 return false;
             }
 
+            if (confSenha !== password){
+                alert("As Senhas inseridas não são iguais");
+                return false;
+            }
+            
+            if(nomeRegex.test(nome)){
+                alert("Preencha o campo nome");
+                return false;
+            }
+
+            if()
+            
             console.log('deu');
+            
         }
 
         
