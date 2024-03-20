@@ -81,7 +81,7 @@
             }
 
             if (!cpfRegex.test(cpf)){
-                alert("Preencha o CPF");
+                alert("Preencha somente com números, sem LETRAS");
                 return false;
             }
 
@@ -91,12 +91,12 @@
             }
 
             if (!passwordRegex.test(password)) {
-                alert("Senha inválida.");
+                alert("A senha deve ter conter 6 caracteres, números e caracter especial");
                 return false;
             }
 
             if (confSenha !== password){
-                alert("As Senhas inseridas não são iguais");
+                alert("A senha deve ter conter 6 caracteres, números e caracter especial");
                 return false;
             }
             

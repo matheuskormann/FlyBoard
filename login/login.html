@@ -11,19 +11,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <div class="logo"><img id="Logo" src="../imagens/flyboardLOGOremovido.png" alt="Logo"></div>
     <div class="conteinerLogin">
         <form name="form1" onsubmit="return validateForm()">
-
+            
             <div id="Login">
                 <h1>LOGIN</h1>
                 <p>E-MAIL:</p>
-                <input id="inputLogin" type="text" name="txtLogin" required>
+                <input id="inputLogin" type="text" name="txtLogin">
                 <p>SENHA:</p>
-                <input id="inputPasswoed" type="password" name="txtPassword" required>
+                <input id="inputPasswoed" type="password" name="txtPassword">
                 <a href="/cliente/cadastroPasageiro.html">Criar uma conta</a>
                 <br>
-                <input id="inputEnviar" type="submit" value="Enviar" onclick="validateForm()">
+                <input id="inputEnviar" type="submit" value="Enviar" onclick="validateForm(alert)">
             </div>
         </form>
     </div>
