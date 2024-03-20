@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro Passageiro</title>
+    <title>Cadastro Bagagem</title>
     <link rel="stylesheet" href="cadBagagem.css">
     <link rel="shortcut icon" href="/imagens/flyboardLOGOremovido.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,23 +26,23 @@
             
                     <div class="input">
                         <p>Nome completo:</p>
-                        <input id="inputcadBagagem" type="text" name="txtLogin">
+                        <input id="inputcadBagagem" type="text" name="txtNome" required placeholder="Nome Completo">
                     </div>
                     <div class="input">
                         <p>CPF:</p>
-                        <input id="inputcadBagagem" type="text" name="txtLogin">
+                        <input id="inputcadBagagem" type="text" name="txtCpf" required placeholder="xxx.xxx.xxx-xx">
                     </div>
                     <div class="input">
                         <p>Data de partida:</p>
-                        <input id="inputcadBagagem" type="date" name="txtdatPartCad">
+                        <input id="inputcadBagagem" type="date" name="txtdatPartCad" required>
                     </div>
                     <div class="input">
                         <p>Código da Passagem:</p>
-                        <input id="inputLogin" type="text" name="txtLogin">
+                        <input id="inputLogin" type="text" name="txtCodPas" required placeholder="xxxxAA">
                     </div>
                     <div class="input">
                         <p>Código da bagagem:</p>
-                        <input id="inputcadBagagem" type="text" name="txtPassword">
+                        <input id="inputcadBagagem" type="text" name="txtCodBag" required placeholder="xxxxxxAA"> 
                     </div>
             </div>
             <br>
@@ -50,6 +50,57 @@
         </div>
 
     </form>
-</body>
 
+
+    <script>
+        function validateForm() {
+
+            var nome = document.forms["form1"]["txtNome"].value;
+            var cpf = document.forms["form1"]["txtCpf"].value;
+            var dataPartida = document.forms["form1"]["txtdatPartCad"].value;
+            var codPas = document.forms["form1"]["txtCodPas"].value;
+            var codBag = document.forms["forms1"]["txtCodBag"].value;
+
+            var nomeRegex = /^\s*$/
+
+            var cpfRegex = /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/;
+
+            var codPasRegex = /^[A-Z0-9]{6}$/
+
+            var codBagRegex = /^[A-Z0-9]{8}$/
+
+
+
+            if(!nomeRegex.test(nome)){
+                alert("Preencha o campo nome");
+                return false;
+            }
+
+            if(!cpfRegex.test(cpf)){
+                alert("Cpf inválido");
+                return false;
+            }
+
+            if(!codPasRegex.text(codPas)) {
+                alert("Preencha o campo")
+                return false;
+            }
+
+            if(!codBagRegex.text(codBag)) {
+                alert("Preencha o campo")
+                return false;
+            }
+
+            console.log('CPF:' + cpf);
+            console.log('Nome:' + nome);
+            console.log('Data:'+ dataPartida);
+            console.log('CodigoPassagem:' + codPas)
+            console.log('CodigoBagagem' + codBag);
+
+            return true;
+
+
+        }
+    </script>
+</body>
 </html>

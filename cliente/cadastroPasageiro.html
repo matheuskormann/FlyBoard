@@ -26,11 +26,11 @@
             
                     <div class="input">
                         <p>Nome completo:</p>
-                        <input id="inputNome" type="text" name="txtNome">
+                        <input id="inputNome" type="text" name="txtNome" required placeholder="Nome Completo">
                     </div>
                     <div class="input">
                         <p>CPF:</p>
-                        <input id="inputCPF" type="text" name="txtCpf">
+                        <input id="inputCPF" type="text" name="txtCpf" required placeholder="xxx.xxx.xxx-xx">
                     </div>
                     <div class="input">
                         <p>Data de Nacimento:</p>
@@ -38,15 +38,15 @@
                     </div>
                     <div class="input">
                         <p>E-mail:</p>
-                        <input id="inputEmail" type="text" name="txtEmail">
+                        <input id="inputEmail" type="text" name="txtEmail" required>
                     </div>
                     <div class="input">
                         <p>Senha</p>
-                        <input id="inputSenha" type="password" name="txtPassword">
+                        <input id="inputSenha" type="password" name="txtPassword" required>
                     </div>
                     <div class="input">
                         <p>Comfirme a Senha</p>
-                        <input id="inputSenha1" type="password" name="txtPassword1">
+                        <input id="inputSenha1" type="password" name="txtPassword1" required>
                     </div>
             </div>
             <br>
@@ -68,13 +68,22 @@
 
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            var passwordRegex = /^.{6,}$/;
+            var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
             var cpfRegex = /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/;
 
             var nomeRegex = /^\s*$/
 
             
+            if(nomeRegex.test(nome)){
+                alert("Preencha o campo nome");
+                return false;
+            }
+
+            if (!cpfRegex.test(cpf)){
+                alert("Preencha o CPF");
+                return false;
+            }
 
             if (!emailRegex.test(email)) {
                 alert("Por favor, Insira um e-mail válido.");
@@ -82,12 +91,7 @@
             }
 
             if (!passwordRegex.test(password)) {
-                alert("Senha inválida, a senha deve ter pelo menos 6 caracteres.");
-                return false;
-            }
-
-            if (!cpfRegex.test(cpf)){
-                alert("Cpf inválido");
+                alert("Senha inválida.");
                 return false;
             }
 
@@ -96,14 +100,9 @@
                 return false;
             }
             
-            if(nomeRegex.test(nome)){
-                alert("Preencha o campo nome");
-                return false;
-            }
-
-           
-            
             console.log('deu');
+
+            return true;
             
         }
 

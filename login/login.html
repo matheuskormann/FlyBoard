@@ -18,9 +18,9 @@
             <div id="Login">
                 <h1>LOGIN</h1>
                 <p>E-MAIL:</p>
-                <input id="inputLogin" type="text" name="txtLogin">
+                <input id="inputLogin" type="text" name="txtLogin" required>
                 <p>SENHA:</p>
-                <input id="inputPasswoed" type="password" name="txtPassword">
+                <input id="inputPasswoed" type="password" name="txtPassword" required>
                 <a href="/cliente/cadastroPasageiro.html">Criar uma conta</a>
                 <br>
                 <input id="inputEnviar" type="submit" value="Enviar" onclick="validateForm()">
@@ -34,7 +34,8 @@
             var password = document.forms["form1"]["txtPassword"].value;
     
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            var passwordRegex = /^.{6,}$/;
+            var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
     
             if (!emailRegex.test(email)) {
                 alert("Por favor, insira um e-mail válido.");
@@ -42,7 +43,7 @@
             }
     
             if (!passwordRegex.test(password)) {
-                alert("A senha deve ter pelo menos 6 caracteres.");
+                alert("Senha incorreta");
                 return false; 
             }
     
