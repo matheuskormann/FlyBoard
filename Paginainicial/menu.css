@@ -1,6 +1,9 @@
 body{
 	background-color: black;
 }
+.white-text {
+    color: white;
+}
 
 #menu {
 	margin: 15px 9px 9px 9px;
