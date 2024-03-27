@@ -30,7 +30,7 @@
                     </div>
                     <div class="input">
                         <p>CPF:</p>
-                        <input id="inputCPF" type="text" name="txtCpf" required placeholder="xxx.xxx.xxx-xx">
+                        <input id="inputCPF" type="text" name="txtCpf" required placeholder="xxx.xxx.xxx-xx" maxlength="14" onkeypress="validarCPF(event)">
                     </div>
                     <div class="input">
                         <p>Data de Nacimento:</p>
@@ -43,9 +43,15 @@
                     <div class="input">
                         <p>Senha</p>
                         <input id="inputSenha" type="password" name="txtPassword" required>
+                        <p>Sua Senha deve conter:<br>
+                            ● Minimo 6 caracteres<br>
+                            ● Caractere maiúsculo<br>
+                            ● Caractere especial<br>
+                            ● Algum número<br>
+                        </p>
                     </div>
                     <div class="input">
-                        <p>Comfirme a Senha</p>
+                        <p>Confirme a Senha</p>
                         <input id="inputSenha1" type="password" name="txtPassword1" required>
                     </div>
             </div>
@@ -105,6 +111,14 @@
             return true;
             
         }
+
+        function validarCPF(e) {
+            var tecla = e.which || e.keyCode;
+            if ((tecla < 48 || tecla > 57) && tecla !== 8 && tecla !== 0 && tecla !== 46 && tecla !== 45) {
+                e.preventDefault();
+            }
+        }
+        
 
         
     </script>
