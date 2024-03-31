@@ -1,3 +1,15 @@
+<?php
+include('../connections/connection.php');
+session_start();
+    if (!isset($_SESSION["id"])) {
+        header("Location: ../login/login.html ");
+      }
+
+        $id = $_SESSION["id"];
+        $sql = "SELECT name ,login , role FROM users WHERE id_user = $id";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,18 +17,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="menu.css"> 
     <title>Home</title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     
 </head>
 <body>
-  <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <nav id='menu'>
     <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
     <ul>
-      <li><a href='/Paginainicial/home.html'>Home</a></li>
+      <li><a href='../index/index.php'>Home</a></li>
       <li><a class='dropdown-arrow'>Servicos</a>
         <ul class='sub-menus'>
-          <li><a href='/cliente/cadagagem/cadBagagem.html'>cad bagagem</a></li>
+          <li><a href='../cliente/cadagagem/cadBagagem.html'>cad bagagem</a></li>
         </ul>
       </li>
       <li><a class='dropdown-arrow'>Voos</a>
@@ -25,8 +37,12 @@
           <li><a href=''>encontar voo</a></li>
         </ul>
       </li>
-      <li><a href='/login/login.html'>Login</a></li>
-    </ul>
+      <li><a class='dropdown-arrow'><?php echo $row['name'] ?></a>
+        <ul class='sub-menus'>
+          <li><a href=''>configurações</a></li>
+          <li><a href='../login/logout.php'>logout</a></li>
+        </ul>
+      </li>
   </nav>
   <div id="carouselExampleDark" class="carousel carousel-dark slide">
     <div class="carousel-indicators">
@@ -36,21 +52,21 @@
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active" data-bs-interval="10000">
-        <img src="/imagens/fotosHome1.png" class="d-block w-100" alt="...">
+        <img src="../imagens/fotosHome1.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block text-white">
           <h5>FlyBoard</h5>
           <p>Seu destino começa aqui, nas asas da tecnologia.</p>
         </div>
       </div>
       <div class="carousel-item" data-bs-interval="2000">
-        <img src="/imagens/fotosHome2.png" class="d-block w-100" alt="...">
+        <img src="../imagens/fotosHome2.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block ">
           <h5>FlyBoard</h5>
           <p>Seu destino começa aqui, nas asas da tecnologia.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img src="/imagens/fotosHome3.png" class="d-block w-100" alt="...">
+        <img src="../imagens/fotosHome3.png" class="d-block w-100" alt="...">
         <div class="carousel-caption d-none d-md-block ">
           <h5>FlyBoard</h5>
           <p>Seu destino começa aqui, nas asas da tecnologia.</p>
@@ -72,7 +88,7 @@
     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
       <div class="col">
         <div class="card h-100">
-          <img src="/imagens/fotoVeneza.png" class="card-img-top" alt="...">
+          <img src="../imagens/fotoVeneza.png" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Veneza</h5>
             <p class="card-text">A capital da região de Vêneto, no norte da Itália, é formada por mais de 100 pequenas ilhas em uma lagoa no Mar Adriático. A cidade não tem estradas, apenas canais (como a via Grand Canal), repletos de palácios góticos e renascentistas.</p>
@@ -87,7 +103,7 @@
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="/imagens/fotoGrecia.png" class="card-img-top" alt="...">
+          <img src="../imagens/fotoGrecia.png" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Atenas</h5>
             <p class="card-text">Atenas é a capital da Grécia. A cidade também foi o centro da Grécia Antiga, um império e civilização poderosos, e ainda é dominada por monumentos do século V a.C., como a Acrópole, uma cidadela no topo de uma montanha repleta de construções antigas.</p>
@@ -102,7 +118,7 @@
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="/imagens/fotoMoscou .png" class="card-img-top" alt="...">
+          <img src="../imagens/fotoMoscou .png" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Moscou</h5>
             <p class="card-text">Moscou, situada às margens do rio de mesmo nome, no oeste da Rússia, é a capital cosmopolita do país. Em seu núcleo histórico está localizado o Kremlin, um complexo que abriga a residência do presidente e tesouros czaristas no Palácio do Arsenal.</p>
@@ -116,7 +132,7 @@
       </div>
       <div class="col">
         <div class="card h-100">
-          <img src="/imagens/fotoDubai.png" class="card-img-top" alt="...">
+          <img src="../imagens/fotoDubai.png" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Dubai</h5>
             <p class="card-text">Dubai é uma cidade e um emirado dos Emirados Árabes Unidos conhecida pelos shoppings de luxo, pela arquitetura ultramoderna e pela animada vida noturna. Burj Khalifa, uma torre de 830 metros de altura, domina a linha do horizonte repleta de arranha-céus.</p>
@@ -128,30 +144,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="col">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-body-secondary">Last updated 3 mins ago</small>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-          </div>
-          <div class="card-footer">
-            <small class="text-body-secondary">Last updated 3 mins ago</small>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </body>
