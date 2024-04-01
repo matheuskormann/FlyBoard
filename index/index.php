@@ -14,35 +14,40 @@ session_start();
     
 </head>
 <body>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <nav id='menu'>
-    <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
-    <ul>
-      <li><a class='dropdown-arrow'>FlyBoard</a>
-        <ul class='sub-menus'>
-          <li><a href='#'>Sobre</a></li>
-        </ul>
-      </li>
-      <li><a class='dropdown-arrow'>Voos</a>
-        <ul class='sub-menus'>
-          <li><a href=''>meus voos</a></li>
-          <li><a href=''>encontar voo</a></li>
-        </ul>
-      </li>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="../index/index.php">
+      <img src="../imagens/flyboardNavBar.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+      flyboard
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+      </ul  class="nav-item d-flex list-unstyled">
+        <li class="nav-item-no-marker">
       <?php
       if (!isset($_SESSION["id"])) {
-        echo"<li><a href='../login/login.html'>Login</a></li>";
+        echo'<a class="nav-link"  href="../login/login.html">Login</a>';
       }
       else{
         $id = $_SESSION["id"];
         $sql = "SELECT name FROM users WHERE id_user = $id";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
-        echo"<li><a href='../homes/collectorHomes.php'>" . $row['name'] . "</a></li>";
+        echo'<a class="nav-link" href="../homes/collectorHomes.php">' . $row["name"] . "</a>";
       }
       ?>
-    </ul>
-  </nav>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
   <div id="carouselExampleDark" class="carousel carousel-dark slide">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -83,6 +88,9 @@ session_start();
   </div>
   <br>
   <br>
-  
+
+
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

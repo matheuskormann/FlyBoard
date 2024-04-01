@@ -20,7 +20,7 @@
     $row = $result->fetch_assoc();
     ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,31 +30,66 @@
     
 </head>
 <body>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <nav id='menu'>
-    <input type='checkbox' id='responsive-menu' onclick='updatemenu()'><label></label>
-    <ul>
-      <li><a href='../index/index.php'>Home</a></li>
-      <li><a class='dropdown-arrow'>users</a>
-        <ul class='sub-menus'>
-          <li><a href='../cliente/cadagagem/cadBagagem.html'>clientes</a></li>
-          <li><a href='../cliente/cadagagem/cadBagagem.html'>funconarios</a></li>
-        </ul>
-      </li>
-      <li><a class='dropdown-arrow'>Voos</a>
-        <ul class='sub-menus'>
-          <li><a href=''>comfiguracao</a></li>
-          <li><a href=''>add voos</a></li>
-        </ul>
-      </li>
-      <li><a class='dropdown-arrow'><?php echo $row['name'] ?></a>
-        <ul class='sub-menus'>
-          <li><a href=''>configurações</a></li>
-          <li><a href='../login/logout.php'>logout</a></li>
-        </ul>
-      </li>
-  </nav>
- 
   
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+  <a class="navbar-brand" href="../index/index.php">
+      <img src="../imagens/flyboardNavBar.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+      flyboard
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page">Admin</a>
+        </li>
+        <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                users
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">list. users</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="./homeCliente.php">Home</a></li>
+              </ul>
+            </li>
+        <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Funcionários
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="../funcionarios/cadFuncionario.html">cad</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="./homeFuncionario.php">Home</a></li>
+              </ul>
+            </li>
+      </ul>
+      <li class="nav-item dropdown  d-flex">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <?php
+                    echo $row['name']
+                ?>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">configurações</a></li>
+                <li><a class="dropdown-item" href="#">logout</a></li>
+              </ul>
+            </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

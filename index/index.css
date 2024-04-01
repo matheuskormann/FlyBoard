@@ -1,3 +1,6 @@
+.nav-item-no-marker {
+    list-style: none;
+}
 
 #menu {
 	margin: 15px 9px 9px 9px;
