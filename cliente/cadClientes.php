@@ -12,8 +12,10 @@
             $dataNacimento = $_POST["txtDtNasc"];
             $password = $_POST["txtPassword"];
             $role = "cliente";
+            $userImagePath ="../imagens/padraoUser.png";
+
             
-            $sql = "INSERT INTO users (name, cpf, login, data_de_nacimento, password, role) VALUES('$name', '$cpf', '$login', '$dataNacimento', '$password', '$role')";
+            $sql = "INSERT INTO users (name, cpf, login, data_de_nacimento, password, role, userImagePath) VALUES('$name', '$cpf', '$login', '$dataNacimento', '$password', '$role', '$userImagePath')";
             $result = $conn->query($sql);
 
             if ($result === TRUE) {
