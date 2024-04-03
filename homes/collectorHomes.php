@@ -26,4 +26,3 @@ if ($role == "cliente") {
     header("Location: ../index/index.php");
 }
 ?>
-
