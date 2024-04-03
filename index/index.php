@@ -29,17 +29,21 @@ session_start();
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
       </ul  class="nav-item d-flex list-unstyled">
-        <li class="nav-item-no-marker">
+        <li class="av-item dropdown  d-flex">
       <?php
       if (!isset($_SESSION["id"])) {
         echo'<a class="nav-link"  href="../login/login.html">Login</a>';
       }
       else{
         $id = $_SESSION["id"];
-        $sql = "SELECT name FROM users WHERE id_user = $id";
+        $sql = "SELECT name,userImagePath FROM users WHERE id_user = $id";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
-        echo'<a class="nav-link" href="../homes/collectorHomes.php">' . $row["name"] . "</a>";
+        echo'
+        <div id="comtImgUser">
+           <img id="userImg" src="'. $row["userImagePath"].'" alt="">
+        </div>
+        <a class="nav-link" href="../homes/collectorHomes.php">' . $row["name"] . '</a>';
       }
       ?>
         </li>

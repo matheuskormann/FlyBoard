@@ -1,27 +1,14 @@
-a{
-    text-decoration: none;
-    color: #000;
-}
-
 #botaoVoltar{
     margin-top: 15px;
     margin-left: 25px;
 }
-
-#btnFiltro{
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 20px; 
-    margin-top: 75px;
-}
 #comtImgUser{
-    width: 400px; /* largura desejada */
-    height: 400px; /* altura desejada */
-    border-radius: 499px;
+    width: 200px; /* largura desejada */
+    height: 200px; /* altura desejada */
+    border-radius: 299px;
     overflow: hidden;
     position: relative;
-    
+    left: 165px;
 }
 #userImg{
 

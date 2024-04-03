@@ -84,7 +84,7 @@
                         while ($row = $result->fetch_assoc()) {
                 ?>
                             <tr>
-                                <td><a href="users_user.php?id=<?php echo $row['id_user'] ?>"><img src="../imagens/idUser.png" alt="user" style="width: 15px; height: 15px;">: <?php echo $row["id_user"] ?></a></td>
+                                <td><a href="./userUser.php?id=<?php echo $row['id_user'] ?>"><img src="../imagens/idUser.png" alt="user" style="width: 15px; height: 15px;">: <?php echo $row["id_user"] ?></a></td>
                                 <td><?php echo $row["name"] ?></td>
                                 <td><?php echo $row["cpf"] ?></td>
                                 <td><?php echo $row["login"] ?></td>
@@ -108,5 +108,7 @@
             }
         }
     </script>
+      <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+      <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

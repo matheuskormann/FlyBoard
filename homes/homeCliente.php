@@ -6,7 +6,7 @@ session_start();
       }
 
         $id = $_SESSION["id"];
-        $sql = "SELECT name ,login , role FROM users WHERE id_user = $id";
+        $sql = "SELECT name ,login , role, userImagePath FROM users WHERE id_user = $id";
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
 ?>
@@ -57,14 +57,13 @@ session_start();
             </li>
       </ul>
       <li class="nav-item dropdown  d-flex">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <?php
-                    echo $row['name']
-                ?>
-              </a>
+              <div id="comtImgUser">
+                 <img  id="userImg" src="<?php echo $row['userImagePath']  ?>" alt="">
+              </div>
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <?php echo $row['name'] ?> </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">configurações</a></li>
-                <li><a class="dropdown-item" href="#"></a></li>
+                <li><a class="dropdown-item" href="../users/comfig.php">configurações</a></li>
+                <li><a class="dropdown-item"onclick="logout()">logout</a></li>
               </ul>
             </li>
       </ul>
@@ -179,7 +178,13 @@ session_start();
 
 
 
-
+  <script>
+function logout() {
+    if (confirm('Tem certeza que deseja fazer logout?')) {
+      window.location.href = '../users/logout.php';
+    }
+}
+</script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
