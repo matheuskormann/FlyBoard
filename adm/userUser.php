@@ -51,8 +51,39 @@ else if ($_SESSION["role"] == "admin") {
                 </div>
             </div>
             <div class="col">
-                <h1>Dados</h1>
-            
+                <h1>Dados:
+                </h1>
+                <div class="container">
+                    <table class="table  table-borderless">
+                    <tr>
+                     <th scope="row">nome:</th>
+                     <td><?php echo $name ?></td>
+                    </tr>
+                    <tr>
+                     <th scope="row">cepeéfi:</th>
+                     <td><?php echo $cpf ?></td>
+                    </tr>
+                    <tr>
+                     <th scope="row">email:</th>
+                     <td><?php echo $login ?></td>
+                    </tr>
+                    <tr>
+                     <th scope="row">Data Nascimento:</th>
+                     <td><?php echo $dataNascimento ?></td>
+                    </tr>
+                    <tr>
+                     <th scope="row">Cargo:</th>
+                     <td><?php echo $role ?></td>
+                    </tr>
+                      
+    
+    
+    
+    
+    
+    
+                    </table>
+                </div>
             </div>
         </div>
     </div>

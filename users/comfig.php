@@ -5,13 +5,7 @@ session_start();
 if (!isset($_SESSION["id"])) {
     header("Location: ../login/login.html");
     exit; 
-} elseif ($_SESSION["role"] == "admin") {
-    echo "<script>
-            alert('Você não tem permissão!');
-            window.location.href = '../index/index.html';
-          </script>";
-    exit; 
-}
+} 
 
 $id = $_SESSION["id"];
 $sql = "SELECT name, cpf, login, data_de_nacimento, role, userImagePath FROM users WHERE id_user = $id";
@@ -120,7 +114,7 @@ if (isset($_POST['atualizarDados'])) {
                     </div>
                     <button name="atualizarDados" class="btn btn-primary mb-3" type="submit">Salvar</button>
                 </form>
-                <a href="">Alterar Senha</a>
+                <a href="../users/alterarSenha.php">Alterar Senha</a>
             </div>
         </div>
     </div>

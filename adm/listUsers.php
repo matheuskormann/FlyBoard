@@ -13,6 +13,48 @@
               </script>";
         exit; 
     }
+    $valor = 0;
+
+    function atualizarfiltro($valor, $conn){
+        switch ($valor) {
+            case 0:
+                $sql = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users";
+                $result = $conn->query($sql);
+                return $result;
+                break;
+            case 1:
+                $sql1 = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users WHERE role = 'cliente' ";
+                $result1 = $conn->query($sql1);
+                return $result1;
+                break;
+            case 2:
+                $sql2 = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users WHERE role = 'funcionarios' ";
+                $result2 = $conn->query($sql2);
+                return $result2;
+                break;
+            case 3:
+                $sql3 = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users WHERE role = 'admin' ";
+                $result3 = $conn->query($sql3);
+                return $result3;
+                break;
+        }
+    }
+
+    // Verifica se o parâmetro 'filtro' foi passado via GET
+    if(isset($_GET['filtro'])){
+        $valor = $_GET['filtro'];
+        $result = atualizarfiltro($valor, $conn);
+    } else {
+        // Se nenhum filtro foi passado, exibe todos os usuários
+        $result = atualizarfiltro($valor, $conn);
+    }
+
+    // Busca por nome ou CPF
+    if(isset($_POST['search'])){
+        $search = $_POST['search'];
+        $sql_search = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users WHERE name LIKE '%$search%' OR cpf LIKE '%$search%'";
+        $result = $conn->query($sql_search);
+    }
 ?>
 <html>
 <head>
@@ -26,8 +68,11 @@
 <body>
     
     <?php
-        $sql = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users";
-        $result = $conn->query($sql);
+        // Número de usuários
+        $sql_num_users = "SELECT COUNT(*) AS total FROM users";
+        $result_num_users = $conn->query($sql_num_users);
+        $row_num_users = $result_num_users->fetch_assoc();
+        $total_users = $row_num_users['total'];
     ?>
      <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -50,7 +95,7 @@
         </li>
       </ul>
       <li class="nav-item dropdown  d-flex">
-              <a class="nav-link"  aria-expanded="false">Número de Users: <?php echo $result->num_rows ?></a>
+              <a class="nav-link"  aria-expanded="false">Número de Users: <?php echo $total_users; ?></a>
             </li>
       </ul>
     </div>
@@ -59,13 +104,21 @@
     <div id="conteinerButtom">
         <a id="botaoVoltar" type="button" class="btn btn-light" href="../homes/homeAdmin.php"><img src="../imagens/iconVoltar.png" alt="voltarHome" style="width: 40px; height: 40px"></a>
     </div>
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="mb-3">
+        <div class="input-group container">
+            <input type="text" class="form-control" placeholder="Buscar por nome ou CPF" name="search">
+            <button class="btn btn-outline-primary" type="submit">Buscar</button>
+        </div>
+    </form>
     <div class="btn-group" id="btnFiltro" role="group" aria-label="Basic outlined example">
-       <button type="button" class="btn btn-outline-primary">Cliente</button>
-       <button type="button" class="btn btn-outline-primary">Funcionario</button>
-       <button type="button" class="btn btn-outline-primary">Admin</button>
+        <button type="button" onclick="atualizarFiltro(0)" class="btn btn-outline-primary">Todos</button>
+        <button type="button" onclick="atualizarFiltro(1)" class="btn btn-outline-primary">Cliente</button>
+        <button type="button" onclick="atualizarFiltro(2)" class="btn btn-outline-primary">Funcionario</button>
+        <button type="button" onclick="atualizarFiltro(3)" class="btn btn-outline-primary">Admin</button>
+        
     </div>
     <div class="container">
-        <table class="table table-striped table-hover">
+        <table id="tabela-usuarios" class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -102,6 +155,10 @@
         </table>
     </div>
     <script>
+        function atualizarFiltro(valor) {
+            location.href = "<?php echo $_SERVER['PHP_SELF']; ?>?filtro=" + valor;
+        }
+
         function excluir(id) {
             if (confirm("Tem certeza que deseja excluir este registro?")) {
                 location.href = "./deletUser.php?id=" + id;
