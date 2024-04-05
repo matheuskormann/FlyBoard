@@ -28,7 +28,7 @@
                 return $result1;
                 break;
             case 2:
-                $sql2 = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users WHERE role = 'funcionarios' ";
+                $sql2 = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users WHERE role = 'funcionario   ' ";
                 $result2 = $conn->query($sql2);
                 return $result2;
                 break;
