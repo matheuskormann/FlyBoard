@@ -17,10 +17,11 @@
                 $_SESSION["role"] = intval($row["ROLE"]);
             }
             else {
+
 ?>
-<script>
-    alert("Senha não confere");
+<script> 
     history.go(-1);
+    alert("Senha Num Ta Certa");
 </script>
 <?php
             }
@@ -29,8 +30,8 @@
     else {
 ?>
 <script>
-    alert("Login não confere");
-    history.go(-1);
+     history.go(-1);
+    alert("Senha Num Ta Certa");
 </script>
 <?php
     }
