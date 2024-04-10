@@ -14,16 +14,16 @@ body{
 
 
 
-h1{
-    color:#ffffff;
-    position: relative;
-    left: 105px;
-    font-weight: 200;
-    position: relative;
-    top: 15px;
-    width: fit-content;
+h1  {
+    color:#ffffff !important;
+    position: relative !important;
+    left: 105px !important;
+    font-weight: 200 !important;
+    position: relative !important;
+    top: 15px !important;
+    width: fit-content !important;
 }
-.conteinerLogin{
+.conteinerLogin2{
     display: flex;
     justify-content: center;
     align-items: center;

@@ -22,26 +22,21 @@
                 else {
     
     ?>
-    <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="false">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      ...
-    </div>
-  </div>
-</div>
+         
+         <div style="margin-top: 9px;" class="container alert alert-danger" role="alert">
+         Senha Incorreto
+        </div>
+         
+
     <?php
                 }
             }
         }
         else {
     ?>
-   <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="false">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      ...
-    </div>
-  </div>
-</div>
+         <div style="margin-top: 9px;" class="container alert alert-danger" role="alert">
+         Login Incorreta    
+        </div>
     <?php
         }
     }
@@ -59,10 +54,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+
 </head>
 <body>
     <div class="logo"><a href='../index/index.php'><img id="Logo" href='../index/index.php' src="../imagens/flyboardLOGOremovido.png" alt="Logo" ></a></div>
-    <div class="conteinerLogin">
+    <div class="conteinerLogin2">
         <form name="login" method="POST">
 
             <div id="Login">
@@ -77,7 +74,9 @@
             </div>
         </form>
     </div>
+    
 
-
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
