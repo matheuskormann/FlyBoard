@@ -3,7 +3,7 @@
 
     session_start();
     if (!isset($_SESSION["id"])) {
-        header("Location: ../login/login.html");
+        header("Location: ../login/login.php");
         exit; 
     }
     else if ($_SESSION["role"] == "admin") {
@@ -28,7 +28,7 @@
                 return $result1;
                 break;
             case 2:
-                $sql2 = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS WHERE ROLE = 'funcionario   ' ";
+                $sql2 = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS WHERE ROLE = 'funcionario' ";
                 $result2 = $conn->query($sql2);
                 return $result2;
                 break;
