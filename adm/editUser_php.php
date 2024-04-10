@@ -29,7 +29,7 @@
             $password = $_POST["txtPassword"];
             $role = $_POST["selesctRole"];
             $id = $_POST["hidId"];
-            $sql = "UPDATE users SET name = '$name', cpf = '$cpf', login = '$login',data_de_nacimento ='$dataNacimento', password = '$password', role = '$role' WHERE id_user = $id";
+            $sql = "UPDATE USERS SET NAME = '$name', CPF = '$cpf', EMAIL = '$login', DATA_DE_NASCIMENTO ='$dataNacimento', PASSWORD = '$password', ROLE = '$role' WHERE id_user = $id";
             $result = $conn->query($sql);
 
             if ($result === TRUE) {
