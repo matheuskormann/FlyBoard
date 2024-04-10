@@ -13,9 +13,10 @@
             $password = $_POST["txtPassword"];
             $role = "cliente";
             $userImagePath ="../imagens/padraoUser.png";
+            $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
             
-            $sql = "INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH) VALUES('$name', '$cpf', '$login', '$dataNascimento', '$password', '$role', '$userImagePath')";
+            $sql = "INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH) VALUES('$name', '$cpf', '$login', '$dataNascimento', ' $password_hashed', '$role', '$userImagePath')";
             $result = $conn->query($sql);
 
             if ($result === TRUE) {
