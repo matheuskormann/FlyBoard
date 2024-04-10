@@ -35,7 +35,7 @@
         else {
     ?>
          <div style="margin-top: 9px;" class="container alert alert-danger" role="alert">
-         Login Incorreta    
+         Senha Incorreta    
         </div>
     <?php
         }
@@ -71,12 +71,13 @@
                 <a id="criarconta" href="../cliente/cadClientes.html">Criar uma conta</a>
                 <br>
                 <input name="submit" id="inputEnviar" type="submit" value="Enviar">
+                
             </div>
         </form>
     </div>
-    
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
