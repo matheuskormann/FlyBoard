@@ -37,14 +37,14 @@ session_start();
             echo '<a class="nav-link"  href="../login/login.html">Login</a>';
           } else {
             $id = $_SESSION["id"];
-            $sql = "SELECT name,userImagePath FROM users WHERE id_user = $id";
+            $sql = "SELECT NAME, USERIMAGEPATH FROM USERS WHERE ID_USER = $id";
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
             echo '
         <div id="comtImgUser">
-           <img id="userImg" src="' . $row["userImagePath"] . '" alt="">
+           <img id="userImg" src="' . $row["USERIMAGEPATH"] . '" alt="">
         </div>
-        <a class="nav-link" href="../homes/collectorHomes.php">' . $row["name"] . '</a>';
+        <a class="nav-link" href="../homes/collectorHomes.php">' . $row["NAME"] . '</a>';
           }
           ?>
         </li>

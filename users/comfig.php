@@ -8,16 +8,16 @@ if (!isset($_SESSION["id"])) {
 } 
 
 $id = $_SESSION["id"];
-$sql = "SELECT name, cpf, login, data_de_nacimento, role, userImagePath FROM users WHERE id_user = $id";
+$sql = "SELECT NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, ROLE, USERIMAGEPATH FROM USERS WHERE ID_USER = $id";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $name = $row["name"];
-        $cpf = $row["cpf"];
-        $login = $row["login"];
-        $datanascimento = $row["data_de_nacimento"];
-        $role = $row["role"];
-        $atualUserImagePath = $row["userImagePath"];
+        $name = $row["NAME"];
+        $cpf = $row["CPF"];
+        $login = $row["EMAIL"];
+        $datanascimento = $row["DATA_DE_NASCIMENTO"];
+        $role = $row["ROLE"];
+        $atualUserImagePath = $row["USERIMAGEPATH"];
     }
 }
 
@@ -41,7 +41,7 @@ if (isset($_POST['upload'])) {
             $deuCerto = move_uploaded_file($userImg["tmp_name"], $path);
 
             if ($deuCerto) {
-                $sqlUploadImg = "UPDATE users SET userImagePath = '$path' WHERE id_user = $id";
+                $sqlUploadImg = "UPDATE USERS SET USERIMAGEPATH = '$path' WHERE ID_USER = $id";
                 $result = $conn->query($sqlUploadImg);
                 echo "<script>alert('Arquivo enviado com sucesso!!');</script>";
             }
@@ -53,7 +53,7 @@ if (isset($_POST['atualizarDados'])) {
     $name2 = $_POST["txtName"];
     $login2 = $_POST["txtlogin"];
     $id = $_SESSION["id"];
-    $sql2 = "UPDATE users SET name = '$name2', login = '$login2' WHERE id_user = $id";
+    $sql2 = "UPDATE USERS SET NAME = '$name2', EMAIL = '$login2' WHERE ID_USER = $id";
     $result2 = $conn->query($sql2);
     if ($result2 === TRUE) {
         echo "<script>
