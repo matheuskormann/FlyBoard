@@ -14,7 +14,7 @@ if (!isset($_SESSION["id"])) {
 }
 
 $id = $_SESSION["id"];
-$sql = "SELECT name ,login , role, userImagePath FROM users WHERE id_user = $id";
+$sql = "SELECT NAME ,EMAIL , ROLE, USERIMAGEPATH FROM USERS WHERE ID_USER = $id";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 ?>
@@ -75,11 +75,11 @@ $row = $result->fetch_assoc();
         </ul>
         <li class="nav-item dropdown  d-flex">
           <div id="comtImgUser">
-            <img id="userImg" src="<?php echo $row['userImagePath'] ?>" alt="">
+            <img id="userImg" src="<?php echo $row['USERIMAGEPATH'] ?>" alt="">
           </div>
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <?php
-            echo $row['name']
+            echo $row['NAME']
             ?>
           </a>
           <ul class="dropdown-menu">

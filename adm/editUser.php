@@ -36,16 +36,16 @@
 <body>
     <?php
         $id = $_GET["id"];
-        $sql = "SELECT name, cpf, login, data_de_nacimento, password, role FROM users WHERE id_user = $id";
+        $sql = "SELECT NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS WHERE ID_USER = $id";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $name = $row["name"];
-                $cpf = $row["cpf"];
-                $login = $row["login"];
-                $datanascimento = $row["data_de_nacimento"];
-                $password = $row["password"];
-                $role = $row["role"];
+                $name = $row["NAME"];
+                $cpf = $row["CPF"];
+                $login = $row["EMAIL"];
+                $datanascimento = $row["DATA_DE_NASCIMENTO"];
+                $password = $row["PASSWORD"];
+                $role = $row["ROLE"];
                 
             }
         }

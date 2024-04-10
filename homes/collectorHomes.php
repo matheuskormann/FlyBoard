@@ -6,10 +6,10 @@ if (!isset($_SESSION["id"])) {
 }
 
 $id = $_SESSION["id"];
-$sql = "SELECT role FROM users WHERE id_user = $id";
+$sql = "SELECT ROLE FROM USERS WHERE ID_USER = $id";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-$role = $row["role"];
+$role = $row["ROLE"];
 
 ?>
 <script>

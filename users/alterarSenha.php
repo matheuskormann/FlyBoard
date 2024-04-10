@@ -9,14 +9,11 @@ if (!isset($_SESSION["id"])) {
 
 if (isset($_POST['novaSenha'])) {
     $id = $_SESSION["id"];
-    $sql = "SELECT password FROM users WHERE id_user = $id";
-    $result = $conn->query($sql);
-    $id = $_SESSION["id"];
-    $sql = "SELECT password FROM users WHERE id_user = $id";
+    $sql = "SELECT PASSWORD FROM USERS WHERE ID_USER = $id";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            $password = $row["password"];
+            $password = $row["PASSWORD"];
         }
     }
 
@@ -24,7 +21,7 @@ if (isset($_POST['novaSenha'])) {
         if($_POST['txtNovotPassword']== $_POST['txtComfirmNovotPassword']){
             $passwordNovo = $_POST["txtNovotPassword"];
             $id = $_SESSION["id"];
-            $sql2 = "UPDATE users SET password = '$passwordNovo' WHERE id_user = $id";
+            $sql2 = "UPDATE USERS SET PASSWORD = '$passwordNovo' WHERE ID_USER = $id";
             $result2 = $conn->query($sql2);
             if ($result2 === TRUE) {
                 echo "<script>
@@ -78,7 +75,7 @@ if (isset($_POST['novaSenha'])) {
 <div id="passwordHelpBlock" class="form-text">
 A senha deve ter conter 6 caracteres, números e caracter especial.
 </div>
-<label for="inputPassword5" class="form-label">Comfirmar novo Password: </label>
+<label for="inputPassword5" class="form-label">Confirmar novo Password: </label>
 <input type="password" name="txtComfirmNovotPassword" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
 <div id="passwordHelpBlock" class="form-text">
     A senha deve ter conter 6 caracteres, números e caracter especial.

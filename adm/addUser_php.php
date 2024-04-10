@@ -30,7 +30,7 @@
             $role = $_POST["selesctRole"];
             $userImagePath = "../imagens/padraoUser.png";
             
-            $sql = "INSERT INTO users (name, cpf, login, data_de_nacimento, password, role, userImagePath) VALUES('$name', '$cpf', '$login', '$dataNacimento', '$password', '$role', '$userImagePath')";
+            $sql = "INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEMPATH) VALUES('$name', '$cpf', '$login', '$dataNacimento', '$password', '$role', '$userImagePath')";
             $result = $conn->query($sql);
 
             if ($result === TRUE) {

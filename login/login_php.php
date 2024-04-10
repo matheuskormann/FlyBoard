@@ -15,6 +15,7 @@
                 session_start();
                 $_SESSION["id"] = intval($row["ID_USER"]);
                 $_SESSION["role"] = intval($row["ROLE"]);
+                
             }
             else {
 

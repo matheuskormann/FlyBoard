@@ -18,22 +18,22 @@
     function atualizarfiltro($valor, $conn){
         switch ($valor) {
             case 0:
-                $sql = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users";
+                $sql = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS";
                 $result = $conn->query($sql);
                 return $result;
                 break;
             case 1:
-                $sql1 = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users WHERE role = 'cliente' ";
+                $sql1 = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS WHERE ROLE = 'cliente' ";
                 $result1 = $conn->query($sql1);
                 return $result1;
                 break;
             case 2:
-                $sql2 = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users WHERE role = 'funcionario   ' ";
+                $sql2 = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS WHERE ROLE = 'funcionario   ' ";
                 $result2 = $conn->query($sql2);
                 return $result2;
                 break;
             case 3:
-                $sql3 = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users WHERE role = 'admin' ";
+                $sql3 = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS WHERE ROLE = 'admin' ";
                 $result3 = $conn->query($sql3);
                 return $result3;
                 break;
@@ -52,7 +52,7 @@
     // Busca por nome ou CPF
     if(isset($_POST['search'])){
         $search = $_POST['search'];
-        $sql_search = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users WHERE name LIKE '%$search%' OR cpf LIKE '%$search%'";
+        $sql_search = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS WHERE NAME LIKE '%$search%' OR CPF LIKE '%$search%'";
         $result = $conn->query($sql_search);
     }
 ?>
@@ -126,7 +126,6 @@
                     <th scope="col">CPF</th>
                     <th scope="col">Login</th>
                     <th scope="col">data Nascimento</th>
-                    <th scope="col">Senha</th>
                     <th scope="col">Cargo</th>
                     <th colspan="2">Ações</th>
                 </tr>
@@ -137,15 +136,14 @@
                         while ($row = $result->fetch_assoc()) {
                 ?>
                             <tr>
-                                <td><a href="./userUser.php?id=<?php echo $row['id_user'] ?>"><img src="../imagens/idUser.png" alt="user" style="width: 15px; height: 15px;">: <?php echo $row["id_user"] ?></a></td>
-                                <td><?php echo $row["name"] ?></td>
-                                <td><?php echo $row["cpf"] ?></td>
-                                <td><?php echo $row["login"] ?></td>
-                                <td><?php echo $row["data_de_nacimento"] ?></td>
-                                <td><?php echo $row["password"] ?></td>
-                                <td><?php echo $row["role"] ?></td>
-                                <td><a href="./editUser.php?id=<?php echo $row['id_user'] ?>"><img src="../imagens/editar.png" alt="edit" style="width: 15px; height: 15px;"></a></td>
-                                <td onclick="excluir(<?php echo $row['id_user'] ?>)"><a href="#"><img src="../imagens/lixo.png" alt="delet" style="width: 15px; height: 15px;"></a></td>
+                                <td><a href="./userUser.php?id=<?php echo $row['ID_USER'] ?>"><img src="../imagens/idUser.png" alt="user" style="width: 15px; height: 15px;">: <?php echo $row["ID_USER"] ?></a></td>
+                                <td><?php echo $row["NAME"] ?></td>
+                                <td><?php echo $row["CPF"] ?></td>
+                                <td><?php echo $row["EMAIL"] ?></td>
+                                <td><?php echo $row["DATA_DE_NASCIMENTO"] ?></td>
+                                <td><?php echo $row["ROLE"] ?></td>
+                                <td><a href="./editUser.php?id=<?php echo $row['ID_USER'] ?>"><img src="../imagens/editar.png" alt="edit" style="width: 15px; height: 15px;"></a></td>
+                                <td onclick="excluir(<?php echo $row['ID_USER'] ?>)"><a href="#"><img src="../imagens/lixo.png" alt="delet" style="width: 15px; height: 15px;"></a></td>
                             </tr>
                 <?php
                         }

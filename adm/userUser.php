@@ -14,16 +14,16 @@ else if ($_SESSION["role"] == "admin") {
     exit; 
 }
             $id = $_GET["id"];
-            $sql = "SELECT  name, cpf, login, data_de_nacimento, role, userImagePath FROM users WHERE id_user = $id";
+            $sql = "SELECT  NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, ROLE, USERIMAGEPATH FROM USERS WHERE ID_USER = $id";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                    $name = $row["name"];
-                    $cpf = $row["cpf"];
-                    $login = $row["login"];
-                    $dataNascimento = $row["data_de_nacimento"];
-                    $role = $row["role"];
-                    $userImagePath = $row["userImagePath"];
+                    $name = $row["NAME"];
+                    $cpf = $row["CPF"];
+                    $login = $row["EMAIL"];
+                    $dataNascimento = $row["DATA_DE_NASCIMENTO"];
+                    $role = $row["ROLE"];
+                    $userImagePath = $row["USERIMAGEPATH"];
                 }
             }
         ?>
