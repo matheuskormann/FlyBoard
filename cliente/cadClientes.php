@@ -9,13 +9,13 @@
             $name = $_POST["txtName"];
             $cpf = $_POST["txtCpf"];
             $login = $_POST["txtLogin"];
-            $dataNacimento = $_POST["txtDtNasc"];
+            $dataNascimento = $_POST["txtDtNasc"];
             $password = $_POST["txtPassword"];
             $role = "cliente";
             $userImagePath ="../imagens/padraoUser.png";
 
             
-            $sql = "INSERT INTO users (name, cpf, login, data_de_nacimento, password, role, userImagePath) VALUES('$name', '$cpf', '$login', '$dataNacimento', '$password', '$role', '$userImagePath')";
+            $sql = "INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH) VALUES('$name', '$cpf', '$login', '$dataNascimento', '$password', '$role', '$userImagePath')";
             $result = $conn->query($sql);
 
             if ($result === TRUE) {
