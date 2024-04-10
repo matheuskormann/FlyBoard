@@ -18,7 +18,7 @@ CREATE TABLE VOOS (
 CREATE TABLE USERS (
     ID_USER INT PRIMARY KEY AUTO_INCREMENT,
     NAME VARCHAR(50),
-    CPF INT(11) UNIQUE,
+    CPF VARCHAR(15) UNIQUE,
     EMAIL VARCHAR(100),
     DATA_DE_NASCIMENTO VARCHAR(100),
     PASSWORD VARCHAR(100),
@@ -66,14 +66,14 @@ ALTER TABLE PASSAGEM ADD CONSTRAINT FK_PASSAGEM_3
     ON DELETE RESTRICT;
     
     
-    INSERT INTO USERS (NAME, CPF, LOGIN, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH)
+    INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH)
 VALUES
     ("Matheus Kormann", "123.455.674-24", "matheus@gmail.com", "12/12/1999","doblo", "admin", "../imagens/padraoUser.png" ),
     ("Lucas Baumer", "345.987.132-54", "luqui@gmail.com", "26/12/1999","luqui24", "admin", "../imagens/padraoUser.png"),
     ("murilo mayer", "234.326.256-75", "murilo@bol.com.br", "16/11/1981","murilui69", "admin", "../imagens/padraoUser.png");
     
     
-    INSERT INTO USERS (NAME, CPF, LOGIN, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH)
+    INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH)
 VALUES
     ("Ana Silva", "456.789.123-98", "ana.silva@example.com", "05/07/1990", "ana123", "cliente", "../imagens/padraoUser.png"),
     ("Carlos Santos", "987.654.321-01", "carlos.santos@example.com", "15/03/1985", "carlos85", "cliente", "../imagens/padraoUser.png"),

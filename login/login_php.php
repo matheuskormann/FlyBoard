@@ -1,20 +1,20 @@
 <?php
     include("../connections/connection.php");
 
-    $login = $_POST["txtemail"];
+    $email = $_POST["txtemail"];
     $password = $_POST["txtPassword"];
 
-    $sql = "SELECT id_user, password , role FROM users WHERE login = '$login'
+    $sql = "SELECT ID_USER, PASSWORD , ROLE FROM USERS WHERE EMAIL = '$email'
     ";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            if ($row["password"] == $password) {
+            if ($row["PASSWORD"] == $password) {
                 header("Location:   ../homes/collectorHomes.php");
                 session_start();
-                $_SESSION["id"] = intval($row["id_user"]);
-                $_SESSION["role"] = intval($row["role"]);
+                $_SESSION["id"] = intval($row["ID_USER"]);
+                $_SESSION["role"] = intval($row["ROLE"]);
             }
             else {
 ?>
