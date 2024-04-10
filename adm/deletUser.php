@@ -15,7 +15,7 @@
     }
  else{
     $id = $_GET["id"];
-    $sql = "DELETE FROM users WHERE id_user = $id";
+    $sql = "DELETE FROM USERS WHERE ID_USER = $id";
     $result = $conn->query($sql);
 
     if ($result === TRUE) {
