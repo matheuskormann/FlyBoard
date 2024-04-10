@@ -18,7 +18,7 @@
     function atualizarfiltro($valor, $conn){
         switch ($valor) {
             case 0:
-                $sql = "SELECT id_user, name, cpf, login, data_de_nacimento, password, role FROM users";
+                $sql = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS";
                 $result = $conn->query($sql);
                 return $result;
                 break;
