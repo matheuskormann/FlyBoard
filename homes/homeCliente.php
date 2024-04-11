@@ -19,6 +19,9 @@ $row = $result->fetch_assoc();
   <link rel="stylesheet" href="menu.css">
   <title>Home</title>
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
 </head>
 
@@ -27,7 +30,7 @@ $row = $result->fetch_assoc();
     <div class="container-fluid">
       <a class="navbar-brand" href="../index/index.php">
         <img src="../imagens/flyboardNavBar.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-        flyboard
+        FlyBoard
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -43,7 +46,7 @@ $row = $result->fetch_assoc();
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Meus Voos</a></li>
-              <li><a class="dropdown-item" href="#">Novos Voos</a></li>
+              <li><a class="dropdown-item" href="#">Adicionar Voo</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -66,8 +69,8 @@ $row = $result->fetch_assoc();
           </div>
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <?php echo $row['NAME'] ?> </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="../users/comfig.php">configurações</a></li>
-            <li><a class="dropdown-item" onclick="logout()">logout</a></li>
+            <li><a class="dropdown-item" href="../users/comfig.php">Configurações</a></li>
+            <li><a class="dropdown-item" onclick="showModal()">Sair</a></li>
           </ul>
         </li>
         </ul>
@@ -177,16 +180,29 @@ $row = $result->fetch_assoc();
     </div>
   </div>
 
-
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="labelHeader" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h5>Tem certeza que deseja sair do sistema?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" onclick="sair()">Sim, sair</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
 
   <script>
-    function logout() {
-      if (confirm('Tem certeza que deseja fazer logout?')) {
-        window.location.href = '../users/logout.php';
-      }
+  function showModal() {
+      $('#modal').modal('show');
+    }
+    function sair() {
+      window.location.href = '../users/logout.php';
     }
   </script>
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>

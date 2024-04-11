@@ -19,14 +19,15 @@ h1  {
     position: relative !important;
     left: 105px !important;
     font-weight: 200 !important;
-    position: relative !important;
     top: 15px !important;
-    width: fit-content !important;
+    margin-bottom: 30px !important;
 }
 .conteinerLogin2{
     display: flex;
     justify-content: center;
     align-items: center;
+    width: auto;
+    height: auto;
 }
 #Logo{
     margin-top: 35px;
@@ -44,12 +45,14 @@ h1  {
     background-color: #000000b0;
     border-radius: 11px;
     width: 300px;
-    height: 300px;
+    height: 310px;
 -webkit-box-shadow: 1px 1px 22px 0px rgba(143,143,143,1);
 -moz-box-shadow: 1px 1px 22px 0px rgba(143,143,143,1);
 box-shadow: 1px 1px 22px 0px rgba(143,143,143,1);
 }
 #Login > p {
+    font-size: small !important;
+    margin-top: 20px;
     margin-left: 21px;
     margin-bottom: 4px;
     color: #ffffff;
@@ -58,9 +61,11 @@ box-shadow: 1px 1px 22px 0px rgba(143,143,143,1);
 }
 #Login > input{
     margin-left: 65px;
-    width: fit-content;
+    
 }
 #inputEnviar{
+
+
     font-weight: 200;
     color: #ffffff;
     background-color: #304d73;
