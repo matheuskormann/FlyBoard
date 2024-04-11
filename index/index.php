@@ -34,7 +34,7 @@ session_start();
         <li class="av-item dropdown  d-flex">
           <?php
           if (!isset($_SESSION["id"])) {
-            echo '<a class="nav-link"  href="../login/login.html">Login</a>';
+            echo '<a class="nav-link"  href="../login/login.php">Login</a>';
           } else {
             $id = $_SESSION["id"];
             $sql = "SELECT NAME, USERIMAGEPATH FROM USERS WHERE ID_USER = $id";

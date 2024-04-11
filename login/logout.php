@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION["id"])) {
-    header("Location: ../login/login.html ");
+    header("Location: ../login/login.php ");
   }
 session_unset();
     
