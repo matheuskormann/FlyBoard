@@ -54,7 +54,7 @@ $row = $result->fetch_assoc();
               Usuários
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../adm/listUsers.php">Lista De Usuários</a></li>
+              <li><a class="dropdown-item" href="../admListUser/listUsers.php">Lista De Usuários</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

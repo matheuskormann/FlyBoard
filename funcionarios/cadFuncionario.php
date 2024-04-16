@@ -11,11 +11,11 @@
             $email = $_POST["txtLogin"];
             $dataNascimento = $_POST["txtDtNasc"];
             $password = $_POST["txtPassword"];
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
             $role = "funcionario";
             $userImagePath ="../imagens/padraoUser.png";
-            $password_hashed = password_hash($password, PASSWORD_DEFAULT);
             
-            $sql = "INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH) VALUES('$name', '$cpf', '$email', '$dataNascimento', '$password_hashed', '$role' , '$userImagePath')";
+            $sql = "INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH) VALUES('$name', '$cpf', '$email', '$dataNascimento', ' $hashedPassword', '$role' , '$userImagePath')";
             $result = $conn->query($sql);
 
             if ($result === TRUE) {

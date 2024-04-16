@@ -1,12 +1,3 @@
-CREATE DATABASE dbFlyBoard;
-USE dbFlyBoard;
-
-/* Lógico_1: */
-
-CREATE DATABASE FLYBOARD;
-USE FLYBOARD;
-
-/* Lógico_1: */
 
 CREATE DATABASE FLYBOARD;
 USE FLYBOARD;
@@ -72,7 +63,7 @@ ALTER TABLE PASSAGENS ADD CONSTRAINT FK_PASSAGENS_3
     
     INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH)
 VALUES
-    ("Matheus Kormann", "123.455.674-24", "matheus@gmail.com", "12/12/1999","doblo", "admin", "../imagens/padraoUser.png" ),
+    ("Matheus Kormann", "123.455.674-24", "matheus@gmail.com", "12/12/1999","$2y$10$NVD5KphAQLpuMZIuXWlew.ED7mdjyr2Et4Y15qFJoH4weWx72NWNS", "admin", "../imagens/padraoUser.png" ),
     ("Lucas Baumer", "345.987.132-54", "luqui@gmail.com", "26/12/1999","luqui24", "admin", "../imagens/padraoUser.png"),
     ("murilo mayer", "234.326.256-75", "murilo@bol.com.br", "16/11/1981","murilui69", "admin", "../imagens/padraoUser.png");
     

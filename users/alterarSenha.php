@@ -4,49 +4,48 @@ include('../connections/connection.php');
 session_start();
 if (!isset($_SESSION["id"])) {
     header("Location: ../login/login.php");
-    exit; 
-} 
+    exit;
+}
 
 if (isset($_POST['novaSenha'])) {
     $id = $_SESSION["id"];
-    $sql = "SELECT PASSWORD FROM USERS WHERE ID_USER = $id";
-    $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $password = $row["PASSWORD"];
-        }
-    }
+    
+    // Preparar declaração para evitar injeção SQL
+    $stmt = $conn->prepare("SELECT PASSWORD FROM USERS WHERE ID_USER = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->bind_result($hashedPasswordAntigo);
+    $stmt->fetch();
+    $stmt->close();
+    
+    $passwordAntigo = $_POST['txAntigotPassword'];
 
-    if($password == $_POST['txAntigotPassword'] ){
-        if($_POST['txtNovotPassword']== $_POST['txtComfirmNovotPassword']){
+    if (password_verify($passwordAntigo, $hashedPasswordAntigo)) {
+        if ($_POST['txtNovotPassword'] === $_POST['txtComfirmNovotPassword']) {
             $passwordNovo = $_POST["txtNovotPassword"];
-            $id = $_SESSION["id"];
-            $sql2 = "UPDATE USERS SET PASSWORD = '$passwordNovo' WHERE ID_USER = $id";
-            $result2 = $conn->query($sql2);
-            if ($result2 === TRUE) {
+            $hashedPasswordNovo = password_hash($passwordNovo, PASSWORD_BCRYPT);
+            
+            // Preparar declaração para evitar injeção SQL
+            $stmt = $conn->prepare("UPDATE USERS SET PASSWORD = ? WHERE ID_USER = ?");
+            $stmt->bind_param("si", $hashedPasswordNovo, $id);
+            if ($stmt->execute()) {
                 echo "<script>
-                        alert('Password atualizado com sucesso!');
+                        alert('Senha atualizada com sucesso!');
                         window.location.href = './comfig.php';
                       </script>";
-            } 
-            else {
+            } else {
                 echo "<script>alert('Algo deu errado...');</script>";
             }
+            $stmt->close();
+        } else {
+            echo "<script>alert('As senhas não conferem!');</script>";
         }
-        else{
-            echo "<script>alert('As senhas não são iguais!');</script>";
-        }
-
+    } else {
+        echo "<script>alert('Senha atual incorreta!');</script>";
     }
-    else{
-        echo "<script>alert('Passowrd esta incoreto!');</script>";
-    }
-    
-
 }
-
-
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <form action="" method="post">

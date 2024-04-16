@@ -38,7 +38,7 @@ else if ($_SESSION["role"] == "admin") {
 </head>
 <body>
     <div id="conteinerButtom">
-        <a id="botaoVoltar" type="button" class="btn btn-light" href="../adm/listUsers.php"><img src="../imagens/iconVoltar.png" alt="voltarHome" style="width: 40px; height: 40px"></a>
+        <a id="botaoVoltar" type="button" class="btn btn-light" href="./listUsers.php"><img src="../imagens/iconVoltar.png" alt="voltarHome" style="width: 40px; height: 40px"></a>
     </div>
     <div class="container">
         <div class="row">

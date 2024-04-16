@@ -51,7 +51,7 @@
         }
     ?>
     <div id="botaoVoltar">
-       <a type="button" class="btn btn-light" href="../adm/listUsers.php"><img src="../imagens/iconVoltar.png" alt="voltarHome" style="width: 40px; height: 40px"></a>
+       <a type="button" class="btn btn-light" href="./listUsers.php"><img src="../imagens/iconVoltar.png" alt="voltarHome" style="width: 40px; height: 40px"></a>
     </div>
     <div class="logo"><a href='../index/index.php'><img id="Logo" href='../index/index.php' src="../imagens/flyboardLOGOremovido.png" alt="Logo" ></a></div>
     <div id="h3">
@@ -96,16 +96,6 @@
                             </div>
                         </div>
                       </div>
-                      <div class="col">
-                        <div class=" h-100 w-100 d-flex justify-content-center align-items-center">
-                            <div class="input" id="senha">
-                                <p>Senha</p>
-                                <input id="inputSenha" type="password" name="txtPassword" value="<?php echo $password ?>">
-                                <h5>A senha deve ter conter 6 caracteres, números e caracter especial</h5>
-                            </div>
-                        </div>
-                      </div>
-                      
                       <div class="col">
                         <div class="h-100 w-100 d-flex justify-content-center align-items-center">
                             <div class="input" id="role">

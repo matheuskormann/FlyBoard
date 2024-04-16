@@ -27,10 +27,11 @@
             $login = $_POST["txtLogin"];
             $dataNacimento = $_POST["txtDtNasc"];
             $password = $_POST["txtPassword"];
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
             $role = $_POST["selesctRole"];
             $userImagePath = "../imagens/padraoUser.png";
             
-            $sql = "INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEMPATH) VALUES('$name', '$cpf', '$login', '$dataNacimento', '$password', '$role', '$userImagePath')";
+            $sql = "INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH) VALUES('$name', '$cpf', '$login', '$dataNacimento', '$hashedPassword', '$role', '$userImagePath')";
             $result = $conn->query($sql);
 
             if ($result === TRUE) {

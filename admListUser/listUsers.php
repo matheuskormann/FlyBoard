@@ -18,22 +18,22 @@
     function atualizarfiltro($valor, $conn){
         switch ($valor) {
             case 0:
-                $sql = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS";
+                $sql = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, ROLE FROM USERS";
                 $result = $conn->query($sql);
                 return $result;
                 break;
             case 1:
-                $sql1 = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS WHERE ROLE = 'cliente' ";
+                $sql1 = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, ROLE FROM USERS WHERE ROLE = 'cliente' ";
                 $result1 = $conn->query($sql1);
                 return $result1;
                 break;
             case 2:
-                $sql2 = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS WHERE ROLE = 'funcionario' ";
+                $sql2 = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, ROLE FROM USERS WHERE ROLE = 'funcionario' ";
                 $result2 = $conn->query($sql2);
                 return $result2;
                 break;
             case 3:
-                $sql3 = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS WHERE ROLE = 'admin' ";
+                $sql3 = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, ROLE FROM USERS WHERE ROLE = 'admin' ";
                 $result3 = $conn->query($sql3);
                 return $result3;
                 break;
@@ -52,7 +52,7 @@
     // Busca por nome ou CPF
     if(isset($_POST['search'])){
         $search = $_POST['search'];
-        $sql_search = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS WHERE NAME LIKE '%$search%' OR CPF LIKE '%$search%'";
+        $sql_search = "SELECT ID_USER, NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, ROLE FROM USERS WHERE NAME LIKE '%$search%' OR CPF LIKE '%$search%'";
         $result = $conn->query($sql_search);
     }
 ?>
@@ -78,7 +78,7 @@
   <div class="container-fluid">
   <a class="navbar-brand" href="../index/index.php">
       <img src="../imagens/flyboardNavBar.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-      flyboard
+      FlyBoard
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -86,16 +86,16 @@
     <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page">List Users</a>
+          <a class="nav-link active" aria-current="page">Lista De Usuários</a>
         </li>
         <li class="nav-item">
               <a class="nav-link" href="./addUser.php" role="button" aria-expanded="false">
-                add user
+                Adicionar Usuário
               </a>
         </li>
       </ul>
       <li class="nav-item dropdown  d-flex">
-              <a class="nav-link"  aria-expanded="false">Número de Users: <?php echo $total_users; ?></a>
+              <a class="nav-link"  aria-expanded="false">Número de Usuários: <?php echo $total_users; ?></a>
             </li>
       </ul>
     </div>
@@ -125,7 +125,7 @@
                     <th scope="col">Nome</th>
                     <th scope="col">CPF</th>
                     <th scope="col">Login</th>
-                    <th scope="col">data Nascimento</th>
+                    <th scope="col">Data Nascimento</th>
                     <th scope="col">Cargo</th>
                     <th colspan="2">Ações</th>
                 </tr>
@@ -143,7 +143,7 @@
                                 <td><?php echo $row["DATA_DE_NASCIMENTO"] ?></td>
                                 <td><?php echo $row["ROLE"] ?></td>
                                 <td><a href="./editUser.php?id=<?php echo $row['ID_USER'] ?>"><img src="../imagens/editar.png" alt="edit" style="width: 15px; height: 15px;"></a></td>
-                                <td onclick="excluir(<?php echo $row['ID_USER'] ?>)"><a href="#"><img src="../imagens/lixo.png" alt="delet" style="width: 15px; height: 15px;"></a></td>
+                                <td data-user-id="<?= $row['ID_USER'] ?>" onclick="showModal(this)"><a href="#"><img src="../imagens/lixo.png" alt="delet" style="width: 15px; height: 15px;"></a></td>
                             </tr>
                 <?php
                         }
@@ -152,15 +152,36 @@
             </tbody>
         </table>
     </div>
+
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="labelHeader" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h5>Deseja <b>Excluir</b> o Usuário?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" id="btnExcluir" class="btn btn-danger" onclick="excluir(this)">Sim, excluir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     <script>
+            function showModal(element) {
+                const userId = element.dataset.userId;
+                $('#modal').modal('show');
+                $('#modal button.btn-danger').data('user-id', userId);
+            }
+
         function atualizarFiltro(valor) {
             location.href = "<?php echo $_SERVER['PHP_SELF']; ?>?filtro=" + valor;
         }
 
-        function excluir(id) {
-            if (confirm("Tem certeza que deseja excluir este registro?")) {
-                location.href = "./deletUser.php?id=" + id;
-            }
+        function excluir(element) {
+            const userId = $(element).data('user-id');
+            location.href = "./deletUser.php?id=" + userId;
+        
         }
     </script>
       <script src="../node_modules/jquery/dist/jquery.min.js"></script>
