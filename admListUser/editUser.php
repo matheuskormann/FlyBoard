@@ -8,7 +8,6 @@
     }
     else if ($_SESSION["role"] == "admin") {
         echo "<script>
-                alert('Você não tem permissão!');
                 window.location.href = '../index/index.html';
               </script>";
         exit; 
@@ -34,7 +33,7 @@
 }
 </style>
 <body>
-    <?php
+<?php
         $id = $_GET["id"];
         $sql = "SELECT NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE FROM USERS WHERE ID_USER = $id";
         $result = $conn->query($sql);

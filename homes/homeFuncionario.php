@@ -7,7 +7,6 @@ if (!isset($_SESSION["id"])) {
 } else if ($_SESSION["role"] == "funcionario" || $_SESSION["role"] == "admin") {
 ?>
   <script>
-    alert("Você não tem permissão!");
     header("Location: ../index/index.php ");
   </script>
 <?php

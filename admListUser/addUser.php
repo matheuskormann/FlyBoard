@@ -8,7 +8,6 @@
     }
     else if ($_SESSION["role"] == "admin") {
         echo "<script>
-                alert('Você não tem permissão!');
                 window.location.href = '../index/index.html';
               </script>";
         exit; 
@@ -122,27 +121,6 @@
         </div>
 
     </form>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-<div id="ToastError" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-  <div class="d-flex">
-    <div class="toast-body">
-      Erro ao cadastrar usuário, Tente novamente.
-    </div>
-    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-  </div>
-</div>
-</div>
-
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-<div id="ToastErrorEmail" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-  <div class="d-flex">
-    <div class="toast-body">
-      Email Já Cadastrado.
-    </div>
-    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-  </div>
-</div>
-</div>
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
 <div id="ToastRegex" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -242,19 +220,32 @@
 </body>
 </html>
 <?php
-    if (isset($_GET['error'])){
-        echo "<script>
-        const ToastError = document.getElementById('ToastError')
+if (isset($_GET['error'])){
+    echo "<script>
+    const ToastRegex = document.getElementById('ToastRegex')
+    const toastBody = ToastRegex.querySelector('.toast-body');
 
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastError)
-        toastBootstrap.show()
-        </script>";
-    } else if (isset($_GET['errorEmail'])){
-        echo "<script>
-        const ToastErrorEmail = document.getElementById('ToastErrorEmail')
+    toastBody.textContent = 'Erro ao cadastrar usuário, tente novamente.';
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+    toastBootstrap.show()
+    </script>";
+} else if (isset($_GET['errorEmail'])){
+    echo "<script>
+    const ToastRegex = document.getElementById('ToastRegex')
+    const toastBody = ToastRegex.querySelector('.toast-body');
 
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastErrorEmail)
-        toastBootstrap.show()
-        </script>";
-    }
+    toastBody.textContent = 'Email já cadastrado, tente novamente.';
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+    toastBootstrap.show()
+    </script>";
+} else if (isset($_GET['errorCpf'])){
+    echo "<script>
+    const ToastRegex = document.getElementById('ToastRegex')
+    const toastBody = ToastRegex.querySelector('.toast-body');
+
+    toastBody.textContent = 'CPF já cadastrado, tente novamente.';
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+    toastBootstrap.show()
+    </script>";
+}
 ?> 

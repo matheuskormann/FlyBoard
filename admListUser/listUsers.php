@@ -67,7 +67,7 @@
 </head>
 <body>
     
-    <?php
+<?php
         // Número de usuários
         $sql_num_users = "SELECT COUNT(*) AS total FROM users";
         $result_num_users = $conn->query($sql_num_users);
@@ -131,7 +131,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php
+<?php
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                 ?>
@@ -145,7 +145,7 @@
                                 <td><a href="./editUser.php?id=<?php echo $row['ID_USER'] ?>"><img src="../imagens/editar.png" alt="edit" style="width: 15px; height: 15px;"></a></td>
                                 <td data-user-id="<?= $row['ID_USER'] ?>" onclick="showModal(this)"><a href="#"><img src="../imagens/lixo.png" alt="delet" style="width: 15px; height: 15px;"></a></td>
                             </tr>
-                <?php
+<?php
                         }
                     }
                 ?>  

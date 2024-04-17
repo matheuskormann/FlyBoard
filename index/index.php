@@ -35,7 +35,7 @@ session_start();
           </li>
         </ul class="nav-item d-flex list-unstyled">
         <li class="av-item dropdown  d-flex">
-          <?php
+<?php
           if (!isset($_SESSION["id"])) {
             echo '<a class="nav-link"  href="../login/login.php">Login</a>';
           } else {

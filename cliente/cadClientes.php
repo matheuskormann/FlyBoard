@@ -3,7 +3,7 @@
         <title>Dados do usuário</title>
     </head>
     <body>
-        <?php
+<?php
             include('../connections/connection.php');
 
             $name = $_POST["txtName"];

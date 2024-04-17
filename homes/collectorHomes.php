@@ -12,9 +12,6 @@ $row = $result->fetch_assoc();
 $role = $row["ROLE"];
 
 ?>
-<script>
-    alert("para continuar realize o login");
-</script>
 <?php
 if ($role == "cliente") {
     header("Location: ./homeCliente.php");

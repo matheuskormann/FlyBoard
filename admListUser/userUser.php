@@ -8,7 +8,6 @@ if (!isset($_SESSION["id"])) {
 }
 else if ($_SESSION["role"] == "admin") {
     echo "<script>
-            alert('Você não tem permissão!');
             window.location.href = '../index/index.html';
           </script>";
     exit; 
@@ -27,7 +26,7 @@ else if ($_SESSION["role"] == "admin") {
                 }
             }
         ?>
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

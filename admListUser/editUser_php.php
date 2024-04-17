@@ -8,7 +8,6 @@
     }
     else if ($_SESSION["role"] == "admin") {
         echo "<script>
-                alert('Você não tem permissão!');
                 window.location.href = '../index/index.html';
               </script>";
         exit; 
@@ -19,7 +18,7 @@
         <title>Dados do usuário</title>
     </head>
     <body>
-        <?php
+<?php
             include('../connections/connection.php');
 
             $name = $_POST["txtName"];

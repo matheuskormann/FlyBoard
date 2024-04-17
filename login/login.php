@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -78,7 +77,7 @@
                     $('#inputPasswoed').focus();
                 });
     </script>
-    <?php
+<?php
                 }
             }
         }
@@ -94,8 +93,8 @@
                     });
                 $('#inputLogin').focus();
             });
-                </script>";
-    <?php
+                </script>
+<?php
         }
     }
 ?>

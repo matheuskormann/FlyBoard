@@ -9,4 +9,3 @@
         die("Conexão falhou: $conn->connect_error");
     }
      
-?>;  

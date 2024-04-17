@@ -7,7 +7,6 @@ if (!isset($_SESSION["id"])) {
 } else if ($_SESSION["role"] == "admin") {
 ?>
   <script>
-    alert("Você não tem permissão!");
     header("Location: ../index/index.html ");
   </script>
 <?php
@@ -18,9 +17,7 @@ $sql = "SELECT NAME ,EMAIL , ROLE, USERIMAGEPATH FROM USERS WHERE ID_USER = $id"
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 ?>
-<!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,9 +27,7 @@ $row = $result->fetch_assoc();
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-
 </head>
-
 <body>
 
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -67,7 +62,7 @@ $row = $result->fetch_assoc();
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="../funcionarios/cadFuncionario.html">Cadastro Funcionarios</a></li>
-              <li><a class="dropdown-item" href="http://localhost/flyboard/adm/listUsers.php?filtro=2">Lista De Funcionarios</a></li>
+              <li><a class="dropdown-item" href="http://localhost/flyboard/admListUser/listUsers.php?filtro=2">Lista De Funcionarios</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

@@ -8,7 +8,7 @@ if (!isset($_SESSION["id"])) {
 } 
 
 ?>
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
