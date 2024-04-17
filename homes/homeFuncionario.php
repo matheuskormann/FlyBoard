@@ -58,7 +58,7 @@ $row = $result->fetch_assoc();
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">List Voos</a></li>
+              <li><a class="dropdown-item" href="../admListVoos/listVoos.php">List Voos</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">

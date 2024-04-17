@@ -50,7 +50,7 @@ if ($result->num_rows > 0) {
 if (isset($_POST['upload'])) {
     if (isset($_FILES['userImg'])) {
         $userImg = $_FILES['userImg'];
-        if ($userImg['size'] > 2197152) {
+        if ($userImg['size'] > 25197152) {
             echo "<script>alert('Arquivo muito grande!');</script>";
         } else {
             if (file_exists($atualUserImagePath) && $atualUserImagePath != "../imagens/padraoUser.png") {

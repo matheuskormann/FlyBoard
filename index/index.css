@@ -2,116 +2,20 @@ body {
 	font-family: "Manrope", sans-serif !important;
 }
 
-.nav-item-no-marker {
-    list-style: none;
-}
-#comtImgUser{
-    width: 29px;
-    height: 29px;
-    border-radius: 99px;
-    overflow: hidden;
-    position: relative;
-    margin-right: 9px;
-}
-#userImg{
+	.nav-item-no-marker {
+		list-style: none;
+	}
+	#comtImgUser{
+		width: 29px;
+		height: 29px;
+		border-radius: 99px;
+		overflow: hidden;
+		position: relative;
+		margin-right: 9px;
+	}
+	#userImg{
 
-	width: 100%; 
-  height: 100%; 
-  object-fit: cover;
-}
-
-#menu {
-	margin: 15px 9px 9px 9px;
-	background: #011C40;
-	background: linear-gradient(to bottom,  #011C40,  #012840);
-	height: 45px;
-	border-radius: 23px;
-}
-#menu ul, #menu li {
-	margin: 0 auto;
-	padding: 0;
-	list-style: none
-}
-#menu ul {
-	width: 100%;
-	text-align: center;
-}
-#menu li {
-	display: inline-block;
-	position: relative;
-}
-#menu a {
-	display: block;
-	line-height: 45px;
-	padding: 0 14px;
-	text-decoration: none;
-	color: #D98841;
-	font-size: 16px;
-}
-#menu a.dropdown-arrow:after {
-	content: "\25BE";
-	margin-left: 5px;
-}
-#menu li a:hover {
-	color: #D98841;
-	background: #325A73;
-}
-#menu input {
-	display: none;
-	margin: 0;
-	padding: 0;
-	height: 45px;
-	width: 100%;
-	opacity: 0;
-	cursor: pointer
-}
-#menu label {
-	display: none;
-	line-height: 45px;
-	text-align: center;
-	position: absolute;
-	left: 35px
-}
-#menu label:before {
-	font-size: 1.6em;
-	color: #D98841;
-	content: "\2261"; 
-	margin-left: 20px;
-}
-#menu ul.sub-menus{
-	height: auto;
-	overflow: hidden;
-	width: 170px;
-	background: #011C40;
-	position: absolute;
-	z-index: 99;
-	display: none;
-}
-#menu ul.sub-menus li {
-	display: block;
-	text-align: left;
-	width: 100%;
-}
-#menu ul.sub-menus a {
-	color: #D98841;
-	font-size: 16px;
-}
-#menu li:hover ul.sub-menus {
-	display: block
-}
-#menu ul.sub-menus a:hover{
-	background: #325A73;
-	color: #D98841;
-}
-@media screen and (max-width: 800px){
-	#menu {position:relative}
-	#menu ul {background:#011C40;position:absolute;top:100%;right:0;left:0;z-index:3;height:auto;display:none;text-align:left;}
-	#menu ul.sub-menus {width:100%;position:static;}
-	#menu ul.sub-menus a {padding-left:30px;}
-	#menu li {display:block;float:none;width:auto;}
-	#menu input, #menu label {position:absolute;top:0;left:0;display:block}
-	#menu input {z-index:4}
-	#menu input:checked + label {color:#D98841}
-	#menu input:checked + label:before {content:"\00d7"}
-	#menu input:checked ~ ul {display:block}
-}
+		width: 100%; 
+	height: 100%; 
+	object-fit: cover;
+	}
