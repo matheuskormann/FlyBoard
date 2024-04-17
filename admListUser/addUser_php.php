@@ -46,7 +46,7 @@ if (!isset($_SESSION["id"])) {
     $sqlEmail = "SELECT * FROM USERS WHERE EMAIL = '$login'";
     $resultadoEmail = $conn->query($sqlEmail);
 
-    if ($resultado->num_rows > 0) {
+    if ($resultadoEmail->num_rows > 0) {
         echo "<script>
                 location.href = './addUser.php?errorEmail';
             </script>";

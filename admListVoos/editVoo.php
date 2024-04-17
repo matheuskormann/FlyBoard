@@ -53,7 +53,13 @@ if (isset($_POST['atualizarDados'])) {
     if (isset($_FILES['userImg'])) {
         $voosImg = $_FILES['userImg'];
         if ($voosImg['size'] > 25197152) {
-            echo "<script>alert('Arquivo muito grande!');</script>";
+            echo "<script>
+                    const ToastRegex = document.getElementById('ToastRegex')
+                    const toastBody = ToastRegex.querySelector('.toast-body');
+                
+                    toastBody.textContent = 'Erro! Arquivo de tamanho maior que o permitido.';
+                    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            </script>";
         } else {
             if (file_exists($atualVooImagePath) && $atualVooImagePath != "../imagens/padraoVoos.jpeg") {
                 if (!unlink($atualVooImagePath)) {

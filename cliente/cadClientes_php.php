@@ -8,11 +8,11 @@
 
             $name = $_POST["txtName"];
             $cpf = $_POST["txtCpf"];
-            $email = $_POST["txtLogin"];
+            $login = $_POST["txtLogin"];
             $dataNascimento = $_POST["txtDtNasc"];
             $password = $_POST["txtPassword"];
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-            $role = "funcionario";
+            $role = "cliente";
             $userImagePath ="../imagens/padraoUser.png";
             
             $sqlEmail = "SELECT * FROM USERS WHERE EMAIL = '$login'";
@@ -34,16 +34,18 @@
                 $result = $conn->query($sql);
         
                 if ($result === TRUE) {
-            ?>
-                <script>
+                
+?>
+<script>
                     location.href = './listUsers.php?result=3'; 
-                </script>
-        <?php
-                    } else {
-                        ?>
-                        <script>
-                            location.href = './cadFuncionario.php?error';
-                        </script>
+</script>
+<?php
+            }
+            else {
+?>
+<script>
+                            location.href = './cadClientes.php?error';
+</script>
 <?php
             }
 ?>

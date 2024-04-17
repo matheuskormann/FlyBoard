@@ -61,7 +61,7 @@ $row = $result->fetch_assoc();
               Funcionários
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../funcionarios/cadFuncionario.html">Cadastro Funcionarios</a></li>
+              <li><a class="dropdown-item" href="../funcionarios/cadFuncionario.php">Cadastro Funcionarios</a></li>
               <li><a class="dropdown-item" href="http://localhost/flyboard/admListUser/listUsers.php?filtro=2">Lista De Funcionarios</a></li>
               <li>
                 <hr class="dropdown-divider">
