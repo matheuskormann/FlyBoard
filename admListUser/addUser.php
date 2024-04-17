@@ -43,7 +43,7 @@
     </div>
     <div class="logo"><a href='../index/index.php'><img id="Logo" href='../index/index.php' src="../imagens/flyboardLOGOremovido.png" alt="Logo" ></a></div>
     <div id="h3">
-    <h3>Admin coadasro de user</h3>
+    <h3>Cadastro De Usuário</h3>
     </div>
     <form name="form1" method="post" action="./addUser_php.php">
 
@@ -55,7 +55,7 @@
                         <div class=" h-100 w-100 d-flex justify-content-center align-items-center">
                             <div class="input">
                                 <p>Nome completo:</p>
-                                <input id="inputNome" type="text" name="txtName" required placeholder="Nome Completo">
+                                <input id="inputNome" type="text" name="txtName" placeholder="Nome Completo">
                             </div>
                         
                       </div>
@@ -71,7 +71,7 @@
                       <div class="col">
                         <div class=" h-100 w-100 d-flex justify-content-center align-items-center">
                             <div class="input">
-                                <p>Data de Nacimento:</p>
+                                <p>Data de Nascimento:</p>
                                 <input id="inputDtnasc" type="date" name="txtDtNasc" required>
                             </div>
                         </div>
@@ -122,7 +122,26 @@
         </div>
 
     </form>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+<div id="ToastError" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      Erro ao cadastrar usuário, Tente novamente.
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+</div>
 
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+<div id="ToastRegex" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+</div>
 
     <script>
         function validateForm() {
@@ -141,11 +160,16 @@
 
             var cpfRegex = /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/;
 
-            var nomeRegex = /^\s*$/
+            var nomeRegex = /^[A-Z a-zÀ-ÁÃ-ÂÉ-ÊÍ-ÏÓ-ÔÕ-ÖÚ-ÜÇ-çñ]{5,}$/;
 
             
             if(nomeRegex.test(nome)){
-                alert("Preencha o campo nome");
+                const ToastRegex = document.getElementById('ToastRegex')
+                const toastBody = ToastRegex.querySelector('.toast-body');
+
+                toastBody.textContent = "Preencha o campo nome";
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+                toastBootstrap.show()
                 return false;
             }
 
@@ -169,8 +193,6 @@
                 return false;
             }
             
-            console.log('deu');
-
             return true;
             
         }
@@ -191,3 +213,13 @@
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> 
 </body>
 </html>
+<?php
+    if (isset($_GET['error'])){
+        echo "<script>
+        const ToastError = document.getElementById('ToastError')
+
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastError)
+        toastBootstrap.show()
+        </script>";
+    }
+?> 

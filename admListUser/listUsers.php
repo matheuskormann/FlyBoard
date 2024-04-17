@@ -59,7 +59,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" lang="pt-br" translate="no" content="width=device-width, initial-scale=1.0">
     <title>Users list</title>
     <link rel="stylesheet" href="userLstStyle.css">
     <link rel="shortcut icon" href="../imagens/favicon.ico" type="image/x-icon">
@@ -104,7 +104,7 @@
     <div id="conteinerButtom">
         <a id="botaoVoltar" type="button" class="btn btn-light" href="../homes/homeAdmin.php"><img src="../imagens/iconVoltar.png" alt="voltarHome" style="width: 40px; height: 40px"></a>
     </div>
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="mb-3">
+    <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="mb-3">
         <div class="input-group container">
             <input type="text" class="form-control" placeholder="Buscar por nome ou CPF" name="search">
             <button class="btn btn-outline-primary" type="submit">Buscar</button>
@@ -153,6 +153,8 @@
         </table>
     </div>
 
+    <!-- Modal  -->
+
     <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="labelHeader" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -161,30 +163,90 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" id="btnExcluir" class="btn btn-danger" onclick="excluir(this)">Sim, excluir</button>
+                        <button type="button" id="btnExcluir" type="submit" class="btn btn-danger" name="submit" >Sim, excluir</button>
                     </div>
                 </div>
             </div>
         </div>
-        
+
+        <!-- Toasts -->
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+<div id="ToastConfirm" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      Usuário excluido com sucesso!
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+<div id="ToastError" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      Erro ao excluir usuário, Tente novamente.
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+<div id="ToastAddSucess" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      Usuário adicionado com sucesso!
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+</div>
+
     <script>
             function showModal(element) {
-                const userId = element.dataset.userId;
                 $('#modal').modal('show');
-                $('#modal button.btn-danger').data('user-id', userId);
-            }
+                $('#btnExcluir').click(function() {
+                    const userId = $(element).data('user-id');
+                    location.href = "./deletUser.php?id=" + userId;
+                });
+                }
 
         function atualizarFiltro(valor) {
             location.href = "<?php echo $_SERVER['PHP_SELF']; ?>?filtro=" + valor;
         }
 
-        function excluir(element) {
-            const userId = $(element).data('user-id');
-            location.href = "./deletUser.php?id=" + userId;
-        
-        }
     </script>
       <script src="../node_modules/jquery/dist/jquery.min.js"></script>
       <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<?php
+    if (isset($_GET['result'])){
+        $result = $_GET['result'];
+        if($result == '1') {
+        echo "<script>
+        console.log('entrou')
+        const toastConfirm = document.getElementById('ToastConfirm')
+
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastConfirm)
+        toastBootstrap.show()
+        </script>";
+        } else if ($result == '2') {
+            echo "<script>
+            const toastError = document.getElementById('ToastError')
+    
+            const Bootstrap = bootstrap.Toast.getOrCreateInstance(toastError)
+            Bootstrap.show()
+                  </script>";
+        }else if ($result == '3') {
+            echo "<script>
+            const ToastAddSucess = document.getElementById('ToastAddSucess')
+    
+            const Bootstrap = bootstrap.Toast.getOrCreateInstance(ToastAddSucess)
+            Bootstrap.show()
+                  </script>";
+        }
+    }
+?> 

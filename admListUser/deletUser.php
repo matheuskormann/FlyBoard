@@ -1,10 +1,6 @@
 <?php
-
     include('../connections/connection.php');
-
-
- 
-
+    
     session_start();
     if (!isset($_SESSION["id"])) {
         header("Location: ../login/login.php");
@@ -25,38 +21,16 @@
     if ($result === TRUE) {
 ?>
 <script>
-function showModal() {
-    $('#modal').modal('show');
-}
-showModal()
-location.href = './listUsers.php';
+location.href = './listUsers.php?result=1';
 </script>
 <?php
     }
     else {
 ?>
 <script>
-alert('Algo não deu certo...');
-history.go(-1);
+location.href = './listUsers.php?result=2';
 </script>
 <?php
     }
 }
 ?>
-    <script>
-    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-      <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    </script>
-
-<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="labelHeader" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h5>Usuario Deletado Com Sucesso</h5>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
-            </div>
-        </div>
-    </div>
-</div>
