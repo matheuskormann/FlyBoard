@@ -1,0 +1,27 @@
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+#botaoVoltar{
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+#comtImgUser{
+    width: 400px; /* largura desejada */
+    height: 400px; /* altura desejada */
+    border-radius: 499px;
+    overflow: hidden;
+    position: relative;
+    
+}
+#userImg{
+
+	width: 100%; 
+  height: 100%; 
+  object-fit: cover;
+}
+#conteinerDadados{
+width: 295px !important;
+}
