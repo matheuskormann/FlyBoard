@@ -17,7 +17,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro Passageiro</title>
+    <title>Cadastro Usuario</title>
     <link rel="stylesheet" href="./addUserStyle.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="shortcut icon" href="../imagens/flyboardLOGOremovido.ico" type="image/x-icon">
@@ -45,7 +45,7 @@
     <div id="h3">
     <h3>Cadastro De Usuário</h3>
     </div>
-    <form name="form1" method="post" action="./addUser_php.php">
+    <form name="form1" id="form1" method="post" action="./addUser_php.php" onsubmit="return validateForm()">
 
         <div id="conteinercadPasageiro">
             <div class="conteinerInput">
@@ -118,7 +118,7 @@
                   </div>
             </div>
             <br>
-            <input id="inputEnviar" type="submit" value="Enviar" ">
+            <input id="inputEnviar" type="submit" value="Enviar" >
         </div>
 
     </form>
@@ -127,6 +127,17 @@
   <div class="d-flex">
     <div class="toast-body">
       Erro ao cadastrar usuário, Tente novamente.
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+</div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+<div id="ToastErrorEmail" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      Email Já Cadastrado.
     </div>
     <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
   </div>
@@ -145,14 +156,13 @@
 
     <script>
         function validateForm() {
-            var email = document.forms["form1"]["txtEmail"].value;
+
+            var nome = document.forms["form1"]["txtName"].value;
+            var cpf = document.forms["form1"]["txtCpf"].value;
+            var email = document.forms["form1"]["txtLogin"].value;
             var password = document.forms["form1"]["txtPassword"].value;
             var confSenha = document.forms["form1"]["txtPassword1"].value;
-            var cpf = document.forms["form1"]["txtCpf"].value;
-            var nome = document.forms["form1"]["txtNome"].value;
             var data = document.forms["form1"]["txtDtNasc"].value;
-
-            
 
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -160,41 +170,59 @@
 
             var cpfRegex = /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/;
 
-            var nomeRegex = /^[A-Z a-zÀ-ÁÃ-ÂÉ-ÊÍ-ÏÓ-ÔÕ-ÖÚ-ÜÇ-çñ]{5,}$/;
+            var nomeRegex = /^[A-Za-z ]{5,}$/;
 
-            
-            if(nomeRegex.test(nome)){
+            if(!nomeRegex.test(nome)){
                 const ToastRegex = document.getElementById('ToastRegex')
                 const toastBody = ToastRegex.querySelector('.toast-body');
 
-                toastBody.textContent = "Preencha o campo nome";
+                toastBody.textContent = "Nome Inválido, Preencha seu Nome com no mínimo 5 caracteres e somente letras.";
                 const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
                 toastBootstrap.show()
                 return false;
             }
 
-            if (!cpfRegex.test(cpf)){
-                alert("Preencha somente com números, sem LETRAS");
+            else if (!cpfRegex.test(cpf)){
+                console.log("cpf")
+                const ToastRegex = document.getElementById('ToastRegex')
+                const toastBody = ToastRegex.querySelector('.toast-body');
+
+                toastBody.textContent = "CPF Inválido, Preencha seu CPF com no máximo 11 caracteres.";
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+                toastBootstrap.show()
                 return false;
             }
 
-            if (!emailRegex.test(email)) {
-                alert("Por favor, Insira um e-mail válido.");
+            else if (!emailRegex.test(email)) {
+                const ToastRegex = document.getElementById('ToastRegex')
+                const toastBody = ToastRegex.querySelector('.toast-body');
+
+                toastBody.textContent = "Email Inválido, Preencha seu Email no formato correto.";
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+                toastBootstrap.show()
                 return false;
             }
 
-            if (!passwordRegex.test(password)) {
-                alert("A senha deve ter conter 6 caracteres, números e caracter especial");
+            else if (!passwordRegex.test(password)) {
+                const ToastRegex = document.getElementById('ToastRegex')
+                const toastBody = ToastRegex.querySelector('.toast-body');
+
+                toastBody.textContent = "Senha Inválida, A sua senha deve conter no Minímo 6 Caracteres, 1 Número e 1 Caracter Especial.";
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+                toastBootstrap.show()
                 return false;
             }
 
-            if (confSenha !== password){
-                alert("A senha deve ter conter 6 caracteres, números e caracter especial");
+            else if (confSenha !== password){
+                const ToastRegex = document.getElementById('ToastRegex')
+                const toastBody = ToastRegex.querySelector('.toast-body');
+
+                toastBody.textContent = "Confirmação Inválida, a confirmação não confere com a senha.";
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+                toastBootstrap.show()
                 return false;
-            }
-            
-            return true;
-            
+            } else {
+                return true;}
         }
 
         function validarCPF(e) {
@@ -219,6 +247,13 @@
         const ToastError = document.getElementById('ToastError')
 
         const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastError)
+        toastBootstrap.show()
+        </script>";
+    } else if (isset($_GET['errorEmail'])){
+        echo "<script>
+        const ToastErrorEmail = document.getElementById('ToastErrorEmail')
+
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastErrorEmail)
         toastBootstrap.show()
         </script>";
     }

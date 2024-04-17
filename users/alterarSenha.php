@@ -7,6 +7,32 @@ if (!isset($_SESSION["id"])) {
     exit;
 }
 
+?>
+    <!DOCTYPE html>
+    <html lang="pt-br">
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="comfig.css">
+        <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <title>Document</title>
+    </head>
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="ToastRegex" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    </html>
+    
+<?php
+
 if (isset($_POST['novaSenha'])) {
     $id = $_SESSION["id"];
     
@@ -30,18 +56,38 @@ if (isset($_POST['novaSenha'])) {
             $stmt->bind_param("si", $hashedPasswordNovo, $id);
             if ($stmt->execute()) {
                 echo "<script>
-                        alert('Senha atualizada com sucesso!');
-                        window.location.href = './comfig.php';
+                        window.location.href = './comfig.php?result=successPasswordUpload';
                       </script>";
             } else {
-                echo "<script>alert('Algo deu errado...');</script>";
+                echo "<script>
+                const ToastRegex = document.getElementById('ToastRegex')
+                const toastBody = ToastRegex.querySelector('.toast-body');
+            
+                toastBody.textContent = 'Falha ao alterar senha, Tente novamente.';
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+                toastBootstrap.show()
+                </script>";
             }
             $stmt->close();
         } else {
-            echo "<script>alert('As senhas não conferem!');</script>";
+            echo "<script>
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+        
+            toastBody.textContent = 'As Senhas Não Conferem.';
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            </script>";
         }
     } else {
-        echo "<script>alert('Senha atual incorreta!');</script>";
+        echo "<script>
+        const ToastRegex = document.getElementById('ToastRegex')
+        const toastBody = ToastRegex.querySelector('.toast-body');
+    
+        toastBody.textContent = 'Senha atual incorreta.';
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+        toastBootstrap.show()
+        </script>";
     }
 }
 ?>
@@ -68,7 +114,7 @@ if (isset($_POST['novaSenha'])) {
 <br>
 <hr>
 <br>
-<form action="" method="post">
+<form name="form1" method="post" onsubmit="return validateForm()">
 <label for="inputPassword5" class="form-label">Novo Password: </label>
 <input type="password" name="txtNovotPassword" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
 <div id="passwordHelpBlock" class="form-text">
@@ -88,8 +134,38 @@ A senha deve ter conter 6 caracteres, números e caracter especial.
   </div>
 </div>
 
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="ToastRegex" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
 
 
+    <script>
+        function validateForm() {
+            console.log("entrouteste")
+            var passwordNew = document.forms["form1"]["txtNovotPassword"].value;
+
+            var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+
+            if(!passwordRegex.test(passwordNew)){
+                const ToastRegex = document.getElementById('ToastRegex')
+                const toastBody = ToastRegex.querySelector('.toast-body');
+
+                toastBody.textContent = "Senha Inválida, A sua senha deve conter no Minímo 6 Caracteres, 1 Número e 1 Caracter Especial.";
+                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+                toastBootstrap.show()
+                return false;
+            }
+            else {
+                return true;}
+            }
+    </script>
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script> 
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

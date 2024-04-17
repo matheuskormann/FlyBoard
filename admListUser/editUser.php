@@ -57,7 +57,7 @@
     <div id="h3">
     <h3>Editar Usuário</h3>
     </div>
-    <form name="form1" method="post" action="./editUser_php.php">
+    <form name="form1" method="post" action="./editUser_php.php" onsubmit="return validateForm()">
 
         <div id="conteinercadPasageiro">
             <div class="conteinerInput">
@@ -117,19 +117,40 @@
             <input id="inputEnviar" type="submit" value="Enviar" ">
         </div>
 
+        <!-- toasts -->
+
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="ToastRegex" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="ToastError" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        Erro ao editar usuário, Tente novamente.
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+
+
     </form>
 
 
     <script>
         function validateForm() {
-            var email = document.forms["form1"]["txtEmail"].value;
-            var password = document.forms["form1"]["txtPassword"].value;
-            var confSenha = document.forms["form1"]["txtPassword1"].value;
-            var cpf = document.forms["form1"]["txtCpf"].value;
-            var nome = document.forms["form1"]["txtNome"].value;
-            var data = document.forms["form1"]["txtDtNasc"].value;
 
-            
+            var nome = document.forms["form1"]["txtName"].value;
+            var cpf = document.forms["form1"]["txtCpf"].value;
+            var email = document.forms["form1"]["txtLogin"].value;
 
             var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -137,39 +158,42 @@
 
             var cpfRegex = /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/;
 
-            var nomeRegex = /^\s*$/
+            var nomeRegex = /^[A-Za-z ]{5,}$/;
 
-            
-            if(nomeRegex.test(nome)){
-                alert("Preencha o campo nome");
-                return false;
-            }
+if(!nomeRegex.test(nome)){
+    const ToastRegex = document.getElementById('ToastRegex')
+    const toastBody = ToastRegex.querySelector('.toast-body');
 
-            if (!cpfRegex.test(cpf)){
-                alert("Preencha somente com números, sem LETRAS");
-                return false;
-            }
+    toastBody.textContent = "Nome Inválido, Preencha seu Nome com no mínimo 5 caracteres e somente letras.";
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+    toastBootstrap.show()
+    return false;
+}
 
-            if (!emailRegex.test(email)) {
-                alert("Por favor, Insira um e-mail válido.");
-                return false;
-            }
+else if (!cpfRegex.test(cpf)){
+    console.log("cpf")
+    const ToastRegex = document.getElementById('ToastRegex')
+    const toastBody = ToastRegex.querySelector('.toast-body');
 
-            if (!passwordRegex.test(password)) {
-                alert("A senha deve ter conter 6 caracteres, números e caracter especial");
-                return false;
-            }
+    toastBody.textContent = "CPF Inválido, Preencha seu CPF com no máximo 11 caracteres.";
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+    toastBootstrap.show()
+    return false;
+}
 
-            if (confSenha !== password){
-                alert("A senha deve ter conter 6 caracteres, números e caracter especial");
-                return false;
-            }
-            
-            console.log('deu');
+else if (!emailRegex.test(email)) {
+    const ToastRegex = document.getElementById('ToastRegex')
+    const toastBody = ToastRegex.querySelector('.toast-body');
 
-            return true;
-            
-        }
+    toastBody.textContent = "Email Inválido, Preencha seu Email no formato correto.";
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+    toastBootstrap.show()
+    return false;
+}
+ else {
+    return true;}
+}
+
 
         function validarCPF(e) {
             var tecla = e.which || e.keyCode;

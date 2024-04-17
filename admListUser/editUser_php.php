@@ -34,16 +34,14 @@
             if ($result === TRUE) {
 ?>
 <script>
-    alert('Usuário cadastrado com sucesso!!!');
-    location.href = './listUsers.php';
+    location.href = './listUsers.php?result=4';
 </script>
 <?php
             }
             else {
 ?>
 <script>
-    alert('Algo não deu certo...');
-    history.go(-1);
+    location.href = './addUser.php?error';
 </script>
 <?php
             }

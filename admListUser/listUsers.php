@@ -204,6 +204,17 @@
 </div>
 </div>
 
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+<div id="ToastEditSucess" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+      Usuário editado com sucesso!
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+</div>
+
     <script>
             function showModal(element) {
                 $('#modal').modal('show');
@@ -245,6 +256,13 @@
             const ToastAddSucess = document.getElementById('ToastAddSucess')
     
             const Bootstrap = bootstrap.Toast.getOrCreateInstance(ToastAddSucess)
+            Bootstrap.show()
+                  </script>";
+        }else if ($result == '4') {
+            echo "<script>
+            const ToastEditSucess = document.getElementById('ToastEditSucess')
+    
+            const Bootstrap = bootstrap.Toast.getOrCreateInstance(ToastEditSucess)
             Bootstrap.show()
                   </script>";
         }

@@ -1,7 +1,7 @@
 <?php
     $servername = "localhost";
     $username = "root"; 
-    $password = "PUC@1234";//alterar senha 
+    $password = "";//alterar senha 
     $dbname = "FLYBOARD";
 
     $conn = new mysqli($servername, $username, $password, $dbname,3306);//aterar a porta do sql
@@ -9,4 +9,4 @@
         die("Conexão falhou: $conn->connect_error");
     }
      
-?>  
+?>;  
