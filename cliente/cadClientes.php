@@ -19,7 +19,8 @@
     <div id="h3">
     <h3>Cadastro</h3>
     </div>
-    <form name="form1" method="post" action="cadClientes.php" onsubmit="return validateForm()">
+    <form name="form1" method="post" action="cadClientes.php" onsubmit="return validateForm()"
+    >
 
         <div id="conteinercadPasageiro">
             <div class="conteinerInput">
