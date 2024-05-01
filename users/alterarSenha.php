@@ -126,7 +126,7 @@ A senha deve ter conter 6 caracteres, números e caracter especial.
     A senha deve ter conter 6 caracteres, números e caracter especial.
 </div>
 <br>
-<button type="submit" name="novaSenha" class="btn btn-primary">Submit</button>
+<button type="submit" name="novaSenha" class="btn btn-primary">Enviar</button>
 </form>
     </div>
     <div class="col">
@@ -163,7 +163,8 @@ A senha deve ter conter 6 caracteres, números e caracter especial.
                 return false;
             }
             else {
-                return true;}
+                return true;
+            }
             }
     </script>
 

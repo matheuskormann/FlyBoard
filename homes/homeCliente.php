@@ -1,3 +1,4 @@
+
 <?php
 include('../connections/connection.php');
 session_start();
@@ -6,9 +7,30 @@ if (!isset($_SESSION["id"])) {
 }
 
 $id = $_SESSION["id"];
-$sql = "SELECT NAME ,EMAIL , ROLE, USERIMAGEPATH FROM USERS WHERE ID_USER = $id";
+$sql = "SELECT NAME , EMAIL, ROLE, USERIMAGEPATH FROM USERS WHERE ID_USER = $id";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
+
+// Consulta para buscar bagagens de um usuário específico e contar o número de bagagens para cada voo
+$sql_bagagens = "SELECT B.ID_BAGAGEM, B.CODIGO_BAGAGEM, B.PESO, B.TIPO, P.NOME_PASSAGEIRO, P.VALOR, V.LOCAL_DE_ORIGEM, V.LOCAL_DE_DESTINO, V.DATA_IDA, V.DATA_CHEGADA ,  V.PORTAO_EMBARQUE, V.VOOIMAGEMPATH, COUNT(*) as QTD_BAGAGENS
+  FROM BAGAGENS B 
+  INNER JOIN PASSAGENS P ON B.FK_PASSAGENS_ID_PASSAGEM = P.ID_PASSAGEM 
+  INNER JOIN VOOS V ON P.FK_VOOS_ID_VOO = V.ID_VOO 
+  WHERE P.FK_USERS_ID_USER = $id
+  GROUP BY B.ID_BAGAGEM, B.CODIGO_BAGAGEM, B.PESO, B.TIPO, P.NOME_PASSAGEIRO, P.VALOR, V.LOCAL_DE_ORIGEM, V.LOCAL_DE_DESTINO, V.DATA_IDA, V.DATA_CHEGADA ,  V.PORTAO_EMBARQUE, V.VOOIMAGEMPATH
+  ORDER BY V.DATA_IDA DESC";
+$result_bagagens = $conn->query($sql_bagagens);
+
+// Consulta para buscar todas as viagens de um usuário específico e contar o número de passagens para cada voo
+$sql_viagens = "SELECT VOOS.*, GROUP_CONCAT(PASSAGENS.ID_PASSAGEM) AS passagens_ids, COUNT(PASSAGENS.ID_PASSAGEM) AS numero_passagens
+FROM PASSAGENS
+INNER JOIN VOOS ON PASSAGENS.FK_VOOS_ID_VOO = VOOS.ID_VOO
+WHERE PASSAGENS.FK_USERS_ID_USER = $id
+GROUP BY VOOS.ID_VOO
+ORDER BY VOOS.DATA_IDA DESC";
+$result_viagens = $conn->query($sql_viagens);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,15 +64,15 @@ $row = $result->fetch_assoc();
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Voos
+              Passagens
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Meus Voos</a></li>
-              <li><a class="dropdown-item" href="#">Adicionar Voo</a></li>
+              <li><a class="dropdown-item" href="#">Minhas passagens</a></li>
+              <li><a class="dropdown-item" href="../passagem/addPasagemCliente.php">Adicionar passagem</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Buscar voos</a></li>
+              <li><a class="dropdown-item" href="#">Ver minhas passagens</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -118,65 +140,102 @@ $row = $result->fetch_assoc();
   <br>
   <br>
   <div class="container">
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-      <div class="col">
-        <div class="card h-100">
-          <img src="../imagens/fotoVeneza.png" class="card-img-top" alt="...">
+    <h4>Minhas Bagagems: </h4>
+    <div class="position-relative">
+        <div class="position-absolute bottom-0 end-0">
+           <button type="button" class="btn btn-success buttomAdd" style="border-radius: 85px;"><img src="../imagens/mais.png" alt="" ></button>
+         </div>
+    </div>
+    <br>
+    <div class="boxcardCliente">
+    <?php
+    if ($result_bagagens->num_rows > 0) {
+      // Exibe os dados das bagagens
+      while($row = $result_bagagens->fetch_assoc()) {
+        ?>
+        <div class="col">
+        <div class="card h-100 cardCliente">
           <div class="card-body">
-            <h5 class="card-title">Veneza</h5>
-            <p class="card-text">A capital da região de Vêneto, no norte da Itália, é formada por mais de 100 pequenas ilhas em uma lagoa no Mar Adriático. A cidade não tem estradas, apenas canais (como a via Grand Canal), repletos de palácios góticos e renascentistas.</p>
-            <a href="#" class="btn btn-primary">Mais Detalhes</a>
+
+            <h5 class="card-title"><img src="../imagens/mala-alt.png" alt="editar" style="width: 19px; height: 19px; position: relative; bottom: 2px;"> <?php echo $row["CODIGO_BAGAGEM"]; ?></h5>
+            <p class="card-text">TIPO:<?php echo $row["TIPO"];?><br>PESO:<?php echo $row["PESO"]; ?></p>
           </div>
           <div class="card-footer">
-            <span class="badge text-bg-secondary">19/03/24</span>
-            <span class="badge text-bg-success">internacional</span>
-            <span class="badge text-bg-warning">Noturno</span>
+            <a href="#" class="btn btn-primary">Mais Detalhes</a>
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="../imagens/fotoGrecia.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Atenas</h5>
-            <p class="card-text">Atenas é a capital da Grécia. A cidade também foi o centro da Grécia Antiga, um império e civilização poderosos, e ainda é dominada por monumentos do século V a.C., como a Acrópole, uma cidadela no topo de uma montanha repleta de construções antigas.</p>
-            <a href="#" class="btn btn-primary">Mais Detalhes</a>
-          </div>
-          <div class="card-footer">
-            <span class="badge text-bg-info">Em andamento</span>
-            <span class="badge text-bg-warning">Em transito</span>
-            <span class="badge text-bg-danger">Bagagem frágeis</span>
-          </div>
+      <?php
+      }
+    } 
+    else {
+       echo "Nenhuma bagagem encontrada para este usuário.";
+    }
+    ?>
+    </div>
+  </div>
+  <hr>
+  <br>
+  <div class="container">
+    <h4>Meus voos:</h4>
+    <div class="position-relative">
+        <div class="position-absolute bottom-0 end-0">
+           <button type="button" href="../passagem/addPasagemCliente.php" class="btn btn-success buttomAdd" style="border-radius: 85px;"><img src="../imagens/mais.png" alt="" ></button>
         </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="../imagens/fotoMoscou .png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Moscou</h5>
-            <p class="card-text">Moscou, situada às margens do rio de mesmo nome, no oeste da Rússia, é a capital cosmopolita do país. Em seu núcleo histórico está localizado o Kremlin, um complexo que abriga a residência do presidente e tesouros czaristas no Palácio do Arsenal.</p>
-            <a href="#" class="btn btn-primary">Mais Detalhes</a>
+    </div>
+    <br>
+    <div class="boxcardCliente">
+      <?php
+      if ($result_viagens->num_rows > 0) {
+        while($row = $result_viagens->fetch_assoc()) {
+          ?>
+          <div class="col espasso">
+          <div class="card h-100 cardCliente ">
+            <img src="<?php echo $row["VOOIMAGEMPATH"]; ?>" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><?php echo $row["LOCAL_DE_DESTINO"]; ?></h5>
+              <p class="card-text">Data de saida:<br><?php echo $row["DATA_IDA"];?><br><br>Portão:<br><?php echo $row["PORTAO_EMBARQUE"];?></p>
+              <a href="../passagem/detalesPasagem.php?idVoo=<?php echo $row['ID_VOO']; ?>" class="btn btn-primary">Mais Detalhes</a>
+            </div>
+            <div class="card-footer">
+            <?php
+            $status_viagem = verificarStatusViagem($row["DATA_IDA"]);
+            ?>
+              <br>
+              <?php 
+              $id_passagem = (int) $row["passagens_ids"];
+              // Query para contar a quantidade de passagens com o mesmo FK_USERS_ID_VOO
+              $sql = "SELECT COUNT(*) AS quantidade_passagens
+                      FROM PASSAGENS
+                      WHERE FK_VOOS_ID_VOO = (
+                          SELECT FK_VOOS_ID_VOO
+                          FROM PASSAGENS
+                          WHERE ID_PASSAGEM = $id_passagem
+                      )";
+              
+              $result = $conn->query($sql);
+              
+              if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                echo '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    '.$row["quantidade_passagens"].'
+                    <span class="visually-hidden">passagens para o mesmo voo</span>
+                    </span>';
+              } else {  
+                echo "Nenhuma passagem encontrada para o ID especificado.";
+              }
+              ?>
+            </div>
           </div>
-          <div class="card-footer">
-            <span class="badge text-bg-dark">Concluído.</span>
-            <br>
           </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card h-100">
-          <img src="../imagens/fotoDubai.png" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Dubai</h5>
-            <p class="card-text">Dubai é uma cidade e um emirado dos Emirados Árabes Unidos conhecida pelos shoppings de luxo, pela arquitetura ultramoderna e pela animada vida noturna. Burj Khalifa, uma torre de 830 metros de altura, domina a linha do horizonte repleta de arranha-céus.</p>
-            <a href="#" class="btn btn-primary">Mais Detalhes</a>
-          </div>
-          <div class="card-footer">
-            <span class="badge text-bg-dark">Concluído.</span>
-            <br>
-          </div>
-        </div>
-      </div>
+          <?php
+        }
+      }
+   
+      else {
+       echo "Nenhuma viagem encontrada para este usuário.";
+      }
+   ?>
     </div>
   </div>
 
@@ -205,6 +264,87 @@ $row = $result->fetch_assoc();
       window.location.href = '../users/logout.php';
     }
   </script>
+  <?php
+ function verificarStatusViagem($data_ida) {
+          $data_atual = date('Y-m-d');
+          $data_ida = date('Y-m-d', strtotime($data_ida));
+
+          if ($data_ida > $data_atual) {
+            $diferenca = strtotime($data_ida) - strtotime($data_atual);
+            $dias = floor($diferenca / (60 * 60 * 24));
+
+            echo '<span class="badge rounded-pill text-bg-primary">Faltam ' . $dias . ' dias para a viagem.</span>';
+                
+          } else if ($data_ida == $data_atual) {
+            echo '<span class="badge rounded-pill text-bg-success">Em Andamento</span>';
+          } else {
+            echo '<span class="badge rounded-pill text-bg-warning">Ja Realivada</span>';
+          }
+        }
+        ?>
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<!-- Modal de confirmação de exclusão -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h5>Deseja excluir o voo?</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btnExcluir" onclick="excluirVoo()">Sim, excluir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php
+    if (isset($_GET["result"])) {
+        $result = $_GET["result"];
+        if ($result == "successDataUpdate") {
+            echo "<script>
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+
+            toastBody.textContent = 'Dados atualizados com sucesso!';
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            </script>";
+        } 
+        else if($result == "successAddPassagem") {
+            echo "<script>
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+
+            toastBody.textContent = 'Voo adicionad com sucesso!';
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            </script>";
+        } 
+        else if($result == "successDeletVoo") {
+            echo "<script>
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+
+            toastBody.textContent = 'Voo apagado com sucesso!';
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            </script>";
+        } 
+        else if($result == "erro") {
+            echo "<script>
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+
+            toastBody.textContent = 'algo deu errado!';
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            </script>";
+        } 
+    }
+
+    ?>
+
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>

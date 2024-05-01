@@ -19,7 +19,7 @@
     <div id="h3">
     <h3>Cadastro</h3>
     </div>
-    <form name="form1" method="post" action="cadClientes.php" onsubmit="return validateForm()">
+    <form name="form1" method="post" action="cadClientes_php.php" onsubmit="return validateForm()">
 
         <div id="conteinercadPasageiro">
             <div class="conteinerInput">
@@ -38,7 +38,7 @@
                         <div class=" h-100 w-100 d-flex justify-content-center align-items-center">
                             <div class="input">
                                 <p>CPF:</p>
-                                <input id="inputCPF" type="text" name="txtCpf" required placeholder="xxx.xxx.xxx-xx" maxlength="14" onkeypress="validarCPF(event)">
+                                <input id="inputCPF" type="text" name="txtCpf" required placeholder="xxx.xxx.xxx-xx" maxlength="14" oninput="formatarCpf(this)">
                             </div>
                         </div>
                       </div>
@@ -87,6 +87,16 @@
 
     </form>
 
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+<div id="ToastRegex" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="d-flex">
+    <div class="toast-body">
+    </div>
+    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+</div>
+</div>
 
     <script>
    function validateForm() {
@@ -164,11 +174,21 @@
       }
 
 
-        function validarCPF(e) {
-            var tecla = e.which || e.keyCode;
-            if ((tecla < 48 || tecla > 57) && tecla !== 8 && tecla !== 0 && tecla !== 46 && tecla !== 45) {
-                e.preventDefault();
+      function formatarCpf(campo) {
+            var cpf = campo.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            var cpfFormatado = '';
+
+            if (cpf.length <= 3) {
+                cpfFormatado = cpf;
+            } else if (cpf.length <= 6) {
+                cpfFormatado = cpf.substring(0, 3) + '.' + cpf.substring(3);
+            } else if (cpf.length <= 9) {
+                cpfFormatado = cpf.substring(0, 3) + '.' + cpf.substring(3, 6) + '.' + cpf.substring(6);
+            } else {
+                cpfFormatado = cpf.substring(0, 3) + '.' + cpf.substring(3, 6) + '.' + cpf.substring(6, 9) + '-' + cpf.substring(9);
             }
+
+            campo.value = cpfFormatado;
         }
         
 
@@ -181,3 +201,33 @@
 </body>
 
 </html>
+<?php
+    if (isset($_GET['error'])){
+        echo "<script>
+        const ToastRegex = document.getElementById('ToastRegex')
+        const toastBody = ToastRegex.querySelector('.toast-body');
+    
+        toastBody.textContent = 'Erro ao cadastrar funcionário, tente novamente.';
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+        toastBootstrap.show()
+        </script>";
+    } else if (isset($_GET['errorEmail'])){
+        echo "<script>
+        const ToastRegex = document.getElementById('ToastRegex')
+        const toastBody = ToastRegex.querySelector('.toast-body');
+    
+        toastBody.textContent = 'Email já cadastrado, tente novamente.';
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+        toastBootstrap.show()
+        </script>";
+    } else if (isset($_GET['errorCpf'])){
+        echo "<script>
+        const ToastRegex = document.getElementById('ToastRegex')
+        const toastBody = ToastRegex.querySelector('.toast-body');
+    
+        toastBody.textContent = 'CPF já cadastrado, tente novamente.';
+        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+        toastBootstrap.show()
+        </script>";
+    }
+?> 

@@ -7,17 +7,19 @@ if (!isset($_SESSION["id"])) {
     exit; 
 }
 $id = $_GET["id"];
-$sql = "SELECT ID_VOO, CODIGO_VOO, DESTINO, DATA_IDA, DATA_CHEGADA, PORTAO_EMBARQUE, AERONAVE, OPERADORA, VOOIMAGEMPATH FROM VOOS WHERE ID_VOO = $id";
+$sql = "SELECT ID_VOO, CODIGO_VOO,LOCAL_DE_ORIGEM, LOCAL_DE_DESTINO, DATA_IDA, DATA_CHEGADA, PORTAO_EMBARQUE, AERONAVE, CODIGO_AERONAVE, OPERADORA, VOOIMAGEMPATH FROM VOOS WHERE ID_VOO = $id";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $CODIGO_VOO = $row["CODIGO_VOO"];
-        $DESTINO = $row["DESTINO"];
+        $ORIGEM = $row["LOCAL_DE_ORIGEM"];
+        $DESTINO = $row["LOCAL_DE_DESTINO"];
         $DATA_IDA = $row["DATA_IDA"];
         $DATA_CHEGADA = $row["DATA_CHEGADA"];
         $PORTAO_EMBARQUE = $row["PORTAO_EMBARQUE"];
         $AERONAVE = $row["AERONAVE"];
         $OPERADORA = $row["OPERADORA"];
+        $CODIGO_AERONAVE = $row["CODIGO_AERONAVE"];
         $VOOIMAGEMPATH = $row["VOOIMAGEMPATH"];
     }
 }
@@ -63,6 +65,10 @@ if ($result->num_rows > 0) {
                          <td ><?php echo $AERONAVE ?></td>
                         </tr>
                         <tr>
+                         <th class="" scope="row">Codigo Aviao: </th>
+                         <td ><?php echo $CODIGO_AERONAVE ?></td>
+                        </tr>
+                        <tr>
                          <th class="" scope="row">Compani aerio:</th>
                          <td><?php echo $OPERADORA ?></td>
                         </tr>
@@ -76,7 +82,7 @@ if ($result->num_rows > 0) {
                        
                        </tr>
                        <tr>
-                       <td>Sao Pauolo</td>
+                       <td><?php echo $ORIGEM ?></td>
                        <td><img src="../imagens/viagem-de-aviao.png" alt="viagem-de-aviao"style="width: 25px; height: 25px;"></td>
                        <td><?php echo $DESTINO ?></td>
                        </tr>

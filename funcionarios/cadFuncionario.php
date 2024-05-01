@@ -37,7 +37,7 @@
               <div class="h-100 w-100 d-flex justify-content-center align-items-center">
                 <div class="input">
                   <p>CPF:</p>
-                  <input id="inputCPF" type="text" name="txtCpf" required placeholder="xxx.xxx.xxx-xx" maxlength="11" onkeypress="validarCPF(event)" />
+                  <input id="inputCPF" type="text" name="txtCpf" required placeholder="xxx.xxx.xxx-xx" maxlength="14" oninput="formatarCpf(this)" />
                 </div>
               </div>
             </div>
@@ -104,7 +104,6 @@
       function validateForm() {
         console.log("validando");
         var nome = document.forms["form1"]["txtName"].value;
-        var cpf = document.forms["form1"]["txtCpf"].value;
         var email = document.forms["form1"]["txtLogin"].value;
         var password = document.forms["form1"]["txtPassword"].value;
         var confSenha = document.forms["form1"]["txtPassword1"].value;
@@ -115,7 +114,7 @@
         var passwordRegex =
           /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-        var cpfRegex = /^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/;
+
 
         var nomeRegex = /^[A-Za-z ]{5,}$/;
 
@@ -175,18 +174,22 @@
         }
       }
 
-      function validarCPF(e) {
-        var tecla = e.which || e.keyCode;
-        if (
-          (tecla < 48 || tecla > 57) &&
-          tecla !== 8 &&
-          tecla !== 0 &&
-          tecla !== 46 &&
-          tecla !== 45
-        ) {
-          e.preventDefault();
+      function formatarCpf(campo) {
+            var cpf = campo.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            var cpfFormatado = '';
+
+            if (cpf.length <= 3) {
+                cpfFormatado = cpf;
+            } else if (cpf.length <= 6) {
+                cpfFormatado = cpf.substring(0, 3) + '.' + cpf.substring(3);
+            } else if (cpf.length <= 9) {
+                cpfFormatado = cpf.substring(0, 3) + '.' + cpf.substring(3, 6) + '.' + cpf.substring(6);
+            } else {
+                cpfFormatado = cpf.substring(0, 3) + '.' + cpf.substring(3, 6) + '.' + cpf.substring(6, 9) + '-' + cpf.substring(9);
+            }
+
+            campo.value = cpfFormatado;
         }
-      }
     </script>
 
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>

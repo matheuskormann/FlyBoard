@@ -34,16 +34,18 @@ if (!isset($_SESSION["id"])) {
 <?php
 
  $id = $_GET["id"];
- $sql = "SELECT ID_VOO, CODIGO_VOO, DESTINO, DATA_IDA, DATA_CHEGADA, PORTAO_EMBARQUE, AERONAVE, OPERADORA, VOOIMAGEMPATH FROM VOOS WHERE ID_VOO = $id";
+ $sql = "SELECT ID_VOO, CODIGO_VOO, LOCAL_DE_ORIGEM, LOCAL_DE_DESTINO, DATA_IDA, DATA_CHEGADA, PORTAO_EMBARQUE, AERONAVE, CODIGO_AERONAVE, OPERADORA, VOOIMAGEMPATH FROM VOOS WHERE ID_VOO = $id";
  $result = $conn->query($sql);
  if ($result->num_rows > 0) {
      while($row = $result->fetch_assoc()) {
          $CODIGO_VOO = $row["CODIGO_VOO"];
-         $DESTINO = $row["DESTINO"];
+         $ORIGEM = $row["LOCAL_DE_ORIGEM"];
+         $DESTINO = $row["LOCAL_DE_DESTINO"];
          $DATA_IDA = $row["DATA_IDA"];
          $DATA_CHEGADA = $row["DATA_CHEGADA"];
          $PORTAO_EMBARQUE = $row["PORTAO_EMBARQUE"];
          $AERONAVE = $row["AERONAVE"];
+         $CODIGO_AERONAVE = $row["CODIGO_AERONAVE"];
          $OPERADORA = $row["OPERADORA"];
          $atualVooImagePath = $row["VOOIMAGEMPATH"];
      }
@@ -90,17 +92,19 @@ if (isset($_POST['atualizarDados'])) {
 }
 
 if (isset($_POST['atualizarDados'])) {
+    $editOrigem = $_POST['txtOrigem'];
     $editDestino = $_POST['txtDestino'];
     $editData_Ida = $_POST['txtData_Ida'];
     $editData_Chegada = $_POST['txtData_Chegada'];
     $editPortao_Embarque = $_POST['txtPortao_Embarque'];
     $editAeronave = $_POST['txtAeronave'];
+    $editCodigoAeronave = $_POST['txtCodigoAeronave'];
     $id = $_GET["id"];
     
     // Usando consulta preparada para prevenir SQL Injection
-    $sql2 = "UPDATE VOOS SET DESTINO = ?, DATA_IDA = ?, DATA_CHEGADA = ?, PORTAO_EMBARQUE = ?, AERONAVE = ? WHERE ID_VOO = ?";
+    $sql2 = "UPDATE VOOS SET LOCAL_DE_ORIGEM = ?, LOCAL_DE_DESTINO = ?, DATA_IDA = ?, DATA_CHEGADA = ?, PORTAO_EMBARQUE = ?, AERONAVE = ?, CODIGO_AERONAVE = ? WHERE ID_VOO = ?";
     $stmt = $conn->prepare($sql2);
-    $stmt->bind_param('sssssi', $editDestino, $editData_Ida, $editData_Chegada, $editPortao_Embarque, $editAeronave, $id);
+    $stmt->bind_param('sssssssi', $editOrigem, $editDestino, $editData_Ida, $editData_Chegada, $editPortao_Embarque, $editAeronave,$editCodigoAeronave, $id);
     
     if ($stmt->execute()) {
         echo "<script>
@@ -147,7 +151,7 @@ if (isset($_POST['atualizarDados'])) {
                         <div>
                             <form method="POST" enctype="multipart/form-data">
                                 <div class="mb-3">
-                                    <label for="formFile" class="form-label">Alterar imagem de perfil:</label>
+                                    <label for="formFile" class="form-label">Alterar imagem do voo:</label>
                                     <input name="userImg" class="form-control" type="file" id="formFile">
                                 </div>
                                 <br>
@@ -161,10 +165,10 @@ if (isset($_POST['atualizarDados'])) {
                 <h1>Dados</h1>
 
                 
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Origem:</label>
-                        <input type="text"  name="txtName" class="form-control" id="exampleFormControlInput1" value="<?php echo $Origem ?>">
-                    </div>       -->
+                        <input type="text"  name="txtOrigem" class="form-control" id="exampleFormControlInput1" value="<?php echo $ORIGEM ?>">
+                    </div>      
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Destino:</label>
                         <input type="txt" name="txtDestino" class="form-control" id="exampleFormControlInput2" value="<?php echo $DESTINO ?>">
@@ -184,6 +188,10 @@ if (isset($_POST['atualizarDados'])) {
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Aeronave:</label>
                         <input type="txt" name="txtAeronave" class="form-control" id="exampleFormControlInput1" value="<?php echo $AERONAVE ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Codigo Aeronave:</label>
+                        <input type="txt" name="txtCodigoAeronave" class="form-control" id="exampleFormControlInput1" value="<?php echo $CODIGO_AERONAVE ?>">
                     </div>
                     <button name="atualizarDados" class="btn btn-primary mb-3" type="submit">Salvar</button>
                 </form>

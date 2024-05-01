@@ -23,7 +23,7 @@
                     <input id="inputLogin" type="email" name="txtemail" class="form-control-sm"  required>
                     <p>SENHA:</p>
                     <input id="inputPasswoed" type="password" name="txtPassword" class="form-control-sm" >
-                    <a id="criarconta" href="../cliente/cadClientes.html">Criar uma conta</a>
+                    <a id="criarconta" href="../cliente/cadClientes.php">Criar uma conta</a>
                     <br>
                     <input name="submit" id="inputEnviar" type="submit"  value="Enviar">
         

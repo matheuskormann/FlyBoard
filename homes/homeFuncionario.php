@@ -104,6 +104,7 @@ $row = $result->fetch_assoc();
       </div>
     </div>
   </nav>
+  <img src="../imagens/imgHomeFuncionaros.png" class="d-block w-100" alt="...">
 
 
 

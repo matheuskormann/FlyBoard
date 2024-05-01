@@ -7,7 +7,7 @@ if (!isset($_SESSION["id"])) {
 } else if ($_SESSION["role"] == "admin") {
 ?>
   <script>
-    header("Location: ../index/index.html ");
+    header("Location: ../index/index.php ");
   </script>
 <?php
 }
@@ -101,6 +101,8 @@ $row = $result->fetch_assoc();
                 </div>
             </div>
         </div>
+        <img src="../imagens/imgHomeAdmin.png" class="d-block w-100" alt="...">
+       
 
 
   <script>

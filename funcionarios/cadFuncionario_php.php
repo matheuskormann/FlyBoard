@@ -15,7 +15,7 @@
             $role = "funcionario";
             $userImagePath ="../imagens/padraoUser.png";
             
-            $sqlEmail = "SELECT * FROM USERS WHERE EMAIL = '$login'";
+            $sqlEmail = "SELECT * FROM USERS WHERE EMAIL = '$email'";
             $resultadoEmail = $conn->query($sqlEmail);
         
             if ($resultadoEmail->num_rows > 0) {
@@ -29,14 +29,14 @@
                 echo "<script>
                         location.href = './cadFuncionario.php?errorCpf';
                     </script>";
-            }else if ($resultadoEmail->num_rows == 0 && $resultadoCpf->num_rows == 0){
-                $sql = "INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH) VALUES('$name', '$cpf', '$login', '$dataNacimento', '$hashedPassword', '$role', '$userImagePath')";
+            }else{
+                $sql = "INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH) VALUES('$name', '$cpf', '$email', '$dataNascimento', '$hashedPassword', '$role', '$userImagePath')";
                 $result = $conn->query($sql);
         
                 if ($result === TRUE) {
             ?>
                 <script>
-                    location.href = './listUsers.php?result=3'; 
+                    location.href = '../admListUser/listUsers.php?result=3'; 
                 </script>
         <?php
                     } else {

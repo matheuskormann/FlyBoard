@@ -19,36 +19,9 @@ if ($_SESSION["role"] == "admin") {
           </script>";
     exit; 
 }
-?>
-<!DOCTYPE html>
-<html lang="pt-br"> 
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lista de Voos</title>
-<link rel="stylesheet" href="voosListStyle.css">
-<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-
-</head>
-<div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="ToastRegex" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                </div>
-                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
-
-<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-</html>
-
-
-<?php
 
 // Consulta SQL para obter voos da tabela VOOS
-$sql = "SELECT ID_VOO, CODIGO_VOO, DESTINO, DATA_IDA, DATA_CHEGADA, PORTAO_EMBARQUE, AERONAVE, OPERADORA FROM VOOS";
+$sql = "SELECT ID_VOO, CODIGO_VOO, LOCAL_DE_ORIGEM, LOCAL_DE_DESTINO, DATA_IDA, DATA_CHEGADA, PORTAO_EMBARQUE, AERONAVE,CODIGO_AERONAVE , OPERADORA FROM VOOS";
 $result = $conn->query($sql);
 
 // Consulta SQL para contar o número total de voos cadastrados
@@ -59,10 +32,10 @@ $total_voos = $row_num_voos['total'];
 
 if (isset($_POST['search'])) {
     $search = $conn->real_escape_string($_POST['search']);
-    $sql_search = "SELECT ID_VOO, CODIGO_VOO, DESTINO, DATA_IDA, AERONAVE, OPERADORA 
+    $sql_search = "SELECT ID_VOO, CODIGO_VOO, LOCAL_DE_ORIGEM, LOCAL_DE_DESTINO, DATA_IDA, AERONAVE, OPERADORA 
                    FROM VOOS 
                    WHERE CODIGO_VOO LIKE '%$search%'
-                   OR DESTINO LIKE '%$search%'
+                   OR LOCAL_DE_DESTINO LIKE '%$search%'
                    OR OPERADORA LIKE '%$search%'
                    OR DATA_IDA LIKE '%$search%'";
     $result = $conn->query($sql_search);
@@ -70,17 +43,24 @@ if (isset($_POST['search'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-br"> 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Voos</title>
-    <link rel="stylesheet" href="voosListStyle.css">
-    <link rel="shortcut icon" href="../imagens/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="comfig.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <title>voos</title>
 </head>
 <body>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="ToastRegex" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
@@ -131,9 +111,9 @@ if (isset($_POST['search'])) {
             <thead>
                 <tr>
                     <th scope="col">CODIGO_VOO</th>
+                    <th scope="col">ORIGEM</th>
                     <th scope="col">DESTINO</th>
                     <th scope="col">DATA_IDA</th>
-                    <th scope="col">AERONAVE</th>
                     <th scope="col">OPERADORA</th>
                     <th scope="col">Ações</th>
                 </tr>
@@ -145,11 +125,10 @@ if (isset($_POST['search'])) {
                         while ($row = $result->fetch_assoc()) {
                 ?>
                             <tr>
-                                <td><a href="./voosVoos.php?id=<?php echo $row['ID_VOO']; ?>"><img src="../imagens/aviao.png" alt="user" style="width: 25px; height: 25px;">:  <?php echo $row["CODIGO_VOO"]; ?>
-                                </a></td>
-                                <td><?php echo $row["DESTINO"]; ?></td>
+                                <td><a href="./voosVoos.php?id=<?php echo $row['ID_VOO']; ?>"><img src="../imagens/aviao.png" alt="user" style="width: 25px; height: 25px;">:  <?php echo $row["CODIGO_VOO"]; ?></a></td>
+                                <td><?php echo $row["LOCAL_DE_ORIGEM"]; ?></td>
+                                <td><?php echo $row["LOCAL_DE_DESTINO"]; ?></td>
                                 <td><?php echo $row["DATA_IDA"]; ?></td>
-                                <td><?php echo $row["AERONAVE"]; ?></td>
                                 <td><?php echo $row["OPERADORA"]; ?></td>
                                 <!-- Ações: Editar e Excluir -->
                                 <td>
@@ -202,20 +181,52 @@ if (isset($_POST['search'])) {
             window.location.href = "./deletVoo.php?id=" + vooIdParaExcluir;
         }
     </script>
+
+    <?php
+    if (isset($_GET["result"])) {
+        $result = $_GET["result"];
+        if ($result == "successDataUpdate") {
+            echo "<script>
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+
+            toastBody.textContent = 'Dados atualizados com sucesso!';
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            </script>";
+        } 
+        else if($result == "successAddVoo") {
+            echo "<script>
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+
+            toastBody.textContent = 'Voo adicionad com sucesso!';
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            </script>";
+        } 
+        else if($result == "successDeletVoo") {
+            echo "<script>
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+
+            toastBody.textContent = 'Voo apagado com sucesso!';
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            </script>";
+        } 
+        else if($result == "erro") {
+            echo "<script>
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+
+            toastBody.textContent = 'algo deu errado!';
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            </script>";
+        } 
+    }
+
+    ?>
 </body>
 </html>
-<?php
-if (isset($_GET["result"])) {
-    $result = $_GET["result"];
-    if ($result == "successDataUpdate") {
-        echo "<script>
-        const ToastRegex = document.getElementById('ToastRegex')
-        const toastBody = ToastRegex.querySelector('.toast-body');
-    
-        toastBody.textContent = 'Dados atualizados com sucesso!';
-        const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
-        toastBootstrap.show()
-        </script>";
-    } 
-}
-?>

@@ -16,7 +16,7 @@
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro Passageiro</title>
+    <title>Editar Usuário</title>
     <link rel="stylesheet" href="./addUserStyle.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="shortcut icon" href="../imagens/flyboardLOGOremovido.ico" type="image/x-icon">
@@ -75,7 +75,7 @@
                         <div class=" h-100 w-100 d-flex justify-content-center align-items-center">
                             <div class="input">
                                 <p>CPF:</p>
-                                <input id="inputCPF" type="text" name="txtCpf" value="<?php echo $cpf ?>" maxlength="14" onkeypress="validarCPF(event)">
+                                <input id="inputCPF" type="text" name="txtCpf" value="<?php echo $cpf ?>" maxlength="14"oninput="formatarCpf(this)">
                             </div>
                         </div>
                       </div>
@@ -102,7 +102,7 @@
                             <select name="selesctRole">
                               <option value="<?php echo $role ?>"><?php echo $role ?></option>
                               <option value="cliente">cliente</option>
-                              <option value="funcionario">Funcionario</option>
+                              <option value="funcionario">funcionario</option>
                               <option value="admin">admin</option>
                             </select>
                             </div>
@@ -159,48 +159,58 @@
 
             var nomeRegex = /^[A-Za-z ]{5,}$/;
 
-if(!nomeRegex.test(nome)){
-    const ToastRegex = document.getElementById('ToastRegex')
-    const toastBody = ToastRegex.querySelector('.toast-body');
-
-    toastBody.textContent = "Nome Inválido, Preencha seu Nome com no mínimo 5 caracteres e somente letras.";
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
-    toastBootstrap.show()
-    return false;
-}
-
-else if (!cpfRegex.test(cpf)){
-    console.log("cpf")
-    const ToastRegex = document.getElementById('ToastRegex')
-    const toastBody = ToastRegex.querySelector('.toast-body');
-
-    toastBody.textContent = "CPF Inválido, Preencha seu CPF com no máximo 11 caracteres.";
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
-    toastBootstrap.show()
-    return false;
-}
-
-else if (!emailRegex.test(email)) {
-    const ToastRegex = document.getElementById('ToastRegex')
-    const toastBody = ToastRegex.querySelector('.toast-body');
-
-    toastBody.textContent = "Email Inválido, Preencha seu Email no formato correto.";
-    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
-    toastBootstrap.show()
-    return false;
-}
- else {
-    return true;}
-}
-
-
-        function validarCPF(e) {
-            var tecla = e.which || e.keyCode;
-            if ((tecla < 48 || tecla > 57) && tecla !== 8 && tecla !== 0 && tecla !== 46 && tecla !== 45) {
-                e.preventDefault();
-            }
-        }
+        if(!nomeRegex.test(nome)){
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
         
+            toastBody.textContent = "Nome Inválido, Preencha seu Nome com no mínimo 5 caracteres e somente letras.";
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            return false;
+        }
+
+        else if (!cpfRegex.test(cpf)){
+            console.log("cpf")
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+        
+            toastBody.textContent = "CPF Inválido, Preencha seu CPF com no máximo 11 caracteres.";
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            return false;
+        }
+
+        else if (!emailRegex.test(email)) {
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+        
+            toastBody.textContent = "Email Inválido, Preencha seu Email no formato correto.";
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            return false;
+        }
+         else {
+            return true;}
+        }
+
+
+        function formatarCpf(campo) {
+                    var cpf = campo.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+                    var cpfFormatado = '';
+        
+                    if (cpf.length <= 3) {
+                        cpfFormatado = cpf;
+                    } else if (cpf.length <= 6) {
+                        cpfFormatado = cpf.substring(0, 3) + '.' + cpf.substring(3);
+                    } else if (cpf.length <= 9) {
+                        cpfFormatado = cpf.substring(0, 3) + '.' + cpf.substring(3, 6) + '.' + cpf.substring(6);
+                    } else {
+                        cpfFormatado = cpf.substring(0, 3) + '.' + cpf.substring(3, 6) + '.' + cpf.substring(6, 9) + '-' + cpf.substring(9);
+                    }
+        
+                    campo.value = cpfFormatado;
+                }
+                
 
         
     </script>

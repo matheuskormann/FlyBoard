@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Dados do usuário</title>
+        
     </head>
     <body>
 <?php
@@ -8,37 +9,36 @@
 
             $name = $_POST["txtName"];
             $cpf = $_POST["txtCpf"];
-            $login = $_POST["txtLogin"];
+            $email = $_POST["txtLogin"];
             $dataNascimento = $_POST["txtDtNasc"];
             $password = $_POST["txtPassword"];
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
             $role = "cliente";
             $userImagePath ="../imagens/padraoUser.png";
             
-            $sqlEmail = "SELECT * FROM USERS WHERE EMAIL = '$login'";
+            $sqlEmail = "SELECT * FROM USERS WHERE EMAIL = '$email'";
             $resultadoEmail = $conn->query($sqlEmail);
-        
+            
             if ($resultadoEmail->num_rows > 0) {
                 echo "<script>
-                        location.href = './cadFuncionario.php?errorEmail';
+                        location.href = './cadClientes.php?errorEmail';
                     </script>";
             } 
             $sqlCpf = "SELECT * FROM USERS WHERE CPF = '$cpf'";
             $resultadoCpf = $conn->query($sqlCpf);
             if ($resultadoCpf->num_rows > 0) {
                 echo "<script>
-                        location.href = './cadFuncionario.php?errorCpf';
+                        location.href = './cadClientes.php?errorCpf';
                     </script>";
-            }else if ($resultadoEmail->num_rows == 0 && $resultadoCpf->num_rows == 0){
-                $sql = "INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH) VALUES('$name', '$cpf', '$login', '$dataNacimento', '$hashedPassword', '$role', '$userImagePath')";
+            }else{
+                $sql = "INSERT INTO USERS (NAME, CPF, EMAIL, DATA_DE_NASCIMENTO, PASSWORD, ROLE, USERIMAGEPATH) VALUES('$name', '$cpf', '$email', '$dataNascimento', '$hashedPassword', '$role', '$userImagePath')";
                 $result = $conn->query($sql);
         
                 if ($result === TRUE) {
-                
-?>
-<script>
-                    location.href = './listUsers.php?result=3'; 
-</script>
+            ?>
+                <script>
+                    location.href = "../index/index.php"; 
+                </script>
 <?php
             }
             else {

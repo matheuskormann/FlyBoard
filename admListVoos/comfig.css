@@ -19,3 +19,6 @@
 #conteinerDadados{
   width: 295px !important;
   }
+.custom-container{
+    max-width: 500px!important;
+}
