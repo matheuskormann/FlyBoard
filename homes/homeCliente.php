@@ -12,12 +12,12 @@ $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 
 // Consulta para buscar bagagens de um usuário específico e contar o número de bagagens para cada voo
-$sql_bagagens = "SELECT B.ID_BAGAGEM, B.CODIGO_BAGAGEM, B.PESO, B.TIPO, P.NOME_PASSAGEIRO, P.VALOR, V.LOCAL_DE_ORIGEM, V.LOCAL_DE_DESTINO, V.DATA_IDA, V.DATA_CHEGADA ,  V.PORTAO_EMBARQUE, V.VOOIMAGEMPATH, COUNT(*) as QTD_BAGAGENS
+$sql_bagagens = "SELECT B.ID_BAGAGEM, B.CODIGO_BAGAGEM, B.PESO, B.TIPO, B.DESCRICAO, P.NOME_PASSAGEIRO, V.LOCAL_DE_ORIGEM, V.LOCAL_DE_DESTINO, V.DATA_IDA, V.DATA_CHEGADA ,  V.PORTAO_EMBARQUE, V.VOOIMAGEMPATH, COUNT(*) as QTD_BAGAGENS
   FROM BAGAGENS B 
   INNER JOIN PASSAGENS P ON B.FK_PASSAGENS_ID_PASSAGEM = P.ID_PASSAGEM 
   INNER JOIN VOOS V ON P.FK_VOOS_ID_VOO = V.ID_VOO 
   WHERE P.FK_USERS_ID_USER = $id
-  GROUP BY B.ID_BAGAGEM, B.CODIGO_BAGAGEM, B.PESO, B.TIPO, P.NOME_PASSAGEIRO, P.VALOR, V.LOCAL_DE_ORIGEM, V.LOCAL_DE_DESTINO, V.DATA_IDA, V.DATA_CHEGADA ,  V.PORTAO_EMBARQUE, V.VOOIMAGEMPATH
+  GROUP BY B.ID_BAGAGEM, B.CODIGO_BAGAGEM, B.PESO, B.TIPO, P.NOME_PASSAGEIRO, V.LOCAL_DE_ORIGEM, V.LOCAL_DE_DESTINO, V.DATA_IDA, V.DATA_CHEGADA ,  V.PORTAO_EMBARQUE, V.VOOIMAGEMPATH
   ORDER BY V.DATA_IDA DESC";
 $result_bagagens = $conn->query($sql_bagagens);
 
@@ -59,9 +59,28 @@ $result_viagens = $conn->query($sql_viagens);
       </button>
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <?php
+        if ($row['ROLE'] == 'admin') {
+          ?>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            clientes
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="../homes/homeFuncionario.php">funcionario</a></li>
+            <li><a class="dropdown-item" href="../homes/homeAdmin.php">admin</a></li>
+          </ul>
+        </li>
+          <?php
+        }
+        else{
+          ?>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">Clientes</a>
           </li>
+          <?php
+        }
+        ?>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Passagens
@@ -80,7 +99,7 @@ $result_viagens = $conn->query($sql_viagens);
               Bagagem
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Nova Bagagem</a></li>
+              <li><a class="dropdown-item" href="../Bagagem/addBagemCliente.php">Nova Bagagem</a></li>
               <li><a class="dropdown-item" href="#">Rastrear Bagagem</a></li>
             </ul>
           </li>
@@ -143,7 +162,9 @@ $result_viagens = $conn->query($sql_viagens);
     <h4>Minhas Bagagems: </h4>
     <div class="position-relative">
         <div class="position-absolute bottom-0 end-0">
-           <button type="button" class="btn btn-success buttomAdd" style="border-radius: 85px;"><img src="../imagens/mais.png" alt="" ></button>
+          <a href="../Bagagem/addBagemCliente.php" class="btn btn-success buttomAdd" style="border-radius: 85px;">
+             <img src="../imagens/mais.png" alt="">
+          </a>
          </div>
     </div>
     <br>
@@ -158,7 +179,7 @@ $result_viagens = $conn->query($sql_viagens);
           <div class="card-body">
 
             <h5 class="card-title"><img src="../imagens/mala-alt.png" alt="editar" style="width: 19px; height: 19px; position: relative; bottom: 2px;"> <?php echo $row["CODIGO_BAGAGEM"]; ?></h5>
-            <p class="card-text">TIPO:<?php echo $row["TIPO"];?><br>PESO:<?php echo $row["PESO"]; ?></p>
+            <p class="card-text">TIPO: <?php echo $row["TIPO"];?><br>PESO: <?php echo $row["PESO"];?><br> DESCRIÇÃO: <?php echo $row["DESCRICAO"];?><br></p>
           </div>
           <div class="card-footer">
             <a href="#" class="btn btn-primary">Mais Detalhes</a>
@@ -169,7 +190,11 @@ $result_viagens = $conn->query($sql_viagens);
       }
     } 
     else {
-       echo "Nenhuma bagagem encontrada para este usuário.";
+      ?>
+      <div class="alert alert-warning" role="alert">
+        Nenhuma bagagem encontrada para este usuário. 
+      </div>  
+      <?php
     }
     ?>
     </div>
@@ -180,7 +205,9 @@ $result_viagens = $conn->query($sql_viagens);
     <h4>Meus voos:</h4>
     <div class="position-relative">
         <div class="position-absolute bottom-0 end-0">
-           <button type="button" href="../passagem/addPasagemCliente.php" class="btn btn-success buttomAdd" style="border-radius: 85px;"><img src="../imagens/mais.png" alt="" ></button>
+          <a href="../passagem/addPasagemCliente.php" class="btn btn-success buttomAdd" style="border-radius: 85px;">
+             <img src="../imagens/mais.png" alt="">
+          </a>
         </div>
     </div>
     <br>
@@ -233,7 +260,11 @@ $result_viagens = $conn->query($sql_viagens);
       }
    
       else {
-       echo "Nenhuma viagem encontrada para este usuário.";
+        ?>
+        <div class="alert alert-warning" role="alert">
+          Nenhuma viagem encontrada para este usuário.
+        </div>
+        <?php
       }
    ?>
     </div>
@@ -321,12 +352,12 @@ $result_viagens = $conn->query($sql_viagens);
             toastBootstrap.show()
             </script>";
         } 
-        else if($result == "successDeletVoo") {
+        else if($result == "successaddPassagem") {
             echo "<script>
             const ToastRegex = document.getElementById('ToastRegex')
             const toastBody = ToastRegex.querySelector('.toast-body');
 
-            toastBody.textContent = 'Voo apagado com sucesso!';
+            toastBody.textContent = 'Bagagem adicionada com sucesso!';
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
             toastBootstrap.show()
             </script>";

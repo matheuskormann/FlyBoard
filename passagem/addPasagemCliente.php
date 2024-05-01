@@ -71,7 +71,7 @@ if ($conn) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="comfig.css">
+        <link rel="stylesheet" href="./style.css">
         <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
         <title>Voos</title>
     </head>
@@ -123,10 +123,10 @@ if ($conn) {
                         <div class="mb-3">
                             <label for="txtClasse" class="form-label">Classe:</label>
                             <select class="form-select" name="txtClasse" id="txtClasse">
-                                <option value="1">Econômica</option>
-                                <option value="2">Econômica Plus</option>
-                                <option value="3">Executiva</option>
-                                <option value="4">Primeira Classe</option>
+                                <option value="Econômica">Econômica</option>
+                                <option value="Econômica Plus">Econômica Plus</option>
+                                <option value="Executiva">Executiva</option>
+                                <option value="Primeira Classe">Primeira Classe</option>
                             </select>
                         </div> 
                         <input type="hidden" name="selectedFlightId" value="<?php echo $idVooSelected; ?>"> <!-- Campo oculto para manter o ID do voo selecionado -->
@@ -173,7 +173,11 @@ if ($conn) {
                                         echo "</tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='5'>Nenhum voo encontrado.</td></tr>";
+                                    ?>
+                                <div class="alert alert-warning" role="alert">
+                                    Nenhum voo encontrado.
+                                 </div>
+                                <?php
                                 }
                                 ?>
                             </tbody>

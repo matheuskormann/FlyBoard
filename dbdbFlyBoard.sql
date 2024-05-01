@@ -94,22 +94,5 @@ VALUES
     ("VOO141", "Aracaju", "Teresina", "2024-05-02 12:00:00", "2024-05-02 14:30:00", "Gate 6", "Airbus A320", "A320-129", "LATAM", "../imagens/padraoVoos.jpeg"),
     ("VOO142", "Teresina", "João Pessoa", "2024-05-03 09:00:00", "2024-05-03 11:30:00", "Gate 5", "Boeing 737", "B737-462", "GOL", "../imagens/padraoVoos.jpeg");
 
--- Inserção de uma nova viagem para o usuário com ID 1
-INSERT INTO PASSAGENS (CODIGO_PASSAGEM, NOME_PASSAGEIRO, CPF_PASSAGEIRO, VALOR, CLASSE, FK_USERS_ID_USER, FK_VOOS_ID_VOO)
-VALUES ('1', 'Fulano de Tal', '123.456.789-10', '500.00', 'Econômica', '1', '1');
 
-INSERT INTO BAGAGENS (CODIGO_BAGAGEM, PESO, TIPO, DESCRICAO, STATUS_BAGAGEM, FK_PASSAGENS_ID_PASSAGEM)
-VALUES ('BAG124', '15kg', 'Mala de Mão', 'Livros e eletrônicos', 'Em Trânsito', 
-        (SELECT ID_PASSAGEM FROM PASSAGENS WHERE FK_USERS_ID_USER = 1 LIMIT 1)),
-       ('BAG125', '30kg', 'Mala de Grande Porte', 'Roupas e objetos pessoais', 'Em Trânsito', 
-        (SELECT ID_PASSAGEM FROM PASSAGENS WHERE FK_USERS_ID_USER = 1 LIMIT 1)),
-       ('BAG126', '10kg', 'Mala de Mão', 'Documentos e laptop', 'Em Trânsito', 
-        (SELECT ID_PASSAGEM FROM PASSAGENS WHERE FK_USERS_ID_USER = 1 LIMIT 1)),
-       ('BAG127', '25kg', 'Mala de Grande Porte', 'Artigos de viagem', 'Em Trânsito', 
-        (SELECT ID_PASSAGEM FROM PASSAGENS WHERE FK_USERS_ID_USER = 1 LIMIT 1)),
-       ('BAG128', '18kg', 'Mala de Mão', 'Medicamentos e produtos de higiene', 'Em Trânsito', 
-        (SELECT ID_PASSAGEM FROM PASSAGENS WHERE FK_USERS_ID_USER = 1 LIMIT 1)),
-       ('BAG129', '22kg', 'Mala de Grande Porte', 'Presentes e lembranças', 'Em Trânsito', 
-        (SELECT ID_PASSAGEM FROM PASSAGENS WHERE FK_USERS_ID_USER = 1 LIMIT 1));
-     
      
