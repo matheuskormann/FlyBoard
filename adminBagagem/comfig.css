@@ -1,0 +1,24 @@
+#botaoVoltar{
+    margin-top: 15px;
+    margin-left: 25px;
+}
+#comtImgUser{
+    width: 200px; /* largura desejada */
+    height: 200px; /* altura desejada */
+    border-radius: 299px;
+    overflow: hidden;
+    position: relative;
+    left: 165px;
+}
+#userImg{
+
+	width: 100%; /* para garantir que a imagem ocupe toda a largura da div */
+  height: 100%; /* para garantir que a imagem ocupe toda a altura da div */
+  object-fit: cover;
+}
+#conteinerDadados{
+  width: 295px !important;
+  }
+.custom-container{
+    max-width: 500px!important;
+}

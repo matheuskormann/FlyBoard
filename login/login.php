@@ -59,13 +59,24 @@
                 if (password_verify($password, $hashedPassword)) {
                     header("Location:   ../homes/collectorHomes.php");
                     session_start();
-                    $_SESSION["id"] = intval($row["ID_USER"]);
-                    $_SESSION["role"] = intval($row["ROLE"]);
+                    $_SESSION["id"] = $row["ID_USER"];
+                    $_SESSION["role"] = $row["ROLE"];
                 }
                 else {
     
     ?>
       <script>
+        
+                $(function () {
+                    $('#inputLogin').val('<?php echo $email; ?>');
+                    $('#inputPasswoed').popover({
+                        trigger: 'focus',
+                        placement: 'right',
+                        content: 'Senha incorreta. Tente novamente.',
+                        html: true
+                    });
+                    $('#inputPasswoed').focus();
+                });
             $(function () {
                     $('#inputLogin').val('<?php echo $email; ?>');
                     $('#inputPasswoed').popover({

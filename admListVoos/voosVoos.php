@@ -6,6 +6,13 @@ if (!isset($_SESSION["id"])) {
     header("Location: ../login/login.php");
     exit; 
 }
+else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
+    echo "<script>
+            alert('Você não tem permissão!');
+            window.history.back();
+          </script>";
+    exit; 
+}
 $id = $_GET["id"];
 $sql = "SELECT ID_VOO, CODIGO_VOO,LOCAL_DE_ORIGEM, LOCAL_DE_DESTINO, DATA_IDA, DATA_CHEGADA, PORTAO_EMBARQUE, AERONAVE, CODIGO_AERONAVE, OPERADORA, VOOIMAGEMPATH FROM VOOS WHERE ID_VOO = $id";
 $result = $conn->query($sql);
@@ -24,8 +31,8 @@ if ($result->num_rows > 0) {
     }
 }
 ?>
-        <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

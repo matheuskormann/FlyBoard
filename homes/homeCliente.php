@@ -43,7 +43,6 @@ $result_viagens = $conn->query($sql_viagens);
   <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
 </head>
 
@@ -86,7 +85,6 @@ $result_viagens = $conn->query($sql_viagens);
               Passagens
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Minhas passagens</a></li>
               <li><a class="dropdown-item" href="../passagem/addPasagemCliente.php">Adicionar passagem</a></li>
               <li>
                 <hr class="dropdown-divider">
@@ -100,6 +98,9 @@ $result_viagens = $conn->query($sql_viagens);
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="../Bagagem/addBagemCliente.php">Nova Bagagem</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
               <li><a class="dropdown-item" href="#">Rastrear Bagagem</a></li>
             </ul>
           </li>
@@ -159,46 +160,97 @@ $result_viagens = $conn->query($sql_viagens);
   <br>
   <br>
   <div class="container">
-    <h4>Minhas Bagagems: </h4>
+  <div class="container">
+    <h4>Minhas Bagagens:</h4>
     <div class="position-relative">
         <div class="position-absolute bottom-0 end-0">
-          <a href="../Bagagem/addBagemCliente.php" class="btn btn-success buttomAdd" style="border-radius: 85px;">
-             <img src="../imagens/mais.png" alt="">
-          </a>
-         </div>
+            <a href="../Bagagem/addBagagemCliente.php" class="btn btn-success buttomAdd" style="border-radius: 85px;">
+                <img src="../imagens/mais.png" alt="">
+            </a>
+        </div>
     </div>
     <br>
     <div class="boxcardCliente">
-    <?php
-    if ($result_bagagens->num_rows > 0) {
-      // Exibe os dados das bagagens
-      while($row = $result_bagagens->fetch_assoc()) {
+        <?php
+        if ($result_bagagens->num_rows > 0) {
+            // Exibe os dados das bagagens
+            while ($row = $result_bagagens->fetch_assoc()) {
+                ?>
+                <div class="col">
+                    <div class="card h-100 cardCliente">
+                        <div class="card-body">
+                            <h5 class="card-title"><img src="../imagens/mala-alt.png" alt="editar" style="width: 19px; height: 19px; position: relative; bottom: 2px;"> <?php echo $row["CODIGO_BAGAGEM"]; ?></h5>
+                            <p class="card-text">TIPO: <?php echo $row["TIPO"]; ?><br>PESO: <?php echo $row["PESO"]; ?><br>
+                                DESCRIÇÃO: <?php echo $row["DESCRICAO"]; ?><br></p>
+                        </div>
+                        <div class="card-footer">
+                          <!-- Botão "Mais Detalhes" que abre o modal -->
+                          <a type="button" class="btn btn-primary" href='../adminBagagem/maisBagagem.php?id=<?php echo $row["ID_BAGAGEM"]; ?>'>Mais Detalhes </a>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+        } else {
+            ?>
+            <div class="alert alert-warning" role="alert">
+                Nenhuma bagagem encontrada para este usuário.
+            </div>
+            <?php
+        }
         ?>
-        <div class="col">
-        <div class="card h-100 cardCliente">
-          <div class="card-body">
+    </div>
+</div>
 
-            <h5 class="card-title"><img src="../imagens/mala-alt.png" alt="editar" style="width: 19px; height: 19px; position: relative; bottom: 2px;"> <?php echo $row["CODIGO_BAGAGEM"]; ?></h5>
-            <p class="card-text">TIPO: <?php echo $row["TIPO"];?><br>PESO: <?php echo $row["PESO"];?><br> DESCRIÇÃO: <?php echo $row["DESCRICAO"];?><br></p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Mais Detalhes</a>
-          </div>
+
+
+  <!-- Modal para exibir as informações da bagagem -->
+  <div class="modal fade" id="bagagemModal" tabindex="-1" role="dialog" aria-labelledby="bagagemModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bagagemModalLabel">Detalhes da Bagagem</h5>
+        </div>
+        <div class="modal-body" id="bagagemInfo">
+          <!-- Aqui serão exibidas as informações da bagagem -->
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">fechar</button>
         </div>
       </div>
-      <?php
-      }
-    } 
-    else {
-      ?>
-      <div class="alert alert-warning" role="alert">
-        Nenhuma bagagem encontrada para este usuário. 
-      </div>  
-      <?php
-    }
-    ?>
     </div>
   </div>
+
+
+  
+  <!-- Função JavaScript para abrir o modal e carregar as informações da bagagem -->
+  <script>
+            function abrirModalBagagem(codigoBagagem) {
+                $.ajax({
+                    url: '../sistem/getBagagemInfo.php', // O arquivo PHP que irá processar a requisição e retornar as informações da bagagem
+                    type: 'GET',
+                    data: {codigoBagagem: codigoBagagem}, // Passa o código da bagagem para o arquivo PHP
+                    dataType: 'json',
+                    success: function(response) {
+                        // Preenche o modal com as informações da bagagem
+                        var modalContent = '';
+                        modalContent += '<p>Código da Bagagem: ' + response.bagagem.CODIGO_BAGAGEM + '</p>';
+                        modalContent += '<p>Descrição: ' + response.bagagem.DESCRICAO + '</p>';
+                        modalContent += '<p>Peso: ' + response.bagagem.PESO + '</p>';
+                        modalContent += '<p>Nome do Passageiro: ' + response.passagem.NOME_PASSAGEIRO + '</p>';
+                        modalContent += '<p>CPF do Passageiro: ' + response.passagem.CPF_PASSAGEIRO + '</p>';
+                        modalContent += '<div class="alert alert-secondary" role="alert">Status da Bagagem: ' + response.bagagem.STATUS_BAGAGEM + '</div>';
+                        $('#bagagemInfo').html(modalContent);
+                        $('#bagagemModal').modal('show'); // Abre o modal
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Erro na requisição AJAX: ' + error);
+                    }
+                });
+            }
+        </script>
+
+
   <hr>
   <br>
   <div class="container">
@@ -375,7 +427,6 @@ $result_viagens = $conn->query($sql_viagens);
     }
 
     ?>
-
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>

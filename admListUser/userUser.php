@@ -6,9 +6,9 @@ if (!isset($_SESSION["id"])) {
     header("Location: ../login/login.php");
     exit; 
 }
-else if ($_SESSION["role"] == "admin") {
+else if ($_SESSION["role"] != "admin"|| $_SESSION["id"] != $_GET["id"]) {
     echo "<script>
-            window.location.href = '../index/index.html';
+            window.history.back();
           </script>";
     exit; 
 }

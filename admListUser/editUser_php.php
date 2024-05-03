@@ -6,9 +6,9 @@
         header("Location: ../login/login.php");
         exit; 
     }
-    else if ($_SESSION["role"] == "admin") {
+    else if ($_SESSION["role"] != "admin") {
         echo "<script>
-                window.location.href = '../index/index.html';
+                window.history.back();
               </script>";
         exit; 
     }

@@ -6,10 +6,11 @@
         header("Location: ../login/login.php");
         exit; 
     }
-    else if ($_SESSION["role"] == "admin") {
+    
+    else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
         echo "<script>
                 alert('Você não tem permissão!');
-                window.location.href = '../index/index.html';
+                window.history.back();
               </script>";
         exit; 
     }

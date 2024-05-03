@@ -12,10 +12,10 @@ if (!isset($_SESSION["id"])) {
 }
 
 // Verifica se o usuário não é administrador
-if ($_SESSION["role"] == "admin") {
+else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
     echo "<script>
-            alert('Você não tem permissão para acessar esta página!');
-            window.location.href = '../index/index.html';
+            alert('Você não tem permissão!');
+            window.history.back();
           </script>";
     exit; 
 }

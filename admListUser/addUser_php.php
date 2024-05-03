@@ -5,10 +5,10 @@ session_start();
 if (!isset($_SESSION["id"])) {
     header("Location: ../login/login.php");
     exit;
-} else if ($_SESSION["role"] == "admin") {
+} else if ($_SESSION["role"] != "admin") {
     echo "<script>
-                window.location.href = '../index/index.html';
-              </script>";
+                window.history.back();
+           </script>";
     exit;
 }
 ?>

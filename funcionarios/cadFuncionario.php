@@ -1,3 +1,18 @@
+<?php
+include('../connections/connection.php');
+
+session_start();
+if (!isset($_SESSION["id"])) {
+    header("Location: ../login/login.php");
+    exit; 
+} 
+else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
+    echo "<script>
+            alert('Você não tem permissão!');
+            window.history.back();
+          </script>";
+    exit; 
+}
 <!DOCTYPE html>
 <html lang="pt-br">
 

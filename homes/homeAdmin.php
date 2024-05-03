@@ -4,12 +4,13 @@ include('../connections/connection.php');
 session_start();
 if (!isset($_SESSION["id"])) {
   header("Location: ../login/login.php  ");
-} else if ($_SESSION["role"] == "admin") {
-?>
-  <script>
-    header("Location: ../index/index.php ");
-  </script>
-<?php
+}
+else if ($_SESSION["role"] != "admin") {
+    echo "<script>
+            alert('Você não tem permissão!');
+            window.history.back();
+          </script>";
+    exit; 
 }
 
 $id = $_SESSION["id"];

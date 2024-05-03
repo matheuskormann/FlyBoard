@@ -3,13 +3,15 @@ include('../connections/connection.php');
 
 session_start();
 if (!isset($_SESSION["id"])) {
-  header("Location: ../login/login.php ");
-} else if ($_SESSION["role"] == "funcionario" || $_SESSION["role"] == "admin") {
-?>
-  <script>
-    header("Location: ../index/index.php ");
-  </script>
-<?php
+    header("Location: ../login/login.php");
+    exit; 
+} 
+else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
+    echo "<script>
+            alert('Você não tem permissão!');
+            window.history.back();
+          </script>";
+    exit; 
 }
 
 $id = $_SESSION["id"];
@@ -81,16 +83,12 @@ $row = $result->fetch_assoc();
               Bagagem
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">checkpoint Bag.</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">cad.P Bagagem</a></li>
+              <li><a class="dropdown-item" href="../adminBagagem/addBagemAdmin.php">cad.P Bagagem</a></li>
               <li><a class="dropdown-item" href="#">loc. Bagagem</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">List Bagagem</a></li>
+              <li><a class="dropdown-item" href="../adminBagagem/listBagagens.php">List Bagagem</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -98,7 +96,7 @@ $row = $result->fetch_assoc();
               Clientes
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">List Clientes</a></li>
+              <li><a class="dropdown-item" href="../admListUser/listUsers.php">List Clientes</a></li>
               <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li> -->
             </ul>
