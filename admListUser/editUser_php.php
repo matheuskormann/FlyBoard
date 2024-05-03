@@ -8,7 +8,7 @@
     }
     else if ($_SESSION["role"] != "admin") {
         echo "<script>
-                window.history.back();
+              location.href = './listUsers.php?result=5';
               </script>";
         exit; 
     }

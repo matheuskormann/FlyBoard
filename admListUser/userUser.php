@@ -6,7 +6,7 @@ if (!isset($_SESSION["id"])) {
     header("Location: ../login/login.php");
     exit; 
 }
-else if ($_SESSION["role"] != "admin"|| $_SESSION["id"] != $_GET["id"]) {
+else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
     echo "<script>
             window.history.back();
           </script>";

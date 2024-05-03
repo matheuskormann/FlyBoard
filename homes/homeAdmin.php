@@ -7,8 +7,7 @@ if (!isset($_SESSION["id"])) {
 }
 else if ($_SESSION["role"] != "admin") {
     echo "<script>
-            alert('Você não tem permissão!');
-            window.history.back();
+            location.href = '../homes/collectorHomes.php?result=semPermissao';
           </script>";
     exit; 
 }
@@ -18,17 +17,29 @@ $sql = "SELECT NAME ,EMAIL , ROLE, USERIMAGEPATH FROM USERS WHERE ID_USER = $id"
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 ?>
-<html lang="pt-br">
+<!DOCTYPE html>
+<html lang="pt-br"> 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="menu.css">
-  <title>Home</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="../imagens/flyboardLOGOremovido.ico" type="image/x-icon">
+    <title>Home</title>
 </head>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="ToastRegex" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    </html>
 <body>
 
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -114,8 +125,22 @@ $row = $result->fetch_assoc();
       window.location.href = '../users/logout.php';
     }
   </script>
-  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  <?php
+      if (isset($_GET["result"])) {
+          $result = $_GET["result"];
+          if($result == "erro") {
+            echo "<script>
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+            toastBody.textContent = 'algo deu errado!';
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            </script>";
+        } 
+      }
+
+      ?>
   
 </body>
 

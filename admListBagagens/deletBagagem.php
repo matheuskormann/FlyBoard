@@ -8,26 +8,26 @@
     }
     else if ($_SESSION["role"] != "admin") {
         echo "<script>
-                  location.href = '../admListVoos/listVoos.php?result=semPermissao';
+               location.href = './listBagagens.php?result=semPermissao';
               </script>";
         exit; 
     }
  else{
     $id = $_GET["id"];
-    $sql = "DELETE FROM VOOS WHERE ID_VOO = $id";
+    $sql = "DELETE FROM BAGAGENS WHERE ID_BAGAGEM = $id";
     $result = $conn->query($sql);
 
     if ($result === TRUE) {
 ?>
 <script>
-location.href = './listVoos.php?result=successDeletVoo';
+location.href = './listBagagens.php?result=successDeletBagagem';
 </script>
 <?php
     }
     else {
 ?>
 <script>
-location.href = './listVoos.php?result=erro';
+location.href = './listBagagens.php?result=erro';
 </script>
 <?php
     }

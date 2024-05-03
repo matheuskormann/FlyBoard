@@ -11,15 +11,45 @@ $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $role = $row["ROLE"];
 
-?>
-<?php
+
+
 if ($role == "cliente") {
-    header("Location: ./homeCliente.php");
+    if (isset($_GET["result"])) {
+        $result = $_GET["result"];
+        if ($result == 'semPermissao') {
+            header("Location: ./homeCliente.php?result=semPermissao");
+        }
+        else{
+            header("Location: ./homeCliente.php?result=erro");
+        }
+    }
+    else{
+        header("Location: ./homeCliente.php");
+    }
 } elseif ($role == "funcionario") {
-    header("Location: ./homeFuncionario.php");
+    if (isset($_GET["result"])) {
+        $result = $_GET["result"];
+        if ($result == 'semPermissao') {
+            header("Location: ./homeFuncionario.php?result=semPermissao");
+        }
+        else{
+            header("Location: ./homeFuncionario.php?result=erro");
+        }
+    }
+    else{
+        header("Location: ./homeFuncionario.php");
+    }   
 } elseif ($role == "admin") {
+    if (isset($_GET["result"])) {
+        $result = $_GET["result"];
+        if ($result == 'erro') {
+            header("Location: ./homeAdmin.php?result=erro");
+        }
+    }
+    else{
     header("Location: ./homeAdmin.php");
-} else {
-    header("Location: ../index/index.php");
+    }
 }
-?>
+else{
+    header("Location: ../login/login.php?result=erro");
+}

@@ -8,8 +8,7 @@ if (!isset($_SESSION["id"])) {
 }   
 else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
     echo "<script>
-            alert('Você não tem permissão!');
-            window.history.back();
+           location.href = '../homes/collectorHomes.php?result=semPermissao';
           </script>";
     exit; 
 }
@@ -101,6 +100,7 @@ if (isset($_POST['atualizarDados'])) {
     </div>
     <div class="col-6   ">
         <h1>Dados:</h1>
+        <form method="POST">
             <table class="table  table-borderless" id="conteinerDadados">
                 <tr>
                   <th class="" scope="row">codigo Bagagem:</th>
@@ -117,7 +117,7 @@ if (isset($_POST['atualizarDados'])) {
             </table>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Peso:</label>
-                <input type="txt" name="txtPeso" class="form-control" id="exampleFormControlInput2" value="<?php echo $TIPO ?>">
+                <input type="txt" name="txtPeso" class="form-control" id="exampleFormControlInput2" value="<?php echo $PESO ?>">
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Descriçao:</label>
@@ -126,6 +126,7 @@ if (isset($_POST['atualizarDados'])) {
             <div class="mb-3">
                 <label for="txtTipo" class="form-label">TIPO</label>
                 <select class="form-select" name="txtTipo" id="txtTipo" value="<?php echo $TIPO ?>">
+                    <option selected><?php echo $TIPO ?></option>
                     <option value="Bagagem de mão">Bagagem de mão </option>
                     <option value="Bagagem despachad">Bagagem despachada</option>
                     <option value="Bagagem despachada fragil">Bagagem despachada fragil</option>
@@ -138,6 +139,7 @@ if (isset($_POST['atualizarDados'])) {
             <div class="mb-3">
                 <label for="txtStatusBagagem" class="form-label">Status</label>
                 <select class="form-select" name="txtStatusBagagem" id="txtStatusBagagem" value="<?php echo $STATUS_BAGAGEM ?>">
+                    <option selected><?php echo $STATUS_BAGAGEM ?></option>
                     <option value="cadastrada">cadastrada</option>
                     <option value="Despachada">Despachada</option>
                     <option value="Passando pela segurança">Passando pela segurança</option>
@@ -151,7 +153,7 @@ if (isset($_POST['atualizarDados'])) {
                 </select>
             </div> 
             <button name="atualizarDados" class="btn btn-primary mb-3" type="submit">Salvar</button>
-        </form>
+        </form> 
     </div>
     <div class="col">
     </div>

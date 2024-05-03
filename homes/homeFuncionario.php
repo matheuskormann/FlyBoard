@@ -8,8 +8,7 @@ if (!isset($_SESSION["id"])) {
 } 
 else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
     echo "<script>
-            alert('Você não tem permissão!');
-            window.history.back();
+            location.href = '../homes/collectorHomes.php?result=semPermissao';
           </script>";
     exit; 
 }
@@ -18,19 +17,31 @@ $id = $_SESSION["id"];
 $sql = "SELECT NAME ,EMAIL , ROLE, USERIMAGEPATH FROM USERS WHERE ID_USER = $id";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
-?>
+?> 
+
 <!DOCTYPE html>
-<html lang="pt-br">
-
+<html lang="pt-br"> 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="menu.css">
-  <title>Home</title>
-  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="../imagens/flyboardLOGOremovido.ico" type="image/x-icon">
+    <title>Home</title>
 </head>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+            <div id="ToastRegex" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
 
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    </html>
 <body>
 
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -83,12 +94,12 @@ $row = $result->fetch_assoc();
               Bagagem
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../adminBagagem/addBagemAdmin.php">cad.P Bagagem</a></li>
+              <li><a class="dropdown-item" href="../admListBagagens/addBagemAdmin.php">cad.P Bagagem</a></li>
               <li><a class="dropdown-item" href="#">loc. Bagagem</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="../adminBagagem/listBagagens.php">List Bagagem</a></li>
+              <li><a class="dropdown-item" href="../admListBagagens/listBagagens.php">List Bagagem</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -101,6 +112,14 @@ $row = $result->fetch_assoc();
                 <li><a class="dropdown-item" href="#">Something else here</a></li> -->
             </ul>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Passagens
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="../admListPassagens/listPassagem.php">List Passagens</a></li>
+            </ul>
+          </li>
         </ul>
         </ul>
         <li class="nav-item dropdown  d-flex">
@@ -110,7 +129,7 @@ $row = $result->fetch_assoc();
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <?php echo $row['NAME'] ?> </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="../users/comfig.php">configurações</a></li>
-            <li><a class="dropdown-item" onclick="logout()">logout</a></li>
+            <li><a class="dropdown-item" onclick="showModal()">Sair</a></li>
           </ul>
         </li>
         </ul>
@@ -121,17 +140,65 @@ $row = $result->fetch_assoc();
 
 
 
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="labelHeader" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body">
+          <h5>Tem certeza que deseja sair do sistema?</h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" onclick="sair()">Sim, sair</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
 
   <script>
-    function logout() {
-      if (confirm('Tem certeza que deseja fazer logout?')) {
-        window.location.href = '../users/logout.php';
-      }
+  function showModal() {
+      $('#modal').modal('show');
     }
-  </script>
-  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    function sair() {
+      window.location.href = '../users/logout.php';
+    }
+  </script>   
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="semPermissao" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          Você não tem permissão para isso! 
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+  <?php
+      if (isset($_GET["result"])) {
+          $result = $_GET["result"];
+          if ($result == 'semPermissao') {
+            echo "<script>
+            const semPermissao = document.getElementById('semPermissao')
+    
+            const Bootstrap = bootstrap.Toast.getOrCreateInstance(semPermissao)
+            Bootstrap.show()
+                  </script>";
+        }
+        else if($result == "erro") {
+            echo "<script>
+            const ToastRegex = document.getElementById('ToastRegex')
+            const toastBody = ToastRegex.querySelector('.toast-body');
+            toastBody.textContent = 'algo deu errado!';
+            const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
+            toastBootstrap.show()
+            </script>";
+        } 
+      }
+
+      ?>
+ 
 </body>
 
 </html>

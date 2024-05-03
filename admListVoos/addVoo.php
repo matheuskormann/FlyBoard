@@ -8,8 +8,7 @@ if (!isset($_SESSION["id"])) {
 } 
 else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
     echo "<script>
-            alert('Você não tem permissão!');
-            window.history.back();
+              location.href = '../admListVoos/listVoos.php?result=semPermissao';
           </script>";
     exit; 
 }  

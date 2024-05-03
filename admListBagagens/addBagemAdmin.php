@@ -8,8 +8,7 @@ if (!isset($_SESSION["id"])) {
 } 
 else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
     echo "<script>
-            alert('Você não tem permissão!');
-            window.history.back();
+          location.href = '../homes/collectorHomes.php?result=semPermissao';
           </script>";
     exit; 
 }
@@ -56,10 +55,10 @@ if(isset($_POST['selectedPassagemId'])) {
     $result_insert_bagagem = $conn->query($sql_insert_bagagem);
 
     if ($result_insert_bagagem === TRUE) {
-        header("Location: ../homes/homeCliente.php?result=successaddPassagem");
+        header("Location: ./listBagagens.php?result=successAddBagagem");
         exit;
     } else {
-        header("Location: ../homes/homeCliente.php?result=erro");
+        header("Location: ./listBagagens.php?result=erro");
         exit;
     }
 }

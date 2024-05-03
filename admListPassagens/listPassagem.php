@@ -14,23 +14,21 @@ if (!isset($_SESSION["id"])) {
 // Verifica se o usuário não é administrador
 else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
     echo "<script>
-            alert('Você não tem permissão!');
-            window.history.back();
+         location.href = '../homes/collectorHomes.php?result=semPermissao';
           </script>";
     exit; 
 }
-// Consulta SQL para obter voos da tabela VOOS
-$sql = "SELECT B.*, U.EMAIL, P.NOME_PASSAGEIRO, V.CODIGO_VOO
-        FROM BAGAGENS AS B
-        JOIN PASSAGENS AS P ON B.FK_PASSAGENS_ID_PASSAGEM = P.ID_PASSAGEM
+// -- Consulta SQL para obter todas as passagens juntamente com os dados do voo associado
+$sql = "SELECT P.*, U.EMAIL, V.*
+        FROM PASSAGENS AS P
         JOIN USERS AS U ON P.FK_USERS_ID_USER = U.ID_USER
-        JOIN VOOS AS V ON P.FK_VOOS_ID_VOO = V.ID_VOO;";
+        JOIN VOOS AS V ON P.FK_VOOS_ID_VOO = V.ID_VOO";
 $result = $conn->query($sql);
 
-$sql_num_bagagens = "SELECT COUNT(*) AS total FROM BAGAGENS";
-$result_num_bagagens = $conn->query($sql_num_bagagens);
-$row_num_bagagens = $result_num_bagagens->fetch_assoc();
-$total_bagagens = $row_num_bagagens['total'];
+$sql_num_passagens = "SELECT COUNT(*) AS total FROM PASSAGENS";
+$result_num_passagens = $conn->query($sql_num_passagens);
+$row_num_passagens = $result_num_passagens->fetch_assoc();
+$total_passagens = $row_num_passagens['total'];
 
 if (isset($_POST['search'])) {
     $search = $conn->real_escape_string($_POST['search']);
@@ -40,10 +38,11 @@ if (isset($_POST['search'])) {
                             JOIN PASSAGENS P ON B.FK_PASSAGENS_ID_PASSAGEM = P.ID_PASSAGEM
                             JOIN USERS U ON P.FK_USERS_ID_USER = U.ID_USER
                             JOIN VOOS V ON P.FK_VOOS_ID_VOO = V.ID_VOO
-                            WHERE B.CODIGO_BAGAGEM LIKE '%$search%'
-                            OR U.EMAIL LIKE '%$search%'
+                            WHERE P.CODIGO_PASSAGEM LIKE '%$search%'
                             OR P.NOME_PASSAGEIRO LIKE '%$search%'
-                            OR V.CODIGO_VOO LIKE '%$search%'";
+                            OR P.CPF_PASSAGEIRO LIKE '%$search%'
+                            OR V.LOCAL_DE_ORIGEM LIKE '%$search%'
+                            OR V.LOCAL_DE_DESTINO LIKE '%$search%'";
     $result_bagagens = $conn->query($sql_search_bagagens);
 }
 
@@ -57,7 +56,7 @@ if (isset($_POST['search'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="comfig.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <title>voos</title>
+    <title>List Passagens</title>
 </head>
 <body>
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
@@ -82,17 +81,17 @@ if (isset($_POST['search'])) {
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active">Lista de Voos</a>
+                        <a class="nav-link active">Lista de Passagens</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./addBagemAdmin.php" role="button">
-                            Adicionar Voo
+                        <a class="nav-link" href="./addPassagemAdmin.php" role="button">
+                            Adicionar Passagem
                         </a>
                     </li>
-                </ul>
+                </ul>   
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown d-flex">
-                        <a class="nav-link">Número de Voos cadastrados: <?php echo $total_bagagens; ?></a>
+                        <a class="nav-link">Número de Passagem cadastradoa: <?php echo $total_passagens; ?></a>
                     </li>
                 </ul>
             </div>
@@ -101,27 +100,28 @@ if (isset($_POST['search'])) {
 
     <!-- Botão de voltar -->
     <div id="containerButton">
-        <a id="botaoVoltar" type="button" class="btn btn-light" href="../homes/homeAdmin.php">
+        <a id="botaoVoltar" type="button" class="btn btn-light" href="../homes/collectorHomes.php">
             <img src="../imagens/iconVoltar.png" alt="voltarHome" style="width: 40px; height: 40px">
         </a>
     </div>
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="mb-3">
         <div class="input-group container">
-            <input type="text" class="form-control" placeholder="Buscar por Codigo do Voo, Destino, Operadoura ou Data de ida" name="search">
+            <input type="text" class="form-control" placeholder="Buscar por Codigo da Passagem, Nome ou CPF do passageuiro, Origem e Destino" name="search">
             <button class="btn btn-outline-primary" type="submit">Buscar</button>
         </div>
     </form>
 
-        <!-- Tabela de voos -->
+
         <div class="container">
         <table id="tabela-voos" class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th scope="col">Codigo Bagagem</th>
-                    <th scope="col">Peso</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Email Usuario</th>
+                    <th scope="col">Codigo Passagem</th>
                     <th scope="col">Nome Passageiro</th>
+                    <th scope="col">CPF Passsageiro</th>
+                    <th scope="col">Email Usuario</th>
+                    <th scope="col">Destino</th>
+                    <th scope="col">Codigo Voo</th>
                     <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -132,17 +132,18 @@ if (isset($_POST['search'])) {
                         while ($row = $result->fetch_assoc()) {
                 ?>
                             <tr>
-                                <td><a href="./maisBagagem.php?id= <?php echo $row['ID_BAGAGEM']; ?>"><img src="../imagens/mala-alt.png" alt="editar" style="width: 17px; height: 17px; position: relative; bottom: 2px;"> : <?php echo $row["CODIGO_BAGAGEM"]; ?></a></td>
-                                <td><?php echo $row["PESO"]; ?></td>
-                                <td><?php echo $row["TIPO"]; ?></td>
-                                <td><?php echo $row["EMAIL"]; ?></td>
+                                <td><a href="./maisBagagem.php?id= <?php echo $row['ID_PASSAGEM']; ?>"><img src="../imagens/passagem-aerea.png" alt="editar" style="width: 19px; height: 19px; position: relative; bottom: 2px;"> : <?php echo $row["CODIGO_PASSAGEM"]; ?></a></td>
                                 <td><?php echo $row["NOME_PASSAGEIRO"]; ?></td>
+                                <td><?php echo $row["CPF_PASSAGEIRO"]; ?></td>
+                                <td><?php echo $row["EMAIL"]; ?></td>
+                                <td><?php echo $row["CLASSE"]; ?></td>
+                                <td><?php echo $row["CODIGO_VOO"]; ?></td>
                                 <!-- Ações: Editar e Excluir -->
                                 <td>
-                                    <a href="./editBagagem.php?id=<?php echo $row['ID_BAGAGEM']; ?>">
+                                    <a href="./editPassagem.php?id=<?php echo $row['ID_PASSAGEM']; ?>">
                                         <img src="../imagens/editar.png" alt="editar" style="width: 15px; height: 15px;">
                                     </a>
-                                    <a href="#" data-voo-id="<?php echo $row['ID_BAGAGEM']; ?>" onclick="showModal(this)">
+                                    <a href="#" data-Bagagem-id="<?php echo $row['ID_PASSAGEM']; ?>" onclick="showModal(<?php echo $row['ID_PASSAGEM']; ?>)">
                                         <img src="../imagens/lixo.png" alt="excluir" style="width: 15px; height: 15px;">
                                     </a>
                                 </td>
@@ -160,7 +161,7 @@ if (isset($_POST['search'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
-                    <h5>Deseja excluir o voo?</h5>
+                    <h5>Deseja excluir essa Passagem?</h5>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -170,23 +171,36 @@ if (isset($_POST['search'])) {
         </div>
     </div>
 
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="semPermissao" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        Você não tem permissão para isso! 
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
     <!-- Scripts -->
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        let vooIdParaExcluir;
+        let BagagemIdParaExcluir;
 
         // Função para abrir o modal e definir o ID do voo a ser excluído
         function showModal(element) {
-            vooIdParaExcluir = $(element).data('voo-id');
+            BagagemIdParaExcluir = element
+            console.log(BagagemIdParaExcluir); // Move the console.log statement here
             $('#modal').modal('show');
         }
 
         // Função para excluir o voo
         function excluirVoo() {
-            window.location.href = "./deletVoo.php?id=" + vooIdParaExcluir;
+            window.location.href = "./deletPassagem.php?id=" + BagagemIdParaExcluir;
         }
+        
     </script>
 
     <?php
@@ -202,22 +216,22 @@ if (isset($_POST['search'])) {
             toastBootstrap.show()
             </script>";
         } 
-        else if($result == "successAddVoo") {
+        else if($result == "successAddPassagem") {
             echo "<script>
             const ToastRegex = document.getElementById('ToastRegex')
             const toastBody = ToastRegex.querySelector('.toast-body');
 
-            toastBody.textContent = 'Voo adicionad com sucesso!';
+            toastBody.textContent = 'Passagem adicionad com sucesso!';
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
             toastBootstrap.show()
             </script>";
         } 
-        else if($result == "successDeletVoo") {
+        else if($result == "successDelete") {
             echo "<script>
             const ToastRegex = document.getElementById('ToastRegex')
             const toastBody = ToastRegex.querySelector('.toast-body');
 
-            toastBody.textContent = 'Voo apagado com sucesso!';
+            toastBody.textContent = 'Passagem apagado com sucesso!';
             const toastBootstrap = bootstrap.Toast.getOrCreateInstance(ToastRegex)
             toastBootstrap.show()
             </script>";
@@ -232,6 +246,14 @@ if (isset($_POST['search'])) {
             toastBootstrap.show()
             </script>";
         } 
+        else if ($result == 'semPermissao') {
+            echo "<script>
+            const semPermissao = document.getElementById('semPermissao')
+    
+            const Bootstrap = bootstrap.Toast.getOrCreateInstance(semPermissao)
+            Bootstrap.show()
+                  </script>";
+        }
     }
 
     ?>

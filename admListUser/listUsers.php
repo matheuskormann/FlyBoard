@@ -9,8 +9,7 @@
     
     else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
         echo "<script>
-                alert('Você não tem permissão!');
-                window.history.back();
+               location.href = '../homes/collectorHomes.php?result=semPermissao';
               </script>";
         exit; 
     }
@@ -103,7 +102,7 @@
   </div>
 </nav>
     <div id="conteinerButtom">
-        <a id="botaoVoltar" type="button" class="btn btn-light" href="../homes/homeAdmin.php"><img src="../imagens/iconVoltar.png" alt="voltarHome" style="width: 40px; height: 40px"></a>
+        <a id="botaoVoltar" type="button" class="btn btn-light" href="../homes/collectorHomes.php"><img src="../imagens/iconVoltar.png" alt="voltarHome" style="width: 40px; height: 40px"></a>
     </div>
     <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="mb-3">
         <div class="input-group container">
@@ -215,6 +214,16 @@
   </div>
 </div>
 </div>
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="semPermissao" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        Você não tem permissão para isso! 
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
 
     <script>
             function showModal(element) {
@@ -267,5 +276,13 @@
             Bootstrap.show()
                   </script>";
         }
+        else if ($result == '5') {
+          echo "<script>
+          const semPermissao = document.getElementById('semPermissao')
+  
+          const Bootstrap = bootstrap.Toast.getOrCreateInstance(semPermissao)
+          Bootstrap.show()
+                </script>";
+      }
     }
 ?> 
