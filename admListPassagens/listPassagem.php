@@ -19,11 +19,11 @@ else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
     exit; 
 }
 // -- Consulta SQL para obter todas as passagens juntamente com os dados do voo associado
-$sql = "SELECT P.*, U.EMAIL, V.*
-        FROM PASSAGENS AS P
-        JOIN USERS AS U ON P.FK_USERS_ID_USER = U.ID_USER
-        JOIN VOOS AS V ON P.FK_VOOS_ID_VOO = V.ID_VOO";
-$result = $conn->query($sql);
+    $sql = "SELECT P.*, U.EMAIL, V.*
+            FROM PASSAGENS AS P
+            JOIN USERS AS U ON P.FK_USERS_ID_USER = U.ID_USER
+            JOIN VOOS AS V ON P.FK_VOOS_ID_VOO = V.ID_VOO";
+    $result = $conn->query($sql);
 
 $sql_num_passagens = "SELECT COUNT(*) AS total FROM PASSAGENS";
 $result_num_passagens = $conn->query($sql_num_passagens);
@@ -56,6 +56,7 @@ if (isset($_POST['search'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="comfig.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="../imagens/flyboardLOGOremovido.ico" type="image/x-icon">
     <title>List Passagens</title>
 </head>
 <body>
@@ -84,7 +85,7 @@ if (isset($_POST['search'])) {
                         <a class="nav-link active">Lista de Passagens</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./addPassagemAdmin.php" role="button">
+                        <a class="nav-link" href="./addPassagemAdm.php" role="button">
                             Adicionar Passagem
                         </a>
                     </li>
@@ -132,7 +133,7 @@ if (isset($_POST['search'])) {
                         while ($row = $result->fetch_assoc()) {
                 ?>
                             <tr>
-                                <td><a href="./maisBagagem.php?id= <?php echo $row['ID_PASSAGEM']; ?>"><img src="../imagens/passagem-aerea.png" alt="editar" style="width: 19px; height: 19px; position: relative; bottom: 2px;"> : <?php echo $row["CODIGO_PASSAGEM"]; ?></a></td>
+                                <td><a href="./maisPassagem.php?id= <?php echo $row['ID_PASSAGEM']; ?>"><img src="../imagens/passagem-aerea.png" alt="editar" style="width: 19px; height: 19px; position: relative; bottom: 2px;"> : <?php echo $row["CODIGO_PASSAGEM"]; ?></a></td>
                                 <td><?php echo $row["NOME_PASSAGEIRO"]; ?></td>
                                 <td><?php echo $row["CPF_PASSAGEIRO"]; ?></td>
                                 <td><?php echo $row["EMAIL"]; ?></td>

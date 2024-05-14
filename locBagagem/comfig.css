@@ -22,3 +22,7 @@
 .custom-container{
     max-width: 500px!important;
 }
+button:not(.buscar){
+  height: 125px!important;
+  width: 125px!important;
+}

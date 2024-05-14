@@ -173,7 +173,7 @@ $result_viagens = $conn->query($sql_viagens);
     <h4>Minhas Bagagens:</h4>
     <div class="position-relative">
         <div class="position-absolute bottom-0 end-0">
-            <a href="../Bagagem/addBagagemCliente.php" class="btn btn-success buttomAdd" style="border-radius: 85px;">
+            <a href="../admListBagagens/addBagemAdmin.php" class="btn btn-success buttomAdd" style="border-radius: 85px;">
                 <img src="../imagens/mais.png" alt="">
             </a>
         </div>
@@ -194,7 +194,7 @@ $result_viagens = $conn->query($sql_viagens);
                         </div>
                         <div class="card-footer">
                           <!-- Botão "Mais Detalhes" que abre o modal -->
-                          <a type="button" class="btn btn-primary" href='../adminBagagem/maisBagagem.php?id=<?php echo $row["ID_BAGAGEM"]; ?>'>Mais Detalhes </a>
+                          <a type="button" class="btn btn-primary" href='../admListBagagens/maisBagagem.php?id=<?php echo $row["ID_BAGAGEM"]; ?>'>Mais Detalhes </a>
                         </div>
                     </div>
                 </div>

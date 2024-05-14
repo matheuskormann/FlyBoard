@@ -95,7 +95,7 @@ $row = $result->fetch_assoc();
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="../admListBagagens/addBagemAdmin.php">cad.P Bagagem</a></li>
-              <li><a class="dropdown-item" href="#">loc. Bagagem</a></li>
+              <li><a class="dropdown-item" href="../locBagagem/LocBagagem.php">loc. Bagagem</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>

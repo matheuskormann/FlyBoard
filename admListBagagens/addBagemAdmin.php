@@ -71,6 +71,8 @@ if(isset($_POST['selectedPassagemId'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./comfig.css">
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="../imagens/flyboardLOGOremovido.ico" type="image/x-icon">
+
     <title>Voos</title>
 </head>
 <body>
@@ -154,7 +156,7 @@ if(isset($_POST['selectedPassagemId'])) {
                             <option value="Embarcada">Embarcada</option>
                             <option value="Em voo">Em voo</option>
                             <option value="Aguardando para desembarque">Aguardando para desembarque</option>
-                            <option value="Aesembarcado / a caminho da esteira">Aesembarcado / A caminho da esteira</option>
+                            <option value="Desembarcado / a caminho da esteira">Desembarcado / A caminho da esteira</option>
                             <option value="Entregue">Entregue</option>
                             <option value="Aguardando retirada">Aguardando retirada</option>
                         </select>

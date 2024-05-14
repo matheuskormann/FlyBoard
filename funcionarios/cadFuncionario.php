@@ -12,6 +12,7 @@ else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
           </script>";
     exit; 
 }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
