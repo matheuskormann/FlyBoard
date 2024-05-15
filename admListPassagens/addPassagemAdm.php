@@ -78,8 +78,9 @@ if(isset($_POST['selectedVooId'])) {
     $classe = $_POST['txtClasse'];
     $idUserSelected = $_POST['selectedUserId'];
     $idVooSelected = $_POST['selectedVootId'];
+    $Assento = $_POST['txtAssento'];
 
-    $sql_insert_Passagem = "INSERT INTO PASSAGENS (CODIGO_PASSAGEM, NOME_PASSAGEIRO, CPF_PASSAGEIRO, CLASSE, FK_USERS_ID_USER,  FK_VOOS_ID_VOO) VALUES ('$codigoPassagem', '$nomePassageiro', '$cpfPassageiro', '$classe', $idUserSelected, $idVooSelected)";
+    $sql_insert_Passagem = "INSERT INTO PASSAGENS (CODIGO_PASSAGEM, NOME_PASSAGEIRO, CPF_PASSAGEIRO, CLASSE, FK_USERS_ID_USER, FK_VOOS_ID_VOO, ASSENTO) VALUES ('$codigoPassagem', '$nomePassageiro', '$cpfPassageiro', '$classe', $idUserSelected, $idVooSelected, '$Assento')";
     $result_insert_Passagem = $conn->query($sql_insert_Passagem);
 
     if ($result_insert_Passagem === TRUE) {
@@ -174,6 +175,10 @@ if(isset($selectedVooDetails))
                         <div class="mb-3">
                             <label for="txtCpfPassageiro" class="form-label">CPF Passageiro:</label>
                             <input type="text" name="txtCpfPassageiro" class="form-control" id="txtCpfPassageiro" placeholder="xxx.xxx.xxx-xx" maxlength="14" oninput="formatarCpf(this)">
+                        </div>
+                        <div class="mb-3">
+                            <label for="txtAssento" class="form-label">Assento:</label>
+                            <input type="text" name="txtAssento" class="form-control" id="txtAssento" placeholder="" maxlength="4">
                         </div>
                         <div class="mb-3">
                             <label for="txtClasse" class="form-label">Classe:</label>

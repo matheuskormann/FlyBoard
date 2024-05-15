@@ -18,6 +18,11 @@ else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
           </script>";
     exit; 
 }
+$iduser = $_SESSION["id"];
+$sqlNavBar = "SELECT NAME ,EMAIL , ROLE, USERIMAGEPATH FROM USERS WHERE ID_USER = $iduser";
+$resultNavBar = $conn->query($sqlNavBar);
+$rowNavBar = $resultNavBar->fetch_assoc();
+
 // Consulta SQL para obter voos da tabela VOOS
 $sql = "SELECT B.*, U.EMAIL, P.NOME_PASSAGEIRO, V.CODIGO_VOO
         FROM BAGAGENS AS B
@@ -90,15 +95,48 @@ if (isset($_POST['search'])) {
                             Adicionar Bagagem
                         </a>
                     </li>
-                </ul>
-                <ul class="navbar-nav">
                     <li class="nav-item dropdown d-flex">
                         <a class="nav-link">Número de Bagagens cadastrados: <?php echo $total_bagagens; ?></a>
                     </li>
                 </ul>
+                <li class="nav-item dropdown  d-flex">
+          <div id="comtImgUser">
+            <img id="userImg" src="<?php echo $rowNavBar['USERIMAGEPATH'] ?>" alt="">
+          </div>
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <?php
+            echo $rowNavBar['NAME']
+            ?>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" onclick="showModal()">Sair</a></li>
+          </ul>
+        </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="labelHeader" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h5>Tem certeza que deseja sair do sistema?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" onclick="sair()">Sim, sair</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
+  <script>
+    function showModal() {
+      $('#modal').modal('show');
+    }
+    function sair() {
+      window.location.href = '../users/logout.php';
+    }
+  </script>
 
     <!-- Botão de voltar -->
     <div id="containerButton">

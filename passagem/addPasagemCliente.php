@@ -47,10 +47,11 @@ if ($conn) {
             $cpfPassageiro = $_POST['txtCpfPassageiro'];
             $Classe = $_POST['txtClasse'];
             $idUser = $_SESSION['id'];
+            $Assento = $_POST['txtAssento'];
             // $idVoo = $_POST['selectedFlightId']; // Removido, pois vamos usar $idVooSelected
             $idVoo = $idVooSelected; // Usando a variável $idVooSelected
 
-            $sql_insert_passagem = "INSERT INTO PASSAGENS (CODIGO_PASSAGEM , NOME_PASSAGEIRO, CPF_PASSAGEIRO, CLASSE, FK_USERS_ID_USER, FK_VOOS_ID_VOO ) VALUES('$codigoPassagem', '$nomePassageiro', '$cpfPassageiro', '$Classe', '$idUser', '$idVoo')";
+            $sql_insert_passagem = "INSERT INTO PASSAGENS (CODIGO_PASSAGEM , NOME_PASSAGEIRO, CPF_PASSAGEIRO, CLASSE, ASSENTO, FK_USERS_ID_USER, FK_VOOS_ID_VOO ) VALUES('$codigoPassagem', '$nomePassageiro', '$cpfPassageiro', '$Classe','$Assento', '$idUser', '$idVoo')";
             $result_insert_passagem = $conn->query($sql_insert_passagem);
 
             if ($result_insert_passagem === TRUE) {
@@ -119,6 +120,10 @@ if ($conn) {
                         <div class="mb-3">
                             <label for="txtCpfPassageiro" class="form-label">CPF Passageiro:</label>
                             <input type="text" name="txtCpfPassageiro" class="form-control" id="txtCpfPassageiro" placeholder="xxx.xxx.xxx-xx" maxlength="14" oninput="formatarCpf(this)">
+                        </div>
+                        <div class="mb-3">
+                            <label for="txtCpfPassageiro" class="form-label">Assento:</label>
+                            <input type="text" name="txtAssento" class="form-control" id="txtAssento" placeholder="" maxlength="5">
                         </div>
                         <div class="mb-3">
                             <label for="txtClasse" class="form-label">Classe:</label>

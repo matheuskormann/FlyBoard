@@ -173,7 +173,7 @@ $result_viagens = $conn->query($sql_viagens);
     <h4>Minhas Bagagens:</h4>
     <div class="position-relative">
         <div class="position-absolute bottom-0 end-0">
-            <a href="../admListBagagens/addBagemAdmin.php" class="btn btn-success buttomAdd" style="border-radius: 85px;">
+            <a href="../Bagagem/addBagemCliente.php" class="btn btn-success buttomAdd" style="border-radius: 85px;">
                 <img src="../imagens/mais.png" alt="">
             </a>
         </div>

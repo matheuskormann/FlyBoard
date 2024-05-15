@@ -15,14 +15,3 @@ body {
   height: 100%; 
   object-fit: cover;
 }
-
-#botaoVoltar{
-    margin-top: 15px;
-    margin-left: 25px;
-}
-#conteinerDadados{
-  width: 295px !important;
-  }
-.custom-container{
-    max-width: 500px!important;
-}

@@ -59,20 +59,20 @@ if ($result->num_rows > 0) {
         $ORIGEM = $row["LOCAL_DE_ORIGEM"];
         $DESTINO = $row["LOCAL_DE_DESTINO"];
         $OPERADORA = $row["OPERADORA"];
+        $ASSENTO = $row["ASSENTO"];
     }
 }
 if (isset($_POST['atualizarDados'])) {
     $editNomePassageiro = $_POST['txtNomePassageiro'];
     $editCPF = $_POST['txtCPF'];
     $editClasse = $_POST['txtClasse'];
+    $editAssento = $_POST['txtAssento'];
     $id = $_GET["id"];
     
     // Usando consulta preparada para prevenir SQL Injection
-    $sql2 = "UPDATE PASSAGENS p
-             SET NOME_PASSAGEIRO = ?, CLASSE = ?, CPF_PASSAGEIRO = ?
-             WHERE ID_PASSAGEM = ?";
-    $stmt = $conn->prepare($sql2);
-    $stmt->bind_param("sssi", $editNomePassageiro, $editClasse, $editCPF, $id);
+    $sql = "UPDATE PASSAGENS SET NOME_PASSAGEIRO = ?, CPF_PASSAGEIRO = ?, CLASSE = ?, ASSENTO = ? WHERE ID_PASSAGEM = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssi", $editNomePassageiro, $editCPF, $editClasse, $editAssento, $id);
     
     if ($stmt->execute()) {
         echo "<script>
@@ -136,6 +136,10 @@ if (isset($_POST['atualizarDados'])) {
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label">CPF Passageiro:</label>
             <input type="txt" name="txtCPF" class="form-control" id="exampleFormControlInput2" value="<?php echo $CPF ?>">
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Assento:</label>
+            <input type="txt" name="txtAssento" class="form-control" id="exampleFormControlInput2" value="<?php echo $ASSENTO ?>">
         </div>
         <div class="mb-3">
             <label for="txtClasse" class="form-label">Classe:</label>

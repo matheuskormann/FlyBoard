@@ -58,6 +58,7 @@ if ($result->num_rows > 0) {
         $ORIGEM = $row["LOCAL_DE_ORIGEM"];
         $DESTINO = $row["LOCAL_DE_DESTINO"];
         $OPERADORA = $row["OPERADORA"];
+        $ASSENTO = $row["ASSENTO"];
     }
 
 }
@@ -110,6 +111,9 @@ if ($result->num_rows > 0) {
       <h5>info passageiro:</h5>
         <p>Nome: <?php echo $NOME_PASSAGEIRO ?></p>
         <p>CPF: <?php echo $CPF ?></p>
+
+        <h6>Assento:</h6>
+        <p><?php echo $ASSENTO ?></p>
 
         <h6>Classe:</h6>
         <p><?php echo $CLASSE ?></p>
