@@ -98,7 +98,7 @@ $result_viagens = $conn->query($sql_viagens);
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Ver minhas passagens</a></li>
+              <li><a class="dropdown-item" href="#cardPassagenCliente">Ver minhas passagens</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -110,7 +110,7 @@ $result_viagens = $conn->query($sql_viagens);
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Rastrear Bagagem</a></li>
+              <li><a class="dropdown-item" href="#carBagagensClientes">Rastrear Bagagem</a></li>
             </ul>
           </li>
         </ul>
@@ -169,7 +169,7 @@ $result_viagens = $conn->query($sql_viagens);
   <br>
   <br>
   <div class="container">
-  <div class="container">
+  <div class="container" id="carBagagensClientes">
     <h4>Minhas Bagagens:</h4>
     <div class="position-relative">
         <div class="position-absolute bottom-0 end-0">
@@ -272,7 +272,7 @@ $result_viagens = $conn->query($sql_viagens);
         </div>
     </div>
     <br>
-    <div class="boxcardCliente">
+    <div class="boxcardCliente" id="cardPassagenCliente">
       <?php
       if ($result_viagens->num_rows > 0) {
         while($row = $result_viagens->fetch_assoc()) {

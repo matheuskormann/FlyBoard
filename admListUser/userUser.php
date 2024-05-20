@@ -76,12 +76,6 @@ else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
                      <th scope="row">Cargo:</th>
                      <td><?php echo $role ?></td>
                     </tr>
-                      
-    
-    
-    
-    
-    
     
                     </table>
                 </div>

@@ -7,6 +7,10 @@ if (!isset($_SESSION["id"])) {
     exit; 
 } 
 $id = $_SESSION["id"];
+$iduser = $_SESSION["id"];
+$sqlNavBar = "SELECT NAME ,EMAIL , ROLE, USERIMAGEPATH FROM USERS WHERE ID_USER = $iduser";
+$resultNavBar = $conn->query($sqlNavBar);
+$rowNavBar = $resultNavBar->fetch_assoc();
 
 // Check if the connection is established
 if ($conn) {
@@ -76,6 +80,8 @@ if ($conn) {
         <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
         <title>Voos</title>
     </head>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <body>
         <div class="toast-container position-fixed bottom-0 end-0 p-3">
             <div id="ToastRegex" class="toast align-items-center text-bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -86,6 +92,38 @@ if ($conn) {
                 </div>
             </div>
         </div>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="../index/index.php">
+              <img src="../imagens/flyboardNavBar.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+              FlyBoard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+              <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page"></a>
+                </li>
+              </ul>
+              <li class="nav-item dropdown  d-flex">
+                <div id="comtImgUser">
+                  <img id="userImg" src="<?php echo $rowNavBar['USERIMAGEPATH'] ?>" alt="">
+                </div>
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <?php
+                  echo $rowNavBar['NAME']
+                  ?>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" onclick="showModal()">Sair</a></li>
+                </ul>
+              </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
 
         <div id="conteinerButtom">
             <a id="botaoVoltar" type="button" class="btn btn-light" href="../homes/homeCliente.php"><img src="../imagens/iconVoltar.png" alt="voltarHome" style="width: 40px; height: 40px"></a>
@@ -212,7 +250,5 @@ if ($conn) {
             campo.value = cpfFormatado;
         }
     </script>
-<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
