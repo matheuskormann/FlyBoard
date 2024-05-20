@@ -96,7 +96,8 @@ if (isset($_POST['search'])) {
                         </a>
                     </li>
                     <li class="nav-item dropdown d-flex">
-                        <a class="nav-link">Número de Bagagens cadastrados: <?php echo $total_bagagens; ?></a>
+                        <a style="padding-left: 20vh ;" class="d-flex  nav-link">Número de Bagagens cadastradas: <?php echo $total_bagagens; ?></a>
+                    </li>
                     </li>
                 </ul>
                 <li class="nav-item dropdown  d-flex">

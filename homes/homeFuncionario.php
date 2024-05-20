@@ -48,7 +48,7 @@ $row = $result->fetch_assoc();
     <div class="container-fluid">
       <a class="navbar-brand" href="../index/index.php">
         <img src="../imagens/flyboardNavBar.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-        flyboard
+        Flyboard
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -64,7 +64,7 @@ $row = $result->fetch_assoc();
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="../homes/homeCliente.php">Cliente</a></li>
-            <li><a class="dropdown-item" href="../homes/homeAdmin.php">admin</a></li>
+            <li><a class="dropdown-item" href="../homes/homeAdmin.php">Administrador</a></li>
           </ul>
         </li>
           <?php
@@ -82,11 +82,11 @@ $row = $result->fetch_assoc();
               Voos
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../admListVoos/addVoo.php">Add voo</a></li>
+              <li><a class="dropdown-item" href="../admListVoos/addVoo.php">Adicionar Voo</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="../admListVoos/listVoos.php">List Voos</a></li>
+              <li><a class="dropdown-item" href="../admListVoos/listVoos.php">Lista De Voos</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -94,12 +94,12 @@ $row = $result->fetch_assoc();
               Bagagem
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../admListBagagens/addBagemAdmin.php">cad.P Bagagem</a></li>
-              <li><a class="dropdown-item" href="../locBagagem/LocBagagem.php">loc. Bagagem</a></li>
+              <li><a class="dropdown-item" href="../admListBagagens/addBagemAdmin.php">Cadastro De Bagagem</a></li>
+              <li><a class="dropdown-item" href="../locBagagem/LocBagagem.php">Localizar Bagagem</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="../admListBagagens/listBagagens.php">List Bagagem</a></li>
+              <li><a class="dropdown-item" href="../admListBagagens/listBagagens.php">Lista De Bagagens</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -107,7 +107,7 @@ $row = $result->fetch_assoc();
               Clientes
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../admListUser/listUsers.php">List Clientes</a></li>
+              <li><a class="dropdown-item" href="../admListUser/listUsers.php">Lista De Clientes</a></li>
               <!-- <li><a class="dropdown-item" href="#">Another action</a></li>
                 <li><a class="dropdown-item" href="#">Something else here</a></li> -->
             </ul>
@@ -117,7 +117,7 @@ $row = $result->fetch_assoc();
               Passagens
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="../admListPassagens/listPassagem.php">List Passagens</a></li>
+              <li><a class="dropdown-item" href="../admListPassagens/listPassagem.php">Lista De Passagens</a></li>
             </ul>
           </li>
         </ul>
@@ -128,7 +128,7 @@ $row = $result->fetch_assoc();
           </div>
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <?php echo $row['NAME'] ?> </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="../users/comfig.php">configurações</a></li>
+            <li><a class="dropdown-item" href="../users/comfig.php">Configurações</a></li>
             <li><a class="dropdown-item" onclick="showModal()">Sair</a></li>
           </ul>
         </li>

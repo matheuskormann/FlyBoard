@@ -72,11 +72,11 @@ $result_viagens = $conn->query($sql_viagens);
           ?>
           <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            clientes
+            Clientes
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="../homes/homeFuncionario.php">funcionario</a></li>
-            <li><a class="dropdown-item" href="../homes/homeAdmin.php">admin</a></li>
+            <li><a class="dropdown-item" href="../homes/homeFuncionario.php">Funcionário</a></li>
+            <li><a class="dropdown-item" href="../homes/homeAdmin.php">Administrador</a></li>
           </ul>
         </li>
           <?php

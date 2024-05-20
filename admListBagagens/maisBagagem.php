@@ -138,16 +138,16 @@ if ($result->num_rows > 0) {
     <div class="col-6">
       <h2>Codigo Bagagem: <?php echo $CODIGO_BAGAGEM ?></h2>
       <br>
-      <H5>info do voo:</H5>
-      <p>codigo voo: <?php echo $CODIGO_VOO ?></p>
+      <H5>Informações do Voo:</H5>
+      <p>Código Do Voo: <?php echo $CODIGO_VOO ?></p>
       <p>Destino: <?php echo $DESTINO ?></p>
       <p>Origem: <?php echo $ORIGEM ?></p>
    
-      <h5>info passageiro:</h5>
+      <h5>Informações Do Passageiro:</h5>
         <p>Nome: <?php echo $NOME_PASSAGEIRO ?></p>
         <p>CPF: <?php echo $CPF_PASSAGEIRO ?></p>
        
-        <h5>info bagagem:</h5>
+        <h5>Informações Da Bagagem:</h5>
         <p>Peso: <?php echo $PESO ?></p>
         <p>Tipo: <?php echo $TIPO ?></p>
         <p>Descricao: <?php echo $DESCRICAO ?></p>

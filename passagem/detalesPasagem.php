@@ -101,23 +101,23 @@ if ($result_voo->num_rows > 0) {
     <div class="col">
         <table class="table  table-borderless" id="conteinerDadados">
            <tr>
-            <th class="" scope="row">codigo:</th>
+            <th class="" scope="row">Código:</th>
             <td ><?php echo $CODIGO_VOO ?></td>
            </tr>
            <tr>
-             <th class="" scope="row">Protao de embarque:</th>
+             <th class="" scope="row">Portão de Embarque:</th>
              <td ><?php echo $PORTAO_EMBARQUE ?></td>
             </tr>
             <tr>
-             <th class="" scope="row">Aviao: </th>
+             <th class="" scope="row">Avião: </th>
              <td ><?php echo $AERONAVE ?></td>
             </tr>
             <tr>
-             <th class="" scope="row">Codigo Aviao: </th>
+             <th class="" scope="row">Código Avião: </th>
              <td ><?php echo $CODIGO_AERONAVE ?></td>
             </tr>
             <tr>
-             <th class="" scope="row">Compani aerio:</th>
+             <th class="" scope="row">Compania Aérea:</th>
              <td><?php echo $OPERADORA ?></td>
             </tr>
         </table>
@@ -128,9 +128,9 @@ if ($result_voo->num_rows > 0) {
          
         <table class="table table-borderless text-center">
            <tr>
-           <th scope="row"><img src="../imagens/partida-de-aviao.png" alt="viagem-de-aviao"style="width: 25px; height: 25px;">  saida</th>
+           <th scope="row"><img src="../imagens/partida-de-aviao.png" alt="viagem-de-aviao"style="width: 25px; height: 25px;">  Saída</th>
           <th></th>
-           <th scope="row"><img src="../imagens/chegada-do-aviao.png" alt="viagem-de-aviao"style="width: 25px; height: 25px;">  chegada</th>
+           <th scope="row"><img src="../imagens/chegada-do-aviao.png" alt="viagem-de-aviao"style="width: 25px; height: 25px;">  Chegada</th>
            
            </tr>
            <tr>
@@ -163,7 +163,7 @@ if ($result->num_rows > 0) {
                 <div class="col-md-8">
                   <div class="card-body coardPassagem" >
                     <h5 class="card-title"><?php echo $row["CODIGO_PASSAGEM"] ?></h5>
-                    <p class="card-text"><Samp>Nome Passageiro: </Samp><?php echo $row["NOME_PASSAGEIRO"] ?><br><Samp>CPF: </Samp><?php echo $row["CPF_PASSAGEIRO"] ?><br><Samp> Assento: </Samp><?php echo $row["ASSENTO"] ?><br><Samp> Classe: </Samp><?php echo $row["CLASSE"] ?></p>
+                    <p class="card-text"><Samp>Nome Do Passageiro: </Samp><?php echo $row["NOME_PASSAGEIRO"] ?><br><Samp>CPF: </Samp><?php echo $row["CPF_PASSAGEIRO"] ?><br><Samp> Assento: </Samp><?php echo $row["ASSENTO"] ?><br><Samp> Classe: </Samp><?php echo $row["CLASSE"] ?></p>
                   </div>
                 </div>
               </div>

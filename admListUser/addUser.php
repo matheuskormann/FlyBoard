@@ -12,6 +12,11 @@
               </script>";
         exit; 
     }
+
+    $iduser = $_SESSION["id"];
+    $sqlNavBar = "SELECT NAME ,EMAIL , ROLE, USERIMAGEPATH FROM USERS WHERE ID_USER = $iduser";
+    $resultNavBar = $conn->query($sqlNavBar);
+    $rowNavBar = $resultNavBar->fetch_assoc();
 ?>
 <head>
     <meta charset="UTF-8">
@@ -37,14 +42,67 @@
 </style>
 
 <body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="../index/index.php">
+          <img src="../imagens/flyboardNavBar.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+          FlyBoard
+        </a>
+        <div class="pd-10 d-flex justify-content-center"><span>Cadastro De Usuário</span></div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page"></a>
+            </li>
+          </ul>
+          <li class="nav-item dropdown  d-flex">
+            <div id="comtImgUserNav">
+              <img id="userImgNav" src="<?php echo $rowNavBar['USERIMAGEPATH'] ?>" alt="">
+            </div>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <?php
+              echo $rowNavBar['NAME']
+              ?>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" onclick="showModal()">Sair</a></li>
+            </ul>
+          </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="labelHeader" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h5>Tem certeza que deseja sair do sistema?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" onclick="sair()">Sim, sair</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+
+  <script>
+    function showModal() {
+      $('#modal').modal('show');
+    }
+    function sair() {
+      window.location.href = '../users/logout.php';
+    }
+  </script>
     <div id="botaoVoltar">
        <a type="button" class="btn btn-light" href="./listUsers.php"><img src="../imagens/iconVoltar.png" alt="voltarHome" style="width: 40px; height: 40px"></a>
     </div>
-    <div class="logo"><a href='../index/index.php'><img id="Logo" href='../index/index.php' src="../imagens/flyboardLOGOremovido.png" alt="Logo" ></a></div>
-    <div id="h3">
-    <h3>Cadastro De Usuário</h3>
-    </div>
-    <form name="form1" id="form1" method="post" action="./addUser_php.php" onsubmit="return validateForm()">
+    <form name="form1" id="form1" method="post" action="./addUser_php.php" onsubmit="return validateForm()" style="padding-top: 10%;">
 
         <div id="conteinercadPasageiro">
             <div class="conteinerInput">

@@ -54,7 +54,7 @@ $row = $result->fetch_assoc();
       <div class="collapse navbar-collapse" id="navbarScroll">
         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page">Admin</a>
+            <a class="nav-link active" aria-current="page">Administrador</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -78,7 +78,7 @@ $row = $result->fetch_assoc();
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="./homeFuncionario.php">Pagina Inicial</a></li>
+              <li><a class="dropdown-item" href="./homeFuncionario.php">Página Inicial</a></li>
             </ul>
           </li>
         </ul>
