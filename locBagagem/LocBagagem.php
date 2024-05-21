@@ -80,8 +80,8 @@ $rowNavBar = $resultNavBar->fetch_assoc();
                         <h5>Tem certeza que deseja sair do sistema?</h5>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger" onclick="sair()">Sim, sair</button>
+                        <button type="button" id="btnModal" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button"id="btnModal" class="btn btn-danger" onclick="sair()">Sim, sair</button>
                     </div>
                 </div>
             </div>

@@ -123,19 +123,19 @@ else if ($_SESSION["role"] != "admin" && $_SESSION["role"] != "funcionario") {
                 <div class="container">
                     <table class="table  table-borderless">
                     <tr>
-                     <th scope="row">nome:</th>
+                     <th scope="row">Nome:</th>
                      <td><?php echo $name ?></td>
                     </tr>
                     <tr>
-                     <th scope="row">cepeéfi:</th>
+                     <th scope="row">Cpf:</th>
                      <td><?php echo $cpf ?></td>
                     </tr>
                     <tr>
-                     <th scope="row">email:</th>
+                     <th scope="row">Email:</th>
                      <td><?php echo $login ?></td>
                     </tr>
                     <tr>
-                     <th scope="row">Data Nascimento:</th>
+                     <th scope="row">Data De Nascimento:</th>
                      <td><?php echo $dataNascimento ?></td>
                     </tr>
                     <tr>

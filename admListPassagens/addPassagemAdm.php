@@ -122,7 +122,7 @@ if(isset($_POST['selectedVooId'])) {
           <img src="../imagens/flyboardNavBar.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
           FlyBoard
         </a>
-        <div class="pd-10 d-flex justify-content-center"><span>Localizar Bagagem</span></div>
+        <div class="pd-10 d-flex justify-content-center"><span>Adicionar Bagagem</span></div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
