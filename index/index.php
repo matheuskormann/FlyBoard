@@ -139,6 +139,7 @@ session_start();
             <div class="card-body coardPassagem" >
               <h5 class="card-title">Bagagens</h5>
               <p class="card-text">Não se preocupe mais com bagagens perdidas! Com nosso serviço de rastreamento de bagagens, garantimos que sua bagagem esteja sempre ao seu alcance, desde o momento do check-in até a sua chegada ao destino. Nossa tecnologia avançada permite que você acompanhe o status da sua bagagem em tempo real, proporcionando tranquilidade durante toda a viagem. Além disso, oferecemos dicas úteis sobre como embalar de forma eficiente e o que levar em sua bagagem de mão para uma experiência de viagem sem estresse. Viaje com confiança, sabendo que suas bagagens estão em boas mãos!</p>
+              <a href="../cliente/cadClientes.php" class="btn btn-primary">Se Cadastrar</a>
             </div>
           </div>
         </div>
