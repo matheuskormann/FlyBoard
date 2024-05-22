@@ -111,35 +111,11 @@ $result = $conn->query($sql);
             echo $rowNavBar['NAME']
             ?>
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" onclick="showModal()">Sair</a></li>
-          </ul>
         </li>
         </ul>
       </div>
     </div>
-  </nav>
-  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="labelHeader" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h5>Tem certeza que deseja sair do sistema?</h5>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-danger" onclick="sair()">Sim, sair</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-  <script>
-    function showModal() {
-      $('#modal').modal('show');
-    }
-    function sair() {
-      window.location.href = '../users/logout.php';
-    }
-  </script>
+  </nav>    
 
     <!-- Botão de voltar -->
     <div id="containerButton">

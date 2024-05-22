@@ -176,12 +176,12 @@ if (isset($_POST['novaSenha'])) {
 <br>
 <form name="form1" method="post" onsubmit="return validateForm()">
 <label for="inputPassword5" class="form-label">Nova Senha: </label>
-<input type="password" name="txtNovotPassword" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+<input type="password" name="txtNovotPassword" id="inputPassword5"  onsubmit="return validateForm()" class="form-control" aria-describedby="passwordHelpBlock">
 <div id="passwordHelpBlock" class="form-text">
 A senha deve ter conter 6 caracteres, números e caracter especial.
 </div>
 <label for="inputPassword5" class="form-label">Confirmar nova Senha: </label>
-<input type="password" name="txtComfirmNovotPassword" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+<input type="password" name="txtComfirmNovotPassword" id="inputPassword5"   onsubmit="return validateForm()" class="form-control" aria-describedby="passwordHelpBlock">
 <div id="passwordHelpBlock" class="form-text">
     A senha deve ter conter 6 caracteres, números e caracter especial.
 </div>
