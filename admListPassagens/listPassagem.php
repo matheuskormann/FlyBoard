@@ -33,7 +33,7 @@ $total_passagens = $row_num_passagens['total'];
 if (isset($_POST['search'])) {
     $search = $conn->real_escape_string($_POST['search']);
     // Consulta para buscar informações da bagagem, email do usuário, nome do passageiro e código do voo
-    $sql_search_bagagens = "SELECT B.CODIGO_BAGAGEM, U.EMAIL, P.NOME_PASSAGEIRO, V.CODIGO_VOO
+    $sql = "SELECT *
                             FROM BAGAGENS B
                             JOIN PASSAGENS P ON B.FK_PASSAGENS_ID_PASSAGEM = P.ID_PASSAGEM
                             JOIN USERS U ON P.FK_USERS_ID_USER = U.ID_USER
@@ -41,9 +41,10 @@ if (isset($_POST['search'])) {
                             WHERE P.CODIGO_PASSAGEM LIKE '%$search%'
                             OR P.NOME_PASSAGEIRO LIKE '%$search%'
                             OR P.CPF_PASSAGEIRO LIKE '%$search%'
-                            OR V.LOCAL_DE_ORIGEM LIKE '%$search%'
+                            OR U.EMAIL LIKE '%$search%'
+                            OR u.LOCAL_DE_ORIGEM LIKE '%$search%'
                             OR V.LOCAL_DE_DESTINO LIKE '%$search%'";
-    $result_bagagens = $conn->query($sql_search_bagagens);
+    $result = $conn->query($sql);
 }
 
 

@@ -153,6 +153,76 @@ $row = $result->fetch_assoc();
       </div>
     </div>
   </div>
+  <br>
+
+  <div class="container">
+    <div class="card text-center">
+      <div class="card-header">
+        Localizar Bagagens
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        <p class="card-text"></p>
+        <a href="../locBagagem/LocBagagem.php" class="btn btn-primary">Ir para o localizador</a>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container ">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Adicionar Voo</h5>
+            <p class="card-text">Adicionar um novo Voo.</p>
+          </div>
+          <div class="card-footer">
+          <a href="../admListVoos/addVoo.php" class="btn btn-primary">ADICIONAR</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Adicionar Passagem</h5>
+            <p class="card-text">Adicionar uma nova pasagem a um usuario.</p>
+          </div>
+          <div class="card-footer">
+          <a href="../admListPassagens/addPassagemAdm.php" class="btn btn-primary">ADICIONAR</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Adicionar Bagagem</h5>
+            <p class="card-text">Adicionar uma nova Bagagem a um usuario.</p>
+          </div>
+          <div class="card-footer">
+          <a href="../admListBagagens/addBagemAdmin.php" class="btn btn-primary">ADICIONAR</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Info. Cliente</h5>
+            <p class="card-text">Acesar informasois dos clientes</p>
+          </div>
+          <div class="card-footer">
+          <a href="../admListUser/listUsers.php" class="btn btn-primary">IR PARA</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+
+
+
+
 
 
 

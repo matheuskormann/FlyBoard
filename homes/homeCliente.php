@@ -230,36 +230,6 @@ $result_viagens = $conn->query($sql_viagens);
     </div>
   </div>
 
-
-  
-  <!-- Função JavaScript para abrir o modal e carregar as informações da bagagem -->
-  <script>
-            function abrirModalBagagem(codigoBagagem) {
-                $.ajax({
-                    url: '../sistem/getBagagemInfo.php', // O arquivo PHP que irá processar a requisição e retornar as informações da bagagem
-                    type: 'GET',
-                    data: {codigoBagagem: codigoBagagem}, // Passa o código da bagagem para o arquivo PHP
-                    dataType: 'json',
-                    success: function(response) {
-                        // Preenche o modal com as informações da bagagem
-                        var modalContent = '';
-                        modalContent += '<p>Código da Bagagem: ' + response.bagagem.CODIGO_BAGAGEM + '</p>';
-                        modalContent += '<p>Descrição: ' + response.bagagem.DESCRICAO + '</p>';
-                        modalContent += '<p>Peso: ' + response.bagagem.PESO + '</p>';
-                        modalContent += '<p>Nome do Passageiro: ' + response.passagem.NOME_PASSAGEIRO + '</p>';
-                        modalContent += '<p>CPF do Passageiro: ' + response.passagem.CPF_PASSAGEIRO + '</p>';
-                        modalContent += '<div class="alert alert-secondary" role="alert">Status da Bagagem: ' + response.bagagem.STATUS_BAGAGEM + '</div>';
-                        $('#bagagemInfo').html(modalContent);
-                        $('#bagagemModal').modal('show'); // Abre o modal
-                    },
-                    error: function(xhr, status, error) {
-                        alert('Erro na requisição AJAX: ' + error);
-                    }
-                });
-            }
-        </script>
-
-
   <hr>
   <br>
   <div class="container">
@@ -279,7 +249,7 @@ $result_viagens = $conn->query($sql_viagens);
           ?>
           <div class="col espasso">
           <div class="card h-100 cardCliente ">
-            <img src="<?php echo $row["VOOIMAGEMPATH"]; ?>" class="card-img-top" alt="...">
+          <img src="<?php echo $row["VOOIMAGEMPATH"]; ?>" class="card-img-top" alt="..." style="max-width: 150%; height: 185px;">
             <div class="card-body">
               <h5 class="card-title"><?php echo $row["LOCAL_DE_DESTINO"]; ?></h5>
               <p class="card-text">Data de saida:<br><?php echo $row["DATA_IDA"];?><br><br>Portão:<br><?php echo $row["PORTAO_EMBARQUE"];?></p>

@@ -158,7 +158,7 @@ if ($result->num_rows > 0) {
             <div class="card mb-3">
               <div class="row g-0">
                 <div class="col-lg-4">
-                  <img src="<?php echo $row["VOOIMAGEMPATH"] ?>" class="img-fluid rounded-start" alt="...">
+                  <img src="<?php echo $row["VOOIMAGEMPATH"] ?>" class="img-fluid rounded-start" alt="..." style="max-width: 150%; height: 200px;">
                 </div>
                 <div class="col-md-8">
                   <div class="card-body coardPassagem" >

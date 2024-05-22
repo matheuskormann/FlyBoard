@@ -97,6 +97,54 @@ session_start();
   <br>
   <br>
 
+  <div class="container">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-lg-4">
+            <img src="../imagens/imagemVoosindex.jpeg" class="img-fluid rounded-start" alt="..." style="max-width: 350px; height: 100%;">
+          </div>  
+          <div class="col-md-8">
+            <div class="card-body coardPassagem" >
+              <h5 class="card-title">Voos</h5>
+              <p class="card-text">Bem-vindo ao nosso site! Aqui, estamos empenhados em tornar sua experiência de viagem aérea o mais tranquila e agradável possível. Com nossa plataforma intuitiva, você pode facilmente encontrar e reservar voos para destinos em todo o mundo. Quer seja uma viagem de negócios ou uma escapadela de lazer, oferecemos uma ampla gama de opções de voos para atender às suas necessidades. Além disso, mantemos você informado sobre horários de partida e chegada, atrasos e cancelamentos, garantindo que você esteja sempre um passo à frente em sua jornada.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="container">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-lg-4">
+            <img src="../imagens/imagemPassagemIndex.jpeg" class="img-fluid rounded-start" alt="..."style="max-width: 350px; height: 100%;">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body coardPassagem" >
+              <h5 class="card-title">Passagens</h5>
+              <p class="card-text">Está pronto para embarcar em sua próxima aventura? Aqui, tornamos a compra de passagens aéreas uma experiência simples e sem complicações. Nossa plataforma oferece uma variedade de opções de tarifas e horários para que você possa encontrar a melhor oferta para o seu bolso e seu cronograma. Além disso, nosso sistema de reserva seguro garante que suas informações pessoais estejam protegidas. Reserve hoje mesmo e comece a contar os dias para sua próxima viagem inesquecível!
+
+</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="container">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-lg-4">
+            <img src="../imagens/imagem2Bagagemindex.jpeg" class="img-fluid rounded-start" alt="..." style="max-width: 350px; height: 100%;">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body coardPassagem" >
+              <h5 class="card-title">Bagagens</h5>
+              <p class="card-text">Não se preocupe mais com bagagens perdidas! Com nosso serviço de rastreamento de bagagens, garantimos que sua bagagem esteja sempre ao seu alcance, desde o momento do check-in até a sua chegada ao destino. Nossa tecnologia avançada permite que você acompanhe o status da sua bagagem em tempo real, proporcionando tranquilidade durante toda a viagem. Além disso, oferecemos dicas úteis sobre como embalar de forma eficiente e o que levar em sua bagagem de mão para uma experiência de viagem sem estresse. Viaje com confiança, sabendo que suas bagagens estão em boas mãos!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
 
   <script src="../node_modules/jquery/dist/jquery.min.js"></script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
